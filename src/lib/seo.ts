@@ -17,7 +17,7 @@ interface SeoConfig {
 export function seo(config: SeoConfig) {
   const { title, description, path, locale = defaultLocale, type = 'website', image, extraMeta, jsonLd } = config
   const url = `${SITE_URL}/${locale}${path === '/' ? '' : path}`
-  const ogImage = image ?? `${SITE_URL}/images/legacy/hero/hero2.jpeg`
+  const ogImage = image ?? `${SITE_URL}/images/hero/hero-bucatarie-landscape-1.jpeg`
 
   const meta: Array<Record<string, string>> = [
     { title },

@@ -18,7 +18,7 @@ export const Route = createRootRoute({
     ],
     links: [
       { rel: 'stylesheet', href: appCss },
-      { rel: 'icon', href: '/images/legacy/brand/logo.png', type: 'image/png' },
+      { rel: 'icon', href: '/images/brand/logo.png', type: 'image/png' },
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
       { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
       {
@@ -34,7 +34,7 @@ export const Route = createRootRoute({
           '@type': 'LocalBusiness',
           name: 'Arti Studio',
           url: 'https://artistudiodesign.com',
-          image: 'https://artistudiodesign.com/images/legacy/brand/logo.png',
+          image: 'https://artistudiodesign.com/images/brand/logo.png',
           telephone: '+40775140079',
           email: 'info@artistudiodesign.com',
           address: {
