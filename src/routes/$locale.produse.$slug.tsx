@@ -72,17 +72,14 @@ function ProductDetail() {
 
         <div className="flex flex-col gap-5">
           {category ? <p className="eyebrow">{category.label}</p> : null}
-          <h1 className="serif text-4xl md:text-5xl leading-[1.05] title-rule">
+          <h2 className="serif text-3xl md:text-4xl leading-[1.1]">
             <GoldPeriod text={name + '.'} />
-          </h1>
+          </h2>
           <p className="text-base leading-relaxed" style={{ color: 'var(--color-muted)' }}>
             {product.shortDescription[ll === 'en' ? 'en' : 'ro']}
           </p>
-          <p className="serif text-5xl tabular-nums mt-2">
-            {product.priceLei},00 <span className="text-2xl align-baseline" style={{ color: 'var(--color-muted)' }}>{t.produse.priceLabel}</span>
-          </p>
-          <p className="text-xs" style={{ color: product.inStock ? 'var(--color-accent)' : 'var(--color-muted-2)' }}>
-            {product.inStock ? t.produse.inStockLabel : t.produse.outOfStockLabel}
+          <p className="serif text-3xl tabular-nums mt-2">
+            {product.priceLei} <span className="text-base align-baseline" style={{ color: 'var(--color-muted)' }}>{t.produse.priceLabel}</span>
           </p>
           <Link
             to="/$locale/contact"
@@ -125,7 +122,7 @@ function ProductDetail() {
                   <ProductPlaceholder slug={p.slug} title={p.name[ll === 'en' ? 'en' : 'ro']} className="block w-full h-full" />
                 </div>
                 <h3 className="serif text-lg group-hover:text-[var(--color-accent)] transition-colors">{p.name[ll === 'en' ? 'en' : 'ro']}</h3>
-                <p className="serif text-2xl tabular-nums">{p.priceLei},00 <span className="text-sm" style={{ color: 'var(--color-muted)' }}>{t.produse.priceLabel}</span></p>
+                <p className="tabular-nums text-sm" style={{ color: 'var(--color-muted)' }}>{p.priceLei} {t.produse.priceLabel}</p>
               </Link>
             ))}
           </div>

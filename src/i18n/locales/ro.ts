@@ -53,7 +53,6 @@ const ro = {
     subtitle: 'Creăm mobilier personalizat care transformă spațiul tău într-un loc unic și funcțional.',
     ctaPrimary: 'Descoperă serviciile',
     ctaSecondary: 'Vezi portofoliu',
-    scrollLabel: 'Derulează în jos',
     features: [
       { title: 'Design personalizat', description: 'Fiecare proiect este creat în funcție de stilul și nevoile tale.' },
       { title: 'Materiale premium', description: 'Folosim materiale atent selecționate pentru durabilitate și aspect impecabil.' },
@@ -233,6 +232,8 @@ const ro = {
       { title: 'Garanția calității', description: 'produse testate și aprobate' },
     ],
     backToProducts: 'Înapoi la produse',
+    itemSingular: 'produs',
+    itemPlural: 'produse',
     detailDescriptionLabel: 'Descrierea produsului',
     detailHowToUseLabel: 'Mod de utilizare',
     detailContentsLabel: 'Conținut',

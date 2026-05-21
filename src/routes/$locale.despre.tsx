@@ -63,17 +63,30 @@ function DesprePage() {
           <h2 className="serif text-3xl md:text-5xl leading-[1.05] max-w-3xl mb-12">
             <GoldPeriod text={d.valuesHeading} />
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+          <ul className="border-t hairline">
             {d.values.map((v, i) => (
-              <div key={v.title} className="flex flex-col gap-3 border-t hairline pt-6">
-                <p className="eyebrow text-[10px] tabular-nums">— {String(i + 1).padStart(2, '0')}</p>
-                <h3 className="serif text-2xl">{v.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+              <li
+                key={v.title}
+                className="grid grid-cols-[40px_1fr] md:grid-cols-[80px_minmax(0,1.2fr)_minmax(0,2fr)] gap-x-6 md:gap-x-12 gap-y-3 py-10 border-b hairline"
+              >
+                <span
+                  className="serif text-3xl md:text-5xl tabular-nums leading-none"
+                  style={{ color: 'var(--color-accent)' }}
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 className="serif text-2xl md:text-3xl leading-tight col-start-2 md:col-start-2">
+                  {v.title}
+                </h3>
+                <p
+                  className="text-base leading-relaxed col-start-2 md:col-start-3 md:row-start-1 max-w-prose"
+                  style={{ color: 'var(--color-muted)' }}
+                >
                   {v.description}
                 </p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 

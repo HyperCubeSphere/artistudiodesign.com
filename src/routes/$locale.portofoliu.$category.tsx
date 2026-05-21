@@ -52,13 +52,14 @@ function PortofoliuCategoryPage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {projects.map((proj) => (
+          {projects.map((proj, i) => (
             <article key={proj.id} className="portfolio-card group block">
               <div className="aspect-[4/5] relative overflow-hidden">
                 <img
                   src={proj.image.src}
                   alt={localeAlt(proj.image, ll)}
-                  loading="lazy"
+                  loading={i < 3 ? 'eager' : 'lazy'}
+                  fetchPriority={i === 0 ? 'high' : 'auto'}
                   decoding="async"
                   className="portfolio-img absolute inset-0 w-full h-full object-cover photo-moody-soft"
                 />

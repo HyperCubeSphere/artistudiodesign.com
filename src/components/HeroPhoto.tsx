@@ -40,11 +40,6 @@ export default function HeroPhoto() {
         </div>
       </div>
 
-      <a href="#main-content-after-hero" className="relative z-10 self-center mb-10 scroll-cue" aria-label={h.scrollLabel}>
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-          <polyline points="6 9 12 15 18 9" />
-        </svg>
-      </a>
     </section>
   )
 }

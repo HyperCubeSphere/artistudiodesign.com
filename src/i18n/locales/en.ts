@@ -55,7 +55,6 @@ const en: typeof ro = {
     subtitle: 'We craft custom furniture that turns your space into something singular and useful.',
     ctaPrimary: 'Explore services',
     ctaSecondary: 'View portfolio',
-    scrollLabel: 'Scroll down',
     features: [
       { title: 'Personalised design', description: 'Every project is shaped around your style and your needs.' },
       { title: 'Premium materials', description: 'Carefully selected materials for durability and an impeccable finish.' },
@@ -235,6 +234,8 @@ const en: typeof ro = {
       { title: 'Quality guarantee', description: 'tested and approved products' },
     ],
     backToProducts: 'Back to products',
+    itemSingular: 'product',
+    itemPlural: 'products',
     detailDescriptionLabel: 'Product description',
     detailHowToUseLabel: 'How to use',
     detailContentsLabel: 'Contents',

@@ -302,25 +302,6 @@ html.light body {
   .hero-drift { animation: none; }
 }
 
-/* Scroll-down circle */
-.scroll-cue {
-  width: 44px;
-  height: 44px;
-  border: 1px solid var(--color-hairline);
-  border-radius: 9999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-text);
-}
-@keyframes scroll-bounce {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(4px); }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .scroll-cue svg { animation: scroll-bounce 2.2s ease-in-out infinite; }
-}
-
 /* Form inputs */
 .input {
   width: 100%;

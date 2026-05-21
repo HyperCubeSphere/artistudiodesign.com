@@ -1,4 +1,4 @@
-import { createFileRoute, notFound, Link } from '@tanstack/react-router'
+import { createFileRoute, notFound } from '@tanstack/react-router'
 import { useI18n } from '../i18n'
 import { seo } from '../lib/seo'
 import { productCategorySlugs, type ProductCategorySlug } from '../i18n/config'
@@ -29,7 +29,7 @@ export const Route = createFileRoute('/$locale/produse/categorie/$slug')({
 })
 
 function ProduseCategorie() {
-  const { locale, t } = useI18n()
+  const { t } = useI18n()
   const params = Route.useParams()
   const cat = t.produse.categories.find((c) => c.slug === params.slug)
   const list = productsByCategory(params.slug as ProductCategorySlug)
@@ -38,21 +38,20 @@ function ProduseCategorie() {
 
   return (
     <>
-      <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 border-b hairline pb-6">
+      <header className="flex items-end justify-between gap-6 mb-10 pb-4 border-b hairline-soft">
         <div>
-          <p className="eyebrow mb-2">{t.produse.eyebrow}</p>
-          <h1 className="serif text-4xl md:text-5xl leading-[1.05] title-rule">{cat.label}</h1>
-          <p className="text-sm mt-4 max-w-xl" style={{ color: 'var(--color-muted)' }}>{cat.description}</p>
+          <h2 className="serif text-2xl md:text-3xl leading-tight">{cat.label}</h2>
+          <p className="text-sm mt-2 max-w-xl" style={{ color: 'var(--color-muted)' }}>{cat.description}</p>
         </div>
-        <Link to="/$locale/produse" params={{ locale }} className="nav-text text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors">
-          ← {t.produse.backToProducts}
-        </Link>
+        <p className="text-xs tabular-nums whitespace-nowrap" style={{ color: 'var(--color-muted)' }}>
+          {list.length} {list.length === 1 ? t.produse.itemSingular : t.produse.itemPlural}
+        </p>
       </header>
 
       {list.length === 0 ? (
         <p style={{ color: 'var(--color-muted)' }}>{t.produse.productNotFound}</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
           {list.map((product) => <ProductCard key={product.slug} product={product} />)}
         </div>
       )}

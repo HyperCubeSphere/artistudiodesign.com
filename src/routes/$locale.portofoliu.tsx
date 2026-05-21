@@ -70,7 +70,7 @@ function PortofoliuLayout() {
         <section className="py-16 md:py-20">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
-              {p.categories.map((c) => {
+              {p.categories.map((c, i) => {
                 const slug = c.slug as PortfolioCategorySlug
                 const cover = portfolioImages[slug][0]
                 if (!cover) return null
@@ -95,7 +95,8 @@ function PortofoliuLayout() {
                       <img
                         src={cover.src}
                         alt={localeAlt(cover, ll)}
-                        loading="lazy"
+                        loading={i < 3 ? 'eager' : 'lazy'}
+                        fetchPriority={i === 0 ? 'high' : 'auto'}
                         decoding="async"
                         className="portfolio-img absolute inset-0 w-full h-full object-cover photo-moody-soft"
                       />
