@@ -9,7 +9,7 @@ export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
     <div className="min-w-0 flex-1 max-w-[1400px] mx-auto px-6 md:px-10 py-24 flex flex-col items-center text-center">
       <p className="eyebrow mb-4">Error</p>
       <h1 className="serif text-5xl md:text-6xl mb-6">Ceva nu a funcționat.</h1>
-      <p className="text-sm max-w-md mb-8" style={{ color: 'var(--color-muted)' }}>
+      <p className="text-sm max-w-md mb-8 text-muted">
         {error instanceof Error ? error.message : 'A apărut o eroare neașteptată.'}
       </p>
       <div className="flex gap-3 items-center flex-wrap justify-center">

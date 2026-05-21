@@ -29,7 +29,7 @@ function ConfidentialitatePage() {
           <h1 className="serif text-5xl md:text-6xl leading-[1.05] mb-6 text-balance">
             <GoldPeriod text={p.title + '.'} />
           </h1>
-          <p className="text-sm" style={{ color: 'var(--color-muted-2)' }}>{p.lastUpdated}</p>
+          <p className="text-sm text-muted-2">{p.lastUpdated}</p>
         </div>
       </section>
 

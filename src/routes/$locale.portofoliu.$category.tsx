@@ -46,7 +46,7 @@ function PortofoliuCategoryPage() {
               <GoldPeriod text={cat?.description ?? ''} />
             </h2>
           </div>
-          <Link to="/$locale/portofoliu" params={{ locale }} className="nav-text text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors">
+          <Link to="/$locale/portofoliu" params={{ locale }} className="nav-text text-muted hover:text-accent transition-colors">
             ← {t.portofoliu.backToAll}
           </Link>
         </div>
@@ -68,12 +68,15 @@ function PortofoliuCategoryPage() {
                 <h3 className="serif text-xl md:text-2xl leading-tight">
                   {proj.title[ll === 'en' ? 'en' : 'ro']}
                 </h3>
-                <p className="text-sm" style={{ color: 'var(--color-muted)' }}>
+                <p className="text-sm text-muted">
                   {proj.caption[ll === 'en' ? 'en' : 'ro']}
                 </p>
                 <ul className="flex flex-wrap gap-1.5 mt-2">
                   {proj.tags[ll === 'en' ? 'en' : 'ro'].map((tag) => (
-                    <li key={tag} className="text-[10px] uppercase tracking-widest px-2 py-1 border hairline-soft" style={{ borderWidth: 1, color: 'var(--color-muted)' }}>
+                    <li
+                      key={tag}
+                      className="text-[10px] uppercase tracking-[var(--tracking-nav)] px-2 py-1 border hairline-soft text-muted"
+                    >
                       {tag}
                     </li>
                   ))}

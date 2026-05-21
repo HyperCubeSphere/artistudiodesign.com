@@ -23,10 +23,10 @@ export default function HeroPhoto() {
 
       <div className="relative z-10 flex-1 max-w-[1400px] w-full mx-auto px-6 md:px-10 flex flex-col justify-center pt-24 pb-32 enter-stagger">
         <p className="eyebrow mb-6">{h.eyebrow}</p>
-        <h1 className="serif text-[44px] leading-[1.02] md:text-[88px] lg:text-[108px] md:leading-[0.98] mb-8 max-w-5xl text-[var(--color-text)]">
+        <h1 className="serif text-[44px] leading-[1.02] md:text-[88px] lg:text-[108px] md:leading-[0.98] mb-8 max-w-5xl text-text">
           <GoldPeriod text={h.heading} />
         </h1>
-        <p className="text-base md:text-lg max-w-xl mb-10" style={{ color: 'var(--color-muted)' }}>
+        <p className="text-base md:text-lg max-w-xl mb-10 text-muted">
           {h.subtitle}
         </p>
         <div className="flex flex-wrap gap-3">

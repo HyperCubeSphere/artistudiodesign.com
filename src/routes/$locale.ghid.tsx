@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useI18n } from '../i18n'
 import { seo } from '../lib/seo'
 import { GoldPeriod } from '../components/SectionHeader'
+import { pad2 } from '../lib/format'
 import type ro from '../i18n/locales/ro'
 
 const translations = import.meta.glob('../i18n/locales/*.ts', { eager: true }) as Record<string, { default: typeof ro }>
@@ -29,7 +30,7 @@ function GhidPage() {
           <h1 className="serif text-5xl md:text-7xl leading-[1.05] max-w-3xl mb-8 text-balance">
             <GoldPeriod text={g.heading} />
           </h1>
-          <p className="text-base md:text-lg max-w-2xl" style={{ color: 'var(--color-muted)' }}>
+          <p className="text-base md:text-lg max-w-2xl text-muted">
             {g.subtitle}
           </p>
         </div>
@@ -40,12 +41,12 @@ function GhidPage() {
           <ol className="flex flex-col gap-12">
             {g.steps.map((step, i) => (
               <li key={step.title} className="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-6 md:gap-10 items-start border-t hairline pt-8">
-                <p className="serif text-5xl md:text-6xl text-[var(--color-accent)] tabular-nums leading-none">
-                  {String(i + 1).padStart(2, '0')}
+                <p className="serif text-5xl md:text-6xl text-accent tabular-nums leading-none">
+                  {pad2(i + 1)}
                 </p>
                 <div>
                   <h3 className="serif text-2xl md:text-3xl mb-3">{step.title.replace(/^\d+ — /, '')}</h3>
-                  <p className="text-base leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+                  <p className="text-base leading-relaxed text-muted">
                     {step.description}
                   </p>
                 </div>
@@ -55,7 +56,7 @@ function GhidPage() {
         </div>
       </section>
 
-      <section className="border-t hairline" style={{ backgroundColor: 'var(--color-surface)' }}>
+      <section className="border-t hairline bg-surface">
         <div className="max-w-[1100px] mx-auto px-6 md:px-10 py-20 md:py-24">
           <p className="eyebrow mb-4">{g.tipsEyebrow}</p>
           <h2 className="serif text-3xl md:text-5xl leading-[1.05] max-w-3xl mb-10">
@@ -64,8 +65,8 @@ function GhidPage() {
           <ul className="flex flex-col gap-4">
             {g.tips.map((tip) => (
               <li key={tip} className="flex items-start gap-3 border-t hairline-soft pt-4">
-                <span className="text-[var(--color-accent)] mt-1.5">·</span>
-                <p className="text-base leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+                <span className="text-accent mt-1.5">·</span>
+                <p className="text-base leading-relaxed text-muted">
                   {tip}
                 </p>
               </li>

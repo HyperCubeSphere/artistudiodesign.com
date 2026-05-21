@@ -30,7 +30,7 @@ function ServiciiPage() {
           <h1 className="serif text-5xl md:text-7xl leading-[1.05] max-w-3xl mb-8 text-balance">
             <GoldPeriod text={s.heading} />
           </h1>
-          <p className="text-base md:text-lg max-w-2xl" style={{ color: 'var(--color-muted)' }}>
+          <p className="text-base md:text-lg max-w-2xl text-muted">
             {s.subtitle}
           </p>
         </div>
@@ -49,7 +49,7 @@ function ServiciiPage() {
         </div>
       </section>
 
-      <section className="border-t hairline py-20 md:py-28" style={{ backgroundColor: 'var(--color-surface)' }}>
+      <section className="border-t hairline py-20 md:py-28 bg-surface">
         <div className="max-w-[1400px] mx-auto px-6 md:px-10">
           <p className="eyebrow mb-4">{s.processEyebrow}</p>
           <h2 className="serif text-3xl md:text-5xl leading-[1.05] max-w-3xl mb-14">
@@ -61,14 +61,11 @@ function ServiciiPage() {
                 key={step.number}
                 className="flex flex-col md:flex-row md:items-baseline gap-3 md:gap-12 py-8 border-t hairline"
               >
-                <span
-                  className="serif text-3xl md:text-5xl tabular-nums leading-none md:basis-32 shrink-0"
-                  style={{ color: 'var(--color-accent)' }}
-                >
+                <span className="serif text-3xl md:text-5xl tabular-nums leading-none md:basis-32 shrink-0 text-accent">
                   {step.number}
                 </span>
                 <h3 className="serif text-2xl md:text-3xl leading-tight md:basis-80 shrink-0">{step.title}</h3>
-                <p className="text-base leading-relaxed max-w-prose" style={{ color: 'var(--color-muted)' }}>
+                <p className="text-base leading-relaxed max-w-prose text-muted">
                   {step.description}
                 </p>
                 {i === s.process.length - 1 ? (

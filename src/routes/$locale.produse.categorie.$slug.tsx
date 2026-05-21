@@ -41,15 +41,15 @@ function ProduseCategorie() {
       <header className="flex items-end justify-between gap-6 mb-10 pb-4 border-b hairline-soft">
         <div>
           <h2 className="serif text-2xl md:text-3xl leading-tight">{cat.label}</h2>
-          <p className="text-sm mt-2 max-w-xl" style={{ color: 'var(--color-muted)' }}>{cat.description}</p>
+          <p className="text-sm mt-2 max-w-xl text-muted">{cat.description}</p>
         </div>
-        <p className="text-xs tabular-nums whitespace-nowrap" style={{ color: 'var(--color-muted)' }}>
+        <p className="text-xs tabular-nums whitespace-nowrap text-muted">
           {list.length} {list.length === 1 ? t.produse.itemSingular : t.produse.itemPlural}
         </p>
       </header>
 
       {list.length === 0 ? (
-        <p style={{ color: 'var(--color-muted)' }}>{t.produse.productNotFound}</p>
+        <p className="text-muted">{t.produse.productNotFound}</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
           {list.map((product) => <ProductCard key={product.slug} product={product} />)}

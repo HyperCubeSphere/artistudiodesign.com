@@ -9,17 +9,14 @@ export default function AboutForm() {
   const q = t.home.quote
 
   return (
-    <section
-      className="border-t hairline"
-      style={{ backgroundColor: 'var(--color-surface)' }}
-    >
+    <section className="border-t hairline bg-surface">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-20 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
         <div className="flex flex-col gap-5">
           <p className="eyebrow">{a.eyebrow}</p>
           <h2 className="serif text-3xl md:text-4xl leading-[1.1]">
             <GoldPeriod text={a.heading} />
           </h2>
-          <p className="text-sm leading-relaxed max-w-md" style={{ color: 'var(--color-muted)' }}>
+          <p className="text-sm leading-relaxed max-w-md text-muted">
             {a.paragraph}
           </p>
           <Link to="/$locale/despre" params={{ locale }} className="btn btn-outline self-start mt-2">

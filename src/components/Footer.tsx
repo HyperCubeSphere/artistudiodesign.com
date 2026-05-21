@@ -10,10 +10,10 @@ export default function Footer() {
     <footer className="border-t hairline mt-24">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-14 grid grid-cols-1 md:grid-cols-12 gap-10">
         <div className="md:col-span-4 flex flex-col gap-4">
-          <Link to="/$locale" params={{ locale }} className="text-[var(--color-text)] inline-block" aria-label="Arti Studio">
+          <Link to="/$locale" params={{ locale }} className="text-text inline-block" aria-label="Arti Studio">
             <Logo size="sm" />
           </Link>
-          <p className="text-sm" style={{ color: 'var(--color-muted)' }}>
+          <p className="text-sm text-muted">
             {f.tagline}
           </p>
         </div>
@@ -23,7 +23,7 @@ export default function Footer() {
             <PinIcon /> {f.addressLabel}
           </p>
           <p className="text-sm">{f.address}</p>
-          <p className="text-xs" style={{ color: 'var(--color-muted-2)' }}>
+          <p className="text-xs text-muted-2">
             {f.hours}
           </p>
         </div>
@@ -32,19 +32,19 @@ export default function Footer() {
           <p className="eyebrow flex items-center gap-2">
             <PhoneIcon /> {f.phoneLabel}
           </p>
-          <a href={`tel:${f.phone.replace(/\s/g, '')}`} className="text-sm hover:text-[var(--color-accent)] transition-colors">
+          <a href={`tel:${f.phone.replace(/\s/g, '')}`} className="text-sm hover:text-accent transition-colors">
             {f.phone}
           </a>
-          <a href={`tel:${f.phoneAlt.replace(/\s/g, '')}`} className="text-sm hover:text-[var(--color-accent)] transition-colors">
+          <a href={`tel:${f.phoneAlt.replace(/\s/g, '')}`} className="text-sm hover:text-accent transition-colors">
             {f.phoneAlt}
           </a>
           <p className="eyebrow flex items-center gap-2 mt-2">
             <MailIcon /> {f.emailLabel}
           </p>
-          <a href={`mailto:${f.email}`} className="text-sm hover:text-[var(--color-accent)] transition-colors break-all">
+          <a href={`mailto:${f.email}`} className="text-sm hover:text-accent transition-colors break-all">
             {f.email}
           </a>
-          <a href={`mailto:${f.emailAlt}`} className="text-sm hover:text-[var(--color-accent)] transition-colors break-all">
+          <a href={`mailto:${f.emailAlt}`} className="text-sm hover:text-accent transition-colors break-all">
             {f.emailAlt}
           </a>
         </div>
@@ -67,14 +67,13 @@ export default function Footer() {
 
       <div className="border-t hairline-soft">
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
-          <p className="text-xs" style={{ color: 'var(--color-muted-2)' }} suppressHydrationWarning>
+          <p className="text-xs text-muted-2" suppressHydrationWarning>
             {f.rights.replace('{year}', String(new Date().getFullYear()))}
           </p>
           <Link
             to="/$locale/confidentialitate"
             params={{ locale }}
-            className="text-xs hover:text-[var(--color-accent)] transition-colors"
-            style={{ color: 'var(--color-muted-2)' }}
+            className="text-xs text-muted-2 hover:text-accent transition-colors"
           >
             {t.nav.confidentialitate}
           </Link>
@@ -91,8 +90,7 @@ function SocialIcon({ href, label, children }: { href: string; label: string; ch
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="w-10 h-10 inline-flex items-center justify-center border hairline hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
-      style={{ borderWidth: 1 }}
+      className="w-10 h-10 inline-flex items-center justify-center hairline-frame hover:border-accent hover:text-accent transition-colors"
     >
       {children}
     </a>

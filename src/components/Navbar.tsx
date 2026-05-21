@@ -53,7 +53,7 @@ export default function Navbar() {
         }}
       >
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 h-20 flex items-center justify-between gap-6">
-          <Link to="/$locale" params={{ locale }} className="shrink-0 text-[var(--color-text)]" aria-label="Arti Studio">
+          <Link to="/$locale" params={{ locale }} className="shrink-0 text-text" aria-label="Arti Studio">
             <Logo size="sm" />
           </Link>
 
@@ -63,7 +63,7 @@ export default function Navbar() {
                 <Link
                   to={link.to}
                   params={{ locale }}
-                  className="nav-text nav-link text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors"
+                  className="nav-text nav-link text-text hover:text-accent transition-colors"
                   activeOptions={{ exact: link.to === '/$locale' }}
                   activeProps={{ 'data-active': 'true' } as Record<string, string>}
                 >
@@ -91,8 +91,7 @@ export default function Navbar() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
-            className="lg:hidden w-11 h-11 inline-flex items-center justify-center hairline border-1"
-            style={{ borderWidth: 1 }}
+            className="lg:hidden w-11 h-11 inline-flex items-center justify-center hairline-frame"
           >
             <BurgerIcon open={open} />
           </button>
@@ -103,7 +102,7 @@ export default function Navbar() {
           className={`lg:hidden grid transition-[grid-template-rows] duration-300 ease-out ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
         >
           <div className="overflow-hidden">
-            <div className="px-6 py-6 flex flex-col gap-4 border-t hairline" style={{ backgroundColor: 'var(--color-bg)' }}>
+            <div className="px-6 py-6 flex flex-col gap-4 border-t hairline bg-bg">
               <ul className="flex flex-col">
                 {links.map((link) => (
                   <li key={link.to}>

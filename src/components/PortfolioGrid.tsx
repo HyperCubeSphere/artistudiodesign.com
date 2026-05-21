@@ -30,10 +30,10 @@ export default function PortfolioGrid() {
               />
             </div>
             <div className="pt-4">
-              <h3 className="serif text-xl md:text-2xl mb-1 group-hover:text-[var(--color-accent)] transition-colors">
+              <h3 className="serif text-xl md:text-2xl mb-1 group-hover:text-accent transition-colors">
                 {entry.title}
               </h3>
-              <p className="text-sm" style={{ color: 'var(--color-muted)' }}>
+              <p className="text-sm text-muted">
                 {entry.caption}
               </p>
             </div>

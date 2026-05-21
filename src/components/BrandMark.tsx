@@ -16,7 +16,7 @@ interface BrandMarkProps {
  */
 export default function BrandMark({ centered = true }: BrandMarkProps) {
   return (
-    <div className={`text-[var(--color-text)] ${centered ? 'flex justify-center' : ''}`}>
+    <div className={`text-text ${centered ? 'flex justify-center' : ''}`}>
       <Logo size="lg" />
     </div>
   )
