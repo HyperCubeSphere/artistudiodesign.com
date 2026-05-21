@@ -21,12 +21,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HyperCubeSphere/hypercubesphere.online.git"
+    "url": "git+https://github.com/HyperCubeSphere/artistudiodesign.com.git"
   },
   "bugs": {
-    "url": "https://github.com/HyperCubeSphere/hypercubesphere.online/issues"
+    "url": "https://github.com/HyperCubeSphere/artistudiodesign.com/issues"
   },
-  "homepage": "https://github.com/HyperCubeSphere/hypercubesphere.online#readme",
+  "homepage": "https://github.com/HyperCubeSphere/artistudiodesign.com#readme",
   "dependencies": {
     "@tailwindcss/postcss": "^4.2.1",
     "@tanstack/react-router": "^1.166.2",
