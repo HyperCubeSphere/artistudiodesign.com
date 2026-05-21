@@ -5,6 +5,8 @@ import { TALLY_FORM_ID, CONTACT_EMAIL } from '../lib/site'
 interface QuoteFormProps {
   /** Pre-fill the message with a known product slug or note. */
   prefillProduct?: string
+  /** Pre-fill a subject tag — e.g. `magazin-launch` from the ArtiCare CTA. */
+  prefillSubject?: string
 }
 
 /**
@@ -13,7 +15,7 @@ interface QuoteFormProps {
  * available, intercepts and submits via fetch for an inline success state.
  * When TALLY_FORM_ID is the placeholder, falls back to a mailto compose.
  */
-export default function QuoteForm({ prefillProduct }: QuoteFormProps) {
+export default function QuoteForm({ prefillProduct, prefillSubject }: QuoteFormProps) {
   const { t } = useI18n()
   const f = t.contact.form
   const [submitting, setSubmitting] = useState(false)
@@ -69,6 +71,7 @@ export default function QuoteForm({ prefillProduct }: QuoteFormProps) {
       noValidate
     >
       {prefillProduct ? <input type="hidden" name="produs" value={prefillProduct} /> : null}
+      {prefillSubject ? <input type="hidden" name="subiect" value={prefillSubject} /> : null}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <label className="block">
           <span className="sr-only">Nume</span>

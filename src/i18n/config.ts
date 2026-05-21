@@ -22,6 +22,9 @@ export const localeNames: Record<Locale, string> = {
 export const portfolioCategorySlugs = ['bucatarie', 'living', 'dormitor', 'dressing', 'baie'] as const
 export type PortfolioCategorySlug = (typeof portfolioCategorySlugs)[number]
 
+export const magazinCategorySlugs = ['curatenie', 'protectie', 'textile'] as const
+export type MagazinCategorySlug = (typeof magazinCategorySlugs)[number]
+
 export const productCategorySlugs = ['curatare-mobilier', 'protectie-suprafete', 'nano-coating', 'ingrijire-piele-vinil'] as const
 export type ProductCategorySlug = (typeof productCategorySlugs)[number]
 
