@@ -1,0 +1,1 @@
+import{j as r}from"./main-CSTvT9Mp.js";import{L as e}from"./Logo-CL27FoJA.js";function a({centered:t=!0}){return r.jsx("div",{className:`text-[var(--color-text)] ${t?"flex justify-center":""}`,children:r.jsx(e,{size:"lg"})})}export{a as B};
