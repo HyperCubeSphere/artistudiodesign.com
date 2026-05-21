@@ -83,6 +83,12 @@ const ro = {
       subtitle: 'Spune-ne câteva detalii și revenim cu o propunere în maximum 24 de ore.',
       fallback: 'Formularul se încarcă… dacă nu apare, scrie-ne la',
     },
+    stats: [
+      { value: '2018', label: 'Înființare' },
+      { value: '2', label: 'Ateliere & parteneri' },
+      { value: '10 +', label: 'Proiecte livrate' },
+      { value: '3 +', label: 'Orașe acoperite' },
+    ],
   },
 
   despre: {

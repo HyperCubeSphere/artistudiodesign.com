@@ -2,6 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import HeroPhoto from '../components/HeroPhoto'
 import FeaturesStrip from '../components/FeaturesStrip'
 import PortfolioGrid from '../components/PortfolioGrid'
+import StatsStrip from '../components/StatsStrip'
 import AboutForm from '../components/AboutForm'
 import SectionHeader from '../components/SectionHeader'
 import { useI18n } from '../i18n'
@@ -77,6 +78,8 @@ function HomePage() {
           <PortfolioGrid />
         </div>
       </section>
+
+      <StatsStrip />
 
       <AboutForm />
     </>

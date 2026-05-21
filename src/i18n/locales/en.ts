@@ -85,6 +85,12 @@ const en: typeof ro = {
       subtitle: 'Tell us a few details and we’ll come back with a proposal within 24 hours.',
       fallback: 'Form loading… if it doesn’t appear, write to us at',
     },
+    stats: [
+      { value: '2018', label: 'Founded' },
+      { value: '2', label: 'Workshops & partners' },
+      { value: '10 +', label: 'Projects delivered' },
+      { value: '3 +', label: 'Cities served' },
+    ],
   },
 
   despre: {
