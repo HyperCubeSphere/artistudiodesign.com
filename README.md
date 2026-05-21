@@ -1,6 +1,11 @@
+<div align="center">
+  <img src="https://gist.githubusercontent.com/0-vortex/3acb60674856c437c86bee683d96515b/raw/fab74e1934e5a8686a3190f4d53606bb11da4d96/logo.png" width="400">
+
 # @HyperCubeSphere/artistudiodesign.com
 
-Modern re-creation of [artistudiodesign.com](https://www.artistudiodesign.com/) — Oradea-based custom-furniture studio. Static-prerendered TanStack Start app deployed to GitHub Pages.
+> Modern re-creation of [artistudiodesign.com](https://www.artistudiodesign.com/) — Oradea-based custom-furniture studio. Static-prerendered TanStack Start app deployed to GitHub Pages.
+
+</div>
 
 ## Stack
 
