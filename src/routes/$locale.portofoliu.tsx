@@ -2,8 +2,8 @@ import { createFileRoute, Link, Outlet, useRouterState } from '@tanstack/react-r
 import { useI18n } from '../i18n'
 import { seo } from '../lib/seo'
 import { GoldPeriod } from '../components/SectionHeader'
-import { portfolioProjects } from '../content/portfolio'
-import { localeAlt } from '../content/images'
+import { projectsByCategory } from '../content/portfolio'
+import { localeAlt, portfolioImages } from '../content/images'
 import type { Locale, PortfolioCategorySlug } from '../i18n/config'
 import type ro from '../i18n/locales/ro'
 
@@ -69,34 +69,47 @@ function PortofoliuLayout() {
       {isIndex ? (
         <section className="py-16 md:py-20">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-              {portfolioProjects.map((proj) => (
-                <Link
-                  key={proj.id}
-                  to="/$locale/portofoliu/$category"
-                  params={{ locale, category: proj.category }}
-                  className="portfolio-card group block"
-                >
-                  <div className="aspect-[4/5] relative overflow-hidden">
-                    <img
-                      src={proj.image.src}
-                      alt={localeAlt(proj.image, ll)}
-                      loading="lazy"
-                      decoding="async"
-                      className="portfolio-img absolute inset-0 w-full h-full object-cover photo-moody-soft"
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+              {p.categories.map((c) => {
+                const slug = c.slug as PortfolioCategorySlug
+                const cover = portfolioImages[slug][0]
+                const count = projectsByCategory(slug).length
+                return (
+                  <Link
+                    key={c.slug}
+                    to="/$locale/portofoliu/$category"
+                    params={{ locale, category: slug }}
+                    className="portfolio-card group block relative"
+                  >
+                    {/* Folder tab — modern paper-folder cue */}
+                    <span
+                      aria-hidden="true"
+                      className="absolute top-0 left-6 z-10 h-3 w-24 -translate-y-1/2 transition-colors group-hover:bg-[var(--color-accent-hover)]"
+                      style={{ backgroundColor: 'var(--color-accent)' }}
                     />
-                  </div>
-                  <div className="pt-4 flex flex-col gap-1">
-                    <p className="eyebrow text-[10px]">{p.categories.find((c) => c.slug === proj.category)?.label}</p>
-                    <h3 className="serif text-xl md:text-2xl leading-tight group-hover:text-[var(--color-accent)] transition-colors">
-                      {proj.title[ll === 'en' ? 'en' : 'ro']}
-                    </h3>
-                    <p className="text-sm" style={{ color: 'var(--color-muted)' }}>
-                      {proj.caption[ll === 'en' ? 'en' : 'ro']}
-                    </p>
-                  </div>
-                </Link>
-              ))}
+                    <div className="aspect-[4/5] relative overflow-hidden border hairline" style={{ borderWidth: 1 }}>
+                      <img
+                        src={cover.src}
+                        alt={localeAlt(cover, ll)}
+                        loading="lazy"
+                        decoding="async"
+                        className="portfolio-img absolute inset-0 w-full h-full object-cover photo-moody-soft"
+                      />
+                    </div>
+                    <div className="pt-4 flex flex-col gap-2">
+                      <p className="eyebrow text-[10px] tabular-nums">
+                        {String(count).padStart(2, '0')} {p.projectsLabel}
+                      </p>
+                      <h3 className="serif text-2xl md:text-3xl leading-tight group-hover:text-[var(--color-accent)] transition-colors">
+                        {c.label}
+                      </h3>
+                      <p className="text-sm" style={{ color: 'var(--color-muted)' }}>
+                        {c.description}
+                      </p>
+                    </div>
+                  </Link>
+                )
+              })}
             </div>
           </div>
         </section>

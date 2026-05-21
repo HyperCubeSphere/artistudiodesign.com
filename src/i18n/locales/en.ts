@@ -160,6 +160,7 @@ const en: typeof ro = {
     subtitle: 'A selection of recent projects, grouped by room.',
     allLabel: 'All categories',
     backToAll: 'Back to portfolio',
+    projectsLabel: 'projects',
     categories: [
       { slug: 'bucatarie', label: 'Kitchen', description: 'Modern spaces where function meets elegance.' },
       { slug: 'living', label: 'Living', description: 'Day-room layouts designed for ease and conversation.' },

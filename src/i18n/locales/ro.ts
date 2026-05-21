@@ -158,6 +158,7 @@ const ro = {
     subtitle: 'O selecție din proiectele recente, organizată pe camere.',
     allLabel: 'Toate categoriile',
     backToAll: 'Înapoi la portofoliu',
+    projectsLabel: 'proiecte',
     categories: [
       { slug: 'bucatarie', label: 'Bucătărie', description: 'Spații moderne unde funcționalitatea întâlnește eleganța.' },
       { slug: 'living', label: 'Living', description: 'Zonă de zi gândită pentru relaxare și socializare.' },
