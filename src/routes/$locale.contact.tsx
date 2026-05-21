@@ -12,12 +12,14 @@ function tFor(locale: string) {
 
 interface ContactSearch {
   produs?: string
+  subiect?: string
 }
 
 export const Route = createFileRoute('/$locale/contact')({
   component: ContactPage,
   validateSearch: (search: Record<string, unknown>): ContactSearch => ({
     produs: typeof search.produs === 'string' ? search.produs : undefined,
+    subiect: typeof search.subiect === 'string' ? search.subiect : undefined,
   }),
   head: ({ params }) => {
     const t = tFor(params.locale)
@@ -27,7 +29,7 @@ export const Route = createFileRoute('/$locale/contact')({
 
 function ContactPage() {
   const { t } = useI18n()
-  const { produs } = Route.useSearch()
+  const { produs, subiect } = Route.useSearch()
   const c = t.contact
 
   return (
@@ -48,7 +50,7 @@ function ContactPage() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-16">
           <div>
             <p className="eyebrow mb-6">{c.formEyebrow}</p>
-            <ContactForm prefillProduct={produs} />
+            <ContactForm prefillProduct={produs} prefillSubject={subiect} />
           </div>
           <aside className="flex flex-col gap-10">
             <div>
