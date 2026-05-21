@@ -5,6 +5,12 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.2.0-beta.3](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.2.0-beta.2...v1.2.0-beta.3) (2026-05-21)
+
+### 🧑‍💻 Code Refactoring
+
+* full inline-style sweep + audited stats sizing ([#5](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/5)) ([7a9df30](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/7a9df30c8f5b51b3e692fba0772986f831a6befc))
+
 ## [1.2.0-beta.2](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.2.0-beta.1...v1.2.0-beta.2) (2026-05-21)
 
 ### 🍕 Features
