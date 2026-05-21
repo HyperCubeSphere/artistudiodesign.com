@@ -1,6 +1,12 @@
 /**
- * Image registry — central index of static assets under /public/images/legacy/.
- * Bilingual alt text lives here so it's reusable across routes + locales.
+ * Image registry — central index of static assets under `/public/images/`.
+ * Photography lives under `/portfolio/<category>/` and `/hero/`; the brand
+ * crest lives under `/brand/`. Bilingual alt text lives here so it's
+ * reusable across routes + locales.
+ *
+ * Filenames follow `<category>-<orientation>-<n>.jpeg` for SEO + so the
+ * URL itself describes the asset (Google ranks asset filenames as a weak
+ * but non-zero signal, on top of the alt text).
  */
 
 import type { Locale, PortfolioCategorySlug } from '../i18n/config'
@@ -18,37 +24,34 @@ export function pickAlt(img: ImageRef, locale: string): string {
 }
 
 export const heroImages: ImageRef[] = [
-  { src: '/images/legacy/bucatarie/b6.jpeg', alt: { ro: 'Bucătărie cu iluminat integrat — Arti Studio', en: 'Kitchen with integrated lighting — Arti Studio' } },
-  { src: '/images/legacy/bucatarie/b1.jpeg', alt: { ro: 'Bucătărie verde cu blat lemn — Arti Studio', en: 'Green kitchen with wood worktop — Arti Studio' } },
-  { src: '/images/legacy/hero/hero2.jpeg', alt: { ro: 'Interior elegant Arti Studio', en: 'Elegant interior by Arti Studio' } },
+  { src: '/images/hero/hero-bucatarie-landscape-1.jpeg', alt: { ro: 'Bucătărie pe comandă realizată de Arti Studio în Oradea', en: 'Custom kitchen built by Arti Studio in Oradea' } },
 ]
 
 export const homeHero: ImageRef = heroImages[0]
 
 export const portfolioImages: Record<PortfolioCategorySlug, ImageRef[]> = {
   bucatarie: [
-    { src: '/images/legacy/bucatarie/b1.jpeg', alt: { ro: 'Bucătărie modernă cu insulă', en: 'Modern kitchen with island' } },
-    { src: '/images/legacy/bucatarie/b2.jpeg', alt: { ro: 'Bucătărie cu blat din piatră', en: 'Kitchen with stone worktop' } },
-    { src: '/images/legacy/bucatarie/b3.jpeg', alt: { ro: 'Bucătărie cu fronturi mat', en: 'Kitchen with matte fronts' } },
-    { src: '/images/legacy/bucatarie/b6.jpeg', alt: { ro: 'Bucătărie cu iluminat integrat', en: 'Kitchen with integrated lighting' } },
+    { src: '/images/portfolio/bucatarie/bucatarie-landscape-1.jpeg', alt: { ro: 'Bucătărie modernă cu insulă — Arti Studio Oradea', en: 'Modern kitchen with island — Arti Studio Oradea' } },
+    { src: '/images/portfolio/bucatarie/bucatarie-landscape-2.jpeg', alt: { ro: 'Bucătărie cu blat din piatră — Arti Studio Oradea', en: 'Kitchen with stone worktop — Arti Studio Oradea' } },
+    { src: '/images/portfolio/bucatarie/bucatarie-landscape-3.jpeg', alt: { ro: 'Bucătărie cu fronturi mate — Arti Studio Oradea', en: 'Kitchen with matte fronts — Arti Studio Oradea' } },
+    { src: '/images/portfolio/bucatarie/bucatarie-landscape-4.jpeg', alt: { ro: 'Bucătărie cu iluminat integrat — Arti Studio Oradea', en: 'Kitchen with integrated lighting — Arti Studio Oradea' } },
   ],
   living: [
-    { src: '/images/legacy/living/l1.jpeg', alt: { ro: 'Living cu bibliotecă pe perete', en: 'Living room with wall library' } },
-    { src: '/images/legacy/living/l2.jpeg', alt: { ro: 'Living cu zonă TV integrată', en: 'Living room with integrated TV unit' } },
-    { src: '/images/legacy/living/l3.jpeg', alt: { ro: 'Living elegant', en: 'Elegant living room' } },
+    { src: '/images/portfolio/living/living-landscape-1.jpeg', alt: { ro: 'Living cu bibliotecă pe perete — Arti Studio Oradea', en: 'Living room with wall library — Arti Studio Oradea' } },
+    { src: '/images/portfolio/living/living-landscape-2.jpeg', alt: { ro: 'Living cu zonă TV integrată — Arti Studio Oradea', en: 'Living room with integrated TV unit — Arti Studio Oradea' } },
+    { src: '/images/portfolio/living/living-landscape-3.jpeg', alt: { ro: 'Living elegant — Arti Studio Oradea', en: 'Elegant living room — Arti Studio Oradea' } },
   ],
   dormitor: [
-    { src: '/images/legacy/dormitor/do1.jpeg', alt: { ro: 'Dormitor matrimonial cu tăblie tapițată', en: 'Master bedroom with upholstered headboard' } },
-    { src: '/images/legacy/dormitor/do2.jpeg', alt: { ro: 'Dormitor cu depozitare integrată', en: 'Bedroom with integrated storage' } },
-    { src: '/images/legacy/dormitor/do3.jpeg', alt: { ro: 'Dormitor cu fronturi din lemn', en: 'Bedroom with wood fronts' } },
+    { src: '/images/portfolio/dormitor/dormitor-landscape-1.jpeg', alt: { ro: 'Dormitor matrimonial cu tăblie tapițată — Arti Studio Oradea', en: 'Master bedroom with upholstered headboard — Arti Studio Oradea' } },
+    { src: '/images/portfolio/dormitor/dormitor-landscape-2.jpeg', alt: { ro: 'Dormitor cu depozitare integrată — Arti Studio Oradea', en: 'Bedroom with integrated storage — Arti Studio Oradea' } },
   ],
   dressing: [
-    { src: '/images/legacy/dressing/d1.jpeg', alt: { ro: 'Dressing walk-in optimizat', en: 'Optimised walk-in dressing' } },
-    { src: '/images/legacy/dressing/d2.jpeg', alt: { ro: 'Dressing cu iluminat LED', en: 'Dressing with LED lighting' } },
-    { src: '/images/legacy/dressing/d3.jpeg', alt: { ro: 'Dressing cu fronturi lucioase', en: 'Dressing with glossy fronts' } },
+    { src: '/images/portfolio/dressing/dressing-landscape-1.jpeg', alt: { ro: 'Dressing walk-in optimizat — Arti Studio Oradea', en: 'Optimised walk-in dressing — Arti Studio Oradea' } },
+    { src: '/images/portfolio/dressing/dressing-landscape-2.jpeg', alt: { ro: 'Dressing cu iluminat LED — Arti Studio Oradea', en: 'Dressing with LED lighting — Arti Studio Oradea' } },
+    { src: '/images/portfolio/dressing/dressing-landscape-3.jpeg', alt: { ro: 'Dressing cu fronturi lucioase — Arti Studio Oradea', en: 'Dressing with glossy fronts — Arti Studio Oradea' } },
   ],
   baie: [
-    { src: '/images/legacy/baie/ba1.jpeg', alt: { ro: 'Mobilier de baie pe comandă', en: 'Custom bathroom cabinetry' } },
+    { src: '/images/portfolio/baie/baie-portrait-1.jpeg', alt: { ro: 'Mobilier de baie pe comandă — Arti Studio Oradea', en: 'Custom bathroom cabinetry — Arti Studio Oradea' } },
   ],
 }
 

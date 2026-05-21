@@ -84,14 +84,6 @@ export const portfolioProjects: PortfolioProject[] = [
     tags: { ro: ['Depozitare integrată'], en: ['Integrated storage'] },
   },
   {
-    id: 'dormitor-3',
-    category: 'dormitor',
-    title: { ro: 'Dormitor cu fronturi din lemn', en: 'Bedroom with wood fronts' },
-    caption: { ro: 'Lemn natural, lumină indirectă, atmosferă caldă.', en: 'Natural wood, indirect light, a warm mood.' },
-    image: portfolioImages.dormitor[2],
-    tags: { ro: ['Lemn natural', 'Lumină indirectă'], en: ['Natural wood', 'Indirect light'] },
-  },
-  {
     id: 'dressing-1',
     category: 'dressing',
     title: { ro: 'Dressing walk-in optimizat', en: 'Optimised walk-in dressing' },
