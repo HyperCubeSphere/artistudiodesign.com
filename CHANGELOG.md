@@ -5,6 +5,12 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.1.1](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.1.0...v1.1.1) (2026-05-21)
+
+### 🐛 Bug Fixes
+
+* correct temporary domain deployment ([c0042c2](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/c0042c2fcc9ba98d65761708f34d24bc3818f41c))
+
 ## [1.1.0](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.0.0...v1.1.0) (2026-05-21)
 
 ### 📝 Documentation
