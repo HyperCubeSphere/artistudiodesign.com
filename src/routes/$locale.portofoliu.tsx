@@ -73,7 +73,11 @@ function PortofoliuLayout() {
               {p.categories.map((c) => {
                 const slug = c.slug as PortfolioCategorySlug
                 const cover = portfolioImages[slug][0]
+                if (!cover) return null
                 const count = projectsByCategory(slug).length
+                const pluralRules = new Intl.PluralRules(locale)
+                const projectsLabel =
+                  pluralRules.select(count) === 'one' ? p.projectLabelOne : p.projectsLabel
                 return (
                   <Link
                     key={c.slug}
@@ -81,13 +85,13 @@ function PortofoliuLayout() {
                     params={{ locale, category: slug }}
                     className="portfolio-card group block relative"
                   >
-                    {/* Folder tab — modern paper-folder cue */}
+                    {/* Folder tab — base color via class so group-hover:bg wins
+                        (inline style would defeat the hover utility). */}
                     <span
                       aria-hidden="true"
-                      className="absolute top-0 left-6 z-10 h-3 w-24 -translate-y-1/2 transition-colors group-hover:bg-[var(--color-accent-hover)]"
-                      style={{ backgroundColor: 'var(--color-accent)' }}
+                      className="absolute top-0 left-6 z-10 h-3 w-24 -translate-y-1/2 transition-colors bg-[var(--color-accent)] group-hover:bg-[var(--color-accent-hover)]"
                     />
-                    <div className="aspect-[4/5] relative overflow-hidden border hairline" style={{ borderWidth: 1 }}>
+                    <div className="aspect-[4/5] relative overflow-hidden border hairline">
                       <img
                         src={cover.src}
                         alt={localeAlt(cover, ll)}
@@ -97,9 +101,11 @@ function PortofoliuLayout() {
                       />
                     </div>
                     <div className="pt-4 flex flex-col gap-2">
-                      <p className="eyebrow text-[10px] tabular-nums">
-                        {String(count).padStart(2, '0')} {p.projectsLabel}
-                      </p>
+                      {count > 0 && (
+                        <p className="eyebrow text-[10px] tabular-nums">
+                          {count} {projectsLabel}
+                        </p>
+                      )}
                       <h3 className="serif text-2xl md:text-3xl leading-tight group-hover:text-[var(--color-accent)] transition-colors">
                         {c.label}
                       </h3>

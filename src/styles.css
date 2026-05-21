@@ -360,8 +360,9 @@ textarea.input {
 /* Portfolio image card — image hover zoom */
 .portfolio-card {
   position: relative;
-  overflow: hidden;
   isolation: isolate;
+  /* `overflow:hidden` lives on the inner aspect-ratio wrapper so the folder
+     tab can protrude above the card frame without being clipped. */
 }
 .portfolio-card .portfolio-img {
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
