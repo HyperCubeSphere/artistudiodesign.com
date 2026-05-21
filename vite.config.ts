@@ -7,7 +7,7 @@ import { writeFileSync, existsSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { locales, portfolioCategorySlugs, productCategorySlugs, productSlugs } from './src/i18n/config'
 
-const SITE_URL = 'https://artistudiodesign.com'
+const SITE_URL = 'https://artistudiodesign.online'
 
 const staticPages = [
   { path: '/', changefreq: 'monthly', priority: '1.0' },
