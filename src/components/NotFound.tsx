@@ -7,7 +7,7 @@ export function NotFound({ children }: { children?: React.ReactNode }) {
     <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-24 flex flex-col items-center text-center">
       <p className="eyebrow mb-4">{t.notFound.eyebrow}</p>
       <h1 className="serif text-5xl md:text-6xl mb-6">{t.notFound.title}</h1>
-      <div className="text-sm max-w-md mb-8" style={{ color: 'var(--color-muted)' }}>
+      <div className="text-sm max-w-md mb-8 text-muted">
         {children ?? <p>{t.notFound.message}</p>}
       </div>
       <div className="flex gap-3 items-center flex-wrap justify-center">

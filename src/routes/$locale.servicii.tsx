@@ -30,16 +30,18 @@ function ServiciiPage() {
           <h1 className="serif text-5xl md:text-7xl leading-[1.05] max-w-3xl mb-8 text-balance">
             <GoldPeriod text={s.heading} />
           </h1>
-          <p className="text-base md:text-lg max-w-2xl" style={{ color: 'var(--color-muted)' }}>
+          <p className="text-base md:text-lg max-w-2xl text-muted">
             {s.subtitle}
           </p>
         </div>
       </section>
 
-      <section className="py-20 md:py-24">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-          <p className="eyebrow mb-10">{s.listEyebrow}</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <section className="py-16 md:py-20">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-10 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16">
+          <div className="md:col-span-3">
+            <p className="eyebrow sticky top-28">{s.listEyebrow}</p>
+          </div>
+          <div className="md:col-span-9">
             {s.items.map((item) => (
               <ServiceCard key={item.number} number={item.number} title={item.title} description={item.description} />
             ))}
@@ -47,23 +49,28 @@ function ServiciiPage() {
         </div>
       </section>
 
-      <section className="border-t hairline py-20 md:py-24" style={{ backgroundColor: 'var(--color-surface)' }}>
+      <section className="border-t hairline py-20 md:py-28 bg-surface">
         <div className="max-w-[1400px] mx-auto px-6 md:px-10">
           <p className="eyebrow mb-4">{s.processEyebrow}</p>
           <h2 className="serif text-3xl md:text-5xl leading-[1.05] max-w-3xl mb-14">
             <GoldPeriod text={s.processHeading} />
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
+          <ol className="flex flex-col">
             {s.process.map((step) => (
-              <div key={step.number} className="border-t hairline pt-6">
-                <p className="serif text-4xl md:text-5xl text-[var(--color-accent)] mb-4 tabular-nums">{step.number}</p>
-                <h3 className="serif text-2xl mb-3">{step.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+              <li
+                key={step.number}
+                className="flex flex-col md:flex-row md:items-baseline gap-3 md:gap-12 py-8 border-t hairline"
+              >
+                <span className="serif text-3xl md:text-5xl tabular-nums leading-none md:basis-32 shrink-0 text-accent">
+                  {step.number}
+                </span>
+                <h3 className="serif text-2xl md:text-3xl leading-tight md:basis-80 shrink-0">{step.title}</h3>
+                <p className="text-base leading-relaxed max-w-prose text-muted">
                   {step.description}
                 </p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 

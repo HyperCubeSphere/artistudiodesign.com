@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet, notFound, useRouterState } from '@tanstack/react-router'
+import { createFileRoute, Outlet, notFound } from '@tanstack/react-router'
 import { locales, type Locale } from '../i18n/config'
 import { I18nProvider, type Translation } from '../i18n'
 import Navbar from '../components/Navbar'
@@ -20,16 +20,13 @@ export const Route = createFileRoute('/$locale')({
 
 function LocaleLayout() {
   const { locale, t } = Route.useRouteContext()
-  const pathname = useRouterState({ select: (s) => s.location.pathname })
-  const onShop = pathname.includes('/produse')
 
   return (
     <I18nProvider value={{ locale, t }}>
       <a href="#main-content" className="skip-link">
         {t.nav.skipToContent}
       </a>
-      {/* Products section uses its own nav variant inside the route. */}
-      {onShop ? null : <Navbar />}
+      <Navbar />
       <main id="main-content" className="flex-1">
         <Outlet />
       </main>

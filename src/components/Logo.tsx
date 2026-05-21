@@ -34,8 +34,8 @@ export default function Logo({ size = 'sm', centered = false, iconOnly = false }
       <Crest size={crest} />
       {iconOnly ? null : (
         <span className={`serif leading-[0.92] flex flex-col items-start ${wordmark}`}>
-          <span style={{ color: 'var(--color-accent)' }}>Arti</span>
-          <span className="italic font-normal" style={{ color: 'var(--color-text)' }}>Studio</span>
+          <span className="text-accent">Arti</span>
+          <span className="italic font-normal text-text">Studio</span>
         </span>
       )}
     </span>
