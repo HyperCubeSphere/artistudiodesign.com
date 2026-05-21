@@ -5,6 +5,12 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.1.2](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.1.1...v1.1.2) (2026-05-21)
+
+### 🐛 Bug Fixes
+
+* correct stats strip ([f87694a](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/f87694ada42b20a3b371ba3b7b489ec1232eecd7))
+
 ## [1.1.1](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.1.0...v1.1.1) (2026-05-21)
 
 ### 🐛 Bug Fixes
