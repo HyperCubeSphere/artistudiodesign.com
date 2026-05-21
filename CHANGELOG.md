@@ -5,6 +5,12 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.1.0](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.0.0...v1.1.0) (2026-05-21)
+
+### 📝 Documentation
+
+* add correct logo ([4d40edd](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/4d40edd99365e474ca05a2244260583407f4cbbf))
+
 ## 1.0.0 (2026-05-21)
 
 ### 🍕 Features
