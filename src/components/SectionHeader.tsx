@@ -29,7 +29,7 @@ export function GoldPeriod({ text }: { text: string }) {
   return (
     <>
       {parts.map((p, i) =>
-        p === '.' ? <span key={i} className="text-[var(--color-accent)]">.</span> : <span key={i}>{p}</span>,
+        p === '.' ? <span key={i} className="text-accent">.</span> : <span key={i}>{p}</span>,
       )}
     </>
   )

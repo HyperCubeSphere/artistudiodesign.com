@@ -7,7 +7,7 @@ const ro = {
     despre: 'Despre noi',
     servicii: 'Servicii',
     portofoliu: 'Portofoliu',
-    materiale: 'Materiale',
+    magazin: 'Magazin (ArtiCare)',
     produse: 'Produse',
     ghid: 'Ghid de utilizare',
     contact: 'Contact',
@@ -53,7 +53,6 @@ const ro = {
     subtitle: 'Creăm mobilier personalizat care transformă spațiul tău într-un loc unic și funcțional.',
     ctaPrimary: 'Descoperă serviciile',
     ctaSecondary: 'Vezi portofoliu',
-    scrollLabel: 'Derulează în jos',
     features: [
       { title: 'Design personalizat', description: 'Fiecare proiect este creat în funcție de stilul și nevoile tale.' },
       { title: 'Materiale premium', description: 'Folosim materiale atent selecționate pentru durabilitate și aspect impecabil.' },
@@ -158,6 +157,8 @@ const ro = {
     subtitle: 'O selecție din proiectele recente, organizată pe camere.',
     allLabel: 'Toate categoriile',
     backToAll: 'Înapoi la portofoliu',
+    projectLabelOne: 'proiect',
+    projectsLabel: 'proiecte',
     categories: [
       { slug: 'bucatarie', label: 'Bucătărie', description: 'Spații moderne unde funcționalitatea întâlnește eleganța.' },
       { slug: 'living', label: 'Living', description: 'Zonă de zi gândită pentru relaxare și socializare.' },
@@ -167,22 +168,20 @@ const ro = {
     ],
   },
 
-  materiale: {
-    seoTitle: 'Materiale — Arti Studio',
-    seoDescription: 'Lemn, PAL, MDF, blaturi de cuarț, feronerie premium — materialele cu care lucrăm la Arti Studio.',
-    eyebrow: 'Materiale',
-    heading: 'Materiale atent selecționate.',
-    subtitle: 'Lucrăm doar cu furnizori verificați, pentru rezultate care rezistă timpului.',
-    items: [
-      { title: 'PAL melaminat', description: 'Game largi de finisaje mat, lucios și texturat. Rezistent la zgârieturi și umiditate.' },
-      { title: 'MDF vopsit', description: 'Suprafețe omogene, ideale pentru fronturi minimaliste și forme curbe.' },
-      { title: 'Furnir natural', description: 'Lemn natural pe suport stabil. Aspect autentic și durabilitate.' },
-      { title: 'Blaturi cuarț & ceramică', description: 'Suprafețe pentru bucătărie rezistente la pete, căldură și abraziune.' },
-      { title: 'Feronerie premium', description: 'Balamale Blum / Hettich, sertare cu amortizare, sisteme push-to-open.' },
-      { title: 'Iluminat integrat', description: 'LED-uri cu temperatură ajustabilă, încorporate în mobilier și plinte.' },
+  magazin: {
+    seoTitle: 'Magazin ArtiCare — Arti Studio',
+    seoDescription: 'ArtiCare: produse de curățenie, protecție și textile, gândite pentru mobilierul Arti Studio.',
+    eyebrow: 'Magazin',
+    heading: 'ArtiCare. Pentru mobilierul tău, zi de zi.',
+    subtitle: 'Trei colecții pregătite pentru îngrijirea, protecția și estetica mobilierului. Curând cu produse, fotografii și prețuri.',
+    categories: [
+      { slug: 'curatenie', label: 'Curățenie', description: 'Soluții pentru curățarea zilnică a mobilierului — fronturi, blaturi, suprafețe lăcuite.' },
+      { slug: 'protectie', label: 'Protecție', description: 'Tratamente care păstrează suprafețele rezistente la zgârieturi, umiditate și timp.' },
+      { slug: 'textile', label: 'Textile', description: 'Țesături și accesorii care completează atmosfera fiecărui spațiu.' },
     ],
-    ctaHeading: 'Vrei să vezi mostre?',
-    ctaButton: 'Programează o vizită',
+    comingSoon: 'În curând',
+    ctaHeading: 'Vrei să fii anunțat când lansăm?',
+    ctaButton: 'Contactează-ne',
   },
 
   produse: {
@@ -233,6 +232,8 @@ const ro = {
       { title: 'Garanția calității', description: 'produse testate și aprobate' },
     ],
     backToProducts: 'Înapoi la produse',
+    itemSingular: 'produs',
+    itemPlural: 'produse',
     detailDescriptionLabel: 'Descrierea produsului',
     detailHowToUseLabel: 'Mod de utilizare',
     detailContentsLabel: 'Conținut',

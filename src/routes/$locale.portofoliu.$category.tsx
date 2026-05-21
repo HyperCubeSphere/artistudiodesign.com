@@ -46,19 +46,20 @@ function PortofoliuCategoryPage() {
               <GoldPeriod text={cat?.description ?? ''} />
             </h2>
           </div>
-          <Link to="/$locale/portofoliu" params={{ locale }} className="nav-text text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors">
+          <Link to="/$locale/portofoliu" params={{ locale }} className="nav-text text-muted hover:text-accent transition-colors">
             ← {t.portofoliu.backToAll}
           </Link>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {projects.map((proj) => (
+          {projects.map((proj, i) => (
             <article key={proj.id} className="portfolio-card group block">
               <div className="aspect-[4/5] relative overflow-hidden">
                 <img
                   src={proj.image.src}
                   alt={localeAlt(proj.image, ll)}
-                  loading="lazy"
+                  loading={i < 3 ? 'eager' : 'lazy'}
+                  fetchPriority={i === 0 ? 'high' : 'auto'}
                   decoding="async"
                   className="portfolio-img absolute inset-0 w-full h-full object-cover photo-moody-soft"
                 />
@@ -67,12 +68,15 @@ function PortofoliuCategoryPage() {
                 <h3 className="serif text-xl md:text-2xl leading-tight">
                   {proj.title[ll === 'en' ? 'en' : 'ro']}
                 </h3>
-                <p className="text-sm" style={{ color: 'var(--color-muted)' }}>
+                <p className="text-sm text-muted">
                   {proj.caption[ll === 'en' ? 'en' : 'ro']}
                 </p>
                 <ul className="flex flex-wrap gap-1.5 mt-2">
                   {proj.tags[ll === 'en' ? 'en' : 'ro'].map((tag) => (
-                    <li key={tag} className="text-[10px] uppercase tracking-widest px-2 py-1 border hairline-soft" style={{ borderWidth: 1, color: 'var(--color-muted)' }}>
+                    <li
+                      key={tag}
+                      className="text-[10px] uppercase tracking-[var(--tracking-nav)] px-2 py-1 border hairline-soft text-muted"
+                    >
                       {tag}
                     </li>
                   ))}

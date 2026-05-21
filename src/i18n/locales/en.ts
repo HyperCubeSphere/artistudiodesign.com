@@ -9,7 +9,7 @@ const en: typeof ro = {
     despre: 'About',
     servicii: 'Services',
     portofoliu: 'Portfolio',
-    materiale: 'Materials',
+    magazin: 'Shop (ArtiCare)',
     produse: 'Products',
     ghid: 'Usage guide',
     contact: 'Contact',
@@ -55,7 +55,6 @@ const en: typeof ro = {
     subtitle: 'We craft custom furniture that turns your space into something singular and useful.',
     ctaPrimary: 'Explore services',
     ctaSecondary: 'View portfolio',
-    scrollLabel: 'Scroll down',
     features: [
       { title: 'Personalised design', description: 'Every project is shaped around your style and your needs.' },
       { title: 'Premium materials', description: 'Carefully selected materials for durability and an impeccable finish.' },
@@ -160,6 +159,8 @@ const en: typeof ro = {
     subtitle: 'A selection of recent projects, grouped by room.',
     allLabel: 'All categories',
     backToAll: 'Back to portfolio',
+    projectLabelOne: 'project',
+    projectsLabel: 'projects',
     categories: [
       { slug: 'bucatarie', label: 'Kitchen', description: 'Modern spaces where function meets elegance.' },
       { slug: 'living', label: 'Living', description: 'Day-room layouts designed for ease and conversation.' },
@@ -169,22 +170,20 @@ const en: typeof ro = {
     ],
   },
 
-  materiale: {
-    seoTitle: 'Materials — Arti Studio',
-    seoDescription: 'Wood, MFC, MDF, quartz worktops, premium hardware — the materials we use at Arti Studio.',
-    eyebrow: 'Materials',
-    heading: 'Materials chosen with care.',
-    subtitle: 'We only work with vetted suppliers, for results that last.',
-    items: [
-      { title: 'Melamine-faced chipboard (MFC)', description: 'A wide range of matt, gloss, and textured finishes. Scratch- and moisture-resistant.' },
-      { title: 'Painted MDF', description: 'Uniform surfaces, ideal for minimalist fronts and curved shapes.' },
-      { title: 'Real-wood veneer', description: 'Natural wood on a stable substrate. Authentic look, lasting wear.' },
-      { title: 'Quartz & ceramic worktops', description: 'Kitchen surfaces resistant to stains, heat, and abrasion.' },
-      { title: 'Premium hardware', description: 'Blum / Hettich hinges, soft-close drawers, push-to-open systems.' },
-      { title: 'Integrated lighting', description: 'Tunable-temperature LEDs embedded in cabinetry and plinths.' },
+  magazin: {
+    seoTitle: 'ArtiCare Shop — Arti Studio',
+    seoDescription: 'ArtiCare: cleaning, protection, and textile products designed for Arti Studio furniture.',
+    eyebrow: 'Shop',
+    heading: 'ArtiCare. For your furniture, every day.',
+    subtitle: 'Three collections for the care, protection, and styling of your furniture. Products, photos, and pricing land soon.',
+    categories: [
+      { slug: 'curatenie', label: 'Cleaning', description: 'Everyday solutions for fronts, worktops, and lacquered surfaces.' },
+      { slug: 'protectie', label: 'Protection', description: 'Treatments that keep surfaces resistant to scratches, moisture, and wear.' },
+      { slug: 'textile', label: 'Textiles', description: 'Fabrics and accessories that complete the atmosphere of every space.' },
     ],
-    ctaHeading: 'Want to see samples?',
-    ctaButton: 'Book a visit',
+    comingSoon: 'Coming soon',
+    ctaHeading: 'Want a heads-up when we launch?',
+    ctaButton: 'Contact us',
   },
 
   produse: {
@@ -235,6 +234,8 @@ const en: typeof ro = {
       { title: 'Quality guarantee', description: 'tested and approved products' },
     ],
     backToProducts: 'Back to products',
+    itemSingular: 'product',
+    itemPlural: 'products',
     detailDescriptionLabel: 'Product description',
     detailHowToUseLabel: 'How to use',
     detailContentsLabel: 'Contents',
