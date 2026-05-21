@@ -1,0 +1,1 @@
+import{j as r}from"./main-CKqYc9In.js";import{L as e}from"./Logo-BNHGnEQ-.js";function a({centered:t=!0}){return r.jsx("div",{className:`text-[var(--color-text)] ${t?"flex justify-center":""}`,children:r.jsx(e,{size:"lg"})})}export{a as B};
