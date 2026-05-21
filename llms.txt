@@ -36,7 +36,7 @@
 - Despre noi: https://artistudiodesign.com/ro/despre
 - Servicii: https://artistudiodesign.com/ro/servicii
 - Portofoliu: https://artistudiodesign.com/ro/portofoliu
-- Materiale: https://artistudiodesign.com/ro/materiale
+- Magazin (ArtiCare): https://artistudiodesign.com/ro/magazin
 - Produse: https://artistudiodesign.com/ro/produse
 - Ghid de utilizare: https://artistudiodesign.com/ro/ghid
 - Contact: https://artistudiodesign.com/ro/contact
