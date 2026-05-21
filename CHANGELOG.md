@@ -5,6 +5,16 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.2.0-beta.1](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.1.2...v1.2.0-beta.1) (2026-05-21)
+
+### 🍕 Features
+
+* replace Materiale with Magazin (ArtiCare) section ([#4](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/4)) ([1c7b599](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/1c7b5991ada98a4e3618923353bb2d01ed7694ad)), closes [#2](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/2) [#3](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/3)
+
+### 🐛 Bug Fixes
+
+* portofoliu index shows 5 category folders, not flat grid ([#3](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/3)) ([01c074e](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/01c074e322ef680ba7a58ef463bc0d4fdaa309e8)), closes [#1](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/1)
+
 ## [1.1.2](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.1.1...v1.1.2) (2026-05-21)
 
 ### 🐛 Bug Fixes
