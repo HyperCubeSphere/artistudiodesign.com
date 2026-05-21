@@ -5,6 +5,21 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.2.0](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.1.2...v1.2.0) (2026-05-21)
+
+### 🍕 Features
+
+* replace Materiale with Magazin (ArtiCare) section ([#4](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/4)) ([1c7b599](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/1c7b5991ada98a4e3618923353bb2d01ed7694ad)), closes [#2](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/2) [#3](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/3)
+* **images:** swap legacy WordPress photos for new high-res studio shots ([#7](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/7)) ([4652d2d](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/4652d2d871970f9c401fb524c7e04efc88ccaaae))
+
+### 🐛 Bug Fixes
+
+* portofoliu index shows 5 category folders, not flat grid ([#3](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/3)) ([01c074e](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/01c074e322ef680ba7a58ef463bc0d4fdaa309e8)), closes [#1](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/1)
+
+### 🧑‍💻 Code Refactoring
+
+* full inline-style sweep + audited stats sizing ([#5](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/5)) ([7a9df30](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/7a9df30c8f5b51b3e692fba0772986f831a6befc))
+
 ## [1.2.0-beta.3](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.2.0-beta.2...v1.2.0-beta.3) (2026-05-21)
 
 ### 🧑‍💻 Code Refactoring
