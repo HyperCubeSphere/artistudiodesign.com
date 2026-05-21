@@ -3,6 +3,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useI18n } from '../i18n'
 import { seo } from '../lib/seo'
 import { GoldPeriod } from '../components/SectionHeader'
+import { pad2 } from '../lib/format'
 import type { MagazinCategorySlug } from '../i18n/config'
 import type ro from '../i18n/locales/ro'
 
@@ -31,7 +32,7 @@ function MagazinPage() {
           <h1 className="serif text-5xl md:text-7xl leading-[1.05] max-w-3xl mb-8 text-balance">
             <GoldPeriod text={m.heading} />
           </h1>
-          <p className="text-base md:text-lg max-w-2xl" style={{ color: 'var(--color-muted)' }}>
+          <p className="text-base md:text-lg max-w-2xl text-muted">
             {m.subtitle}
           </p>
         </div>
@@ -44,31 +45,20 @@ function MagazinPage() {
               key={c.slug}
               className="relative flex flex-col border hairline isolate"
             >
-              {/* Folder tab — base color via class so utilities can override on hover
-                  if/when these cards become interactive. */}
               <span
                 aria-hidden="true"
-                className="absolute top-0 left-6 z-10 h-3 w-20 -translate-y-1/2 bg-[var(--color-accent)]"
+                className="absolute top-0 left-6 z-10 h-3 w-20 -translate-y-1/2 bg-accent"
               />
-              <div
-                className="aspect-[4/5] relative overflow-hidden flex items-center justify-center"
-                style={{ backgroundColor: 'var(--color-surface)' }}
-              >
+              <div className="aspect-[4/5] relative overflow-hidden flex items-center justify-center bg-surface">
                 <CategoryIcon slug={c.slug as MagazinCategorySlug} />
-                <span
-                  className="absolute top-4 right-4 px-2 py-1 text-[10px] uppercase nav-text"
-                  style={{
-                    color: 'var(--color-accent)',
-                    border: '1px solid var(--color-accent)',
-                  }}
-                >
+                <span className="absolute top-4 right-4 px-2 py-1 nav-text text-[10px] text-accent border border-accent">
                   {m.comingSoon}
                 </span>
               </div>
               <div className="pt-5 px-5 pb-6 flex flex-col gap-2">
-                <p className="eyebrow text-[10px] tabular-nums">— {String(i + 1).padStart(2, '0')}</p>
+                <p className="eyebrow-sm tabular-nums">— {pad2(i + 1)}</p>
                 <h3 className="serif text-2xl md:text-3xl leading-tight">{c.label}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+                <p className="text-sm leading-relaxed text-muted">
                   {c.description}
                 </p>
               </div>
@@ -77,7 +67,7 @@ function MagazinPage() {
         </div>
       </section>
 
-      <section className="border-t hairline" style={{ backgroundColor: 'var(--color-surface)' }}>
+      <section className="border-t hairline bg-surface">
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-20 md:py-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
           <h2 className="serif text-3xl md:text-5xl leading-[1.05] max-w-2xl">
             <GoldPeriod text={m.ctaHeading} />

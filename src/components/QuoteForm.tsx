@@ -48,14 +48,13 @@ export default function QuoteForm({ prefillProduct, prefillSubject }: QuoteFormP
   if (submitted) {
     return (
       <div
-        className="card p-8 flex flex-col gap-3"
+        className="card p-8 flex flex-col gap-3 border-accent"
         role="status"
         aria-live="polite"
-        style={{ borderColor: 'var(--color-accent)' }}
       >
         <p className="eyebrow">✓</p>
         <p className="serif text-2xl">Mulțumim. Revenim în maximum 24h.</p>
-        <p className="text-sm" style={{ color: 'var(--color-muted)' }}>
+        <p className="text-sm text-muted">
           Cererea ta a ajuns la noi. Vom răspunde cât mai curând posibil pe email-ul lăsat.
         </p>
       </div>
@@ -118,16 +117,16 @@ export default function QuoteForm({ prefillProduct, prefillSubject }: QuoteFormP
         />
       </label>
       {!tallyConfigured ? (
-        <p className="text-xs" style={{ color: 'var(--color-muted-2)' }}>
+        <p className="text-xs text-muted-2">
           {f.fallback}{' '}
-          <a className="text-[var(--color-accent)] underline" href={`mailto:${CONTACT_EMAIL}`}>
+          <a className="text-accent underline" href={`mailto:${CONTACT_EMAIL}`}>
             {CONTACT_EMAIL}
           </a>
           .
         </p>
       ) : null}
       {error ? (
-        <p className="text-sm" style={{ color: 'var(--color-accent)' }}>
+        <p className="text-sm text-accent">
           {error}
         </p>
       ) : null}
