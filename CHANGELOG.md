@@ -5,6 +5,12 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.2.0-beta.2](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.2.0-beta.1...v1.2.0-beta.2) (2026-05-21)
+
+### 🍕 Features
+
+* **images:** swap legacy WordPress photos for new high-res studio shots ([#7](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/7)) ([4652d2d](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/4652d2d871970f9c401fb524c7e04efc88ccaaae))
+
 ## [1.2.0-beta.1](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.1.2...v1.2.0-beta.1) (2026-05-21)
 
 ### 🍕 Features
