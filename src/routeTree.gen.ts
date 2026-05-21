@@ -16,7 +16,7 @@ import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
 import { Route as LocaleServiciiRouteImport } from './routes/$locale.servicii'
 import { Route as LocaleProduseRouteImport } from './routes/$locale.produse'
 import { Route as LocalePortofoliuRouteImport } from './routes/$locale.portofoliu'
-import { Route as LocaleMaterialeRouteImport } from './routes/$locale.materiale'
+import { Route as LocaleMagazinRouteImport } from './routes/$locale.magazin'
 import { Route as LocaleGhidRouteImport } from './routes/$locale.ghid'
 import { Route as LocaleDespreRouteImport } from './routes/$locale.despre'
 import { Route as LocaleContactRouteImport } from './routes/$locale.contact'
@@ -61,9 +61,9 @@ const LocalePortofoliuRoute = LocalePortofoliuRouteImport.update({
   path: '/portofoliu',
   getParentRoute: () => LocaleRoute,
 } as any)
-const LocaleMaterialeRoute = LocaleMaterialeRouteImport.update({
-  id: '/materiale',
-  path: '/materiale',
+const LocaleMagazinRoute = LocaleMagazinRouteImport.update({
+  id: '/magazin',
+  path: '/magazin',
   getParentRoute: () => LocaleRoute,
 } as any)
 const LocaleGhidRoute = LocaleGhidRouteImport.update({
@@ -117,7 +117,7 @@ export interface FileRoutesByFullPath {
   '/$locale/contact': typeof LocaleContactRoute
   '/$locale/despre': typeof LocaleDespreRoute
   '/$locale/ghid': typeof LocaleGhidRoute
-  '/$locale/materiale': typeof LocaleMaterialeRoute
+  '/$locale/magazin': typeof LocaleMagazinRoute
   '/$locale/portofoliu': typeof LocalePortofoliuRouteWithChildren
   '/$locale/produse': typeof LocaleProduseRouteWithChildren
   '/$locale/servicii': typeof LocaleServiciiRoute
@@ -134,7 +134,7 @@ export interface FileRoutesByTo {
   '/$locale/contact': typeof LocaleContactRoute
   '/$locale/despre': typeof LocaleDespreRoute
   '/$locale/ghid': typeof LocaleGhidRoute
-  '/$locale/materiale': typeof LocaleMaterialeRoute
+  '/$locale/magazin': typeof LocaleMagazinRoute
   '/$locale/portofoliu': typeof LocalePortofoliuRouteWithChildren
   '/$locale/servicii': typeof LocaleServiciiRoute
   '/$locale': typeof LocaleIndexRoute
@@ -152,7 +152,7 @@ export interface FileRoutesById {
   '/$locale/contact': typeof LocaleContactRoute
   '/$locale/despre': typeof LocaleDespreRoute
   '/$locale/ghid': typeof LocaleGhidRoute
-  '/$locale/materiale': typeof LocaleMaterialeRoute
+  '/$locale/magazin': typeof LocaleMagazinRoute
   '/$locale/portofoliu': typeof LocalePortofoliuRouteWithChildren
   '/$locale/produse': typeof LocaleProduseRouteWithChildren
   '/$locale/servicii': typeof LocaleServiciiRoute
@@ -172,7 +172,7 @@ export interface FileRouteTypes {
     | '/$locale/contact'
     | '/$locale/despre'
     | '/$locale/ghid'
-    | '/$locale/materiale'
+    | '/$locale/magazin'
     | '/$locale/portofoliu'
     | '/$locale/produse'
     | '/$locale/servicii'
@@ -189,7 +189,7 @@ export interface FileRouteTypes {
     | '/$locale/contact'
     | '/$locale/despre'
     | '/$locale/ghid'
-    | '/$locale/materiale'
+    | '/$locale/magazin'
     | '/$locale/portofoliu'
     | '/$locale/servicii'
     | '/$locale'
@@ -206,7 +206,7 @@ export interface FileRouteTypes {
     | '/$locale/contact'
     | '/$locale/despre'
     | '/$locale/ghid'
-    | '/$locale/materiale'
+    | '/$locale/magazin'
     | '/$locale/portofoliu'
     | '/$locale/produse'
     | '/$locale/servicii'
@@ -274,11 +274,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocalePortofoliuRouteImport
       parentRoute: typeof LocaleRoute
     }
-    '/$locale/materiale': {
-      id: '/$locale/materiale'
-      path: '/materiale'
-      fullPath: '/$locale/materiale'
-      preLoaderRoute: typeof LocaleMaterialeRouteImport
+    '/$locale/magazin': {
+      id: '/$locale/magazin'
+      path: '/magazin'
+      fullPath: '/$locale/magazin'
+      preLoaderRoute: typeof LocaleMagazinRouteImport
       parentRoute: typeof LocaleRoute
     }
     '/$locale/ghid': {
@@ -372,7 +372,7 @@ interface LocaleRouteChildren {
   LocaleContactRoute: typeof LocaleContactRoute
   LocaleDespreRoute: typeof LocaleDespreRoute
   LocaleGhidRoute: typeof LocaleGhidRoute
-  LocaleMaterialeRoute: typeof LocaleMaterialeRoute
+  LocaleMagazinRoute: typeof LocaleMagazinRoute
   LocalePortofoliuRoute: typeof LocalePortofoliuRouteWithChildren
   LocaleProduseRoute: typeof LocaleProduseRouteWithChildren
   LocaleServiciiRoute: typeof LocaleServiciiRoute
@@ -384,7 +384,7 @@ const LocaleRouteChildren: LocaleRouteChildren = {
   LocaleContactRoute: LocaleContactRoute,
   LocaleDespreRoute: LocaleDespreRoute,
   LocaleGhidRoute: LocaleGhidRoute,
-  LocaleMaterialeRoute: LocaleMaterialeRoute,
+  LocaleMagazinRoute: LocaleMagazinRoute,
   LocalePortofoliuRoute: LocalePortofoliuRouteWithChildren,
   LocaleProduseRoute: LocaleProduseRouteWithChildren,
   LocaleServiciiRoute: LocaleServiciiRoute,

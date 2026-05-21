@@ -10,7 +10,7 @@ type NavTo =
   | '/$locale/despre'
   | '/$locale/servicii'
   | '/$locale/portofoliu'
-  | '/$locale/materiale'
+  | '/$locale/magazin'
   | '/$locale/produse'
   | '/$locale/contact'
 
@@ -36,7 +36,7 @@ export default function Navbar() {
     { to: '/$locale/despre', label: t.nav.despre },
     { to: '/$locale/servicii', label: t.nav.servicii },
     { to: '/$locale/portofoliu', label: t.nav.portofoliu },
-    { to: '/$locale/materiale', label: t.nav.materiale },
+    { to: '/$locale/magazin', label: t.nav.magazin },
     { to: '/$locale/produse', label: t.nav.produse },
     { to: '/$locale/contact', label: t.nav.contact },
   ]
