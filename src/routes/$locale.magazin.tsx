@@ -57,7 +57,7 @@ function MagazinPage() {
               </div>
               <div className="pt-5 px-5 pb-6 flex flex-col gap-2">
                 <p className="eyebrow-sm tabular-nums">— {pad2(i + 1)}</p>
-                <h3 className="serif text-2xl md:text-3xl leading-tight">{c.label}</h3>
+                <h2 className="serif text-2xl md:text-3xl leading-tight">{c.label}</h2>
                 <p className="text-sm leading-relaxed text-muted">
                   {c.description}
                 </p>

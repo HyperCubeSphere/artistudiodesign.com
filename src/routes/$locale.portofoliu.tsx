@@ -44,8 +44,8 @@ function PortofoliuLayout() {
               to="/$locale/portofoliu"
               params={{ locale }}
               activeOptions={{ exact: true }}
-              className="nav-text px-4 py-2 hairline-frame transition-colors hover:border-accent hover:text-accent"
-              activeProps={{ className: 'nav-text px-4 py-2 hairline-frame transition-colors text-accent border-accent' }}
+              className="nav-text px-4 min-h-11 inline-flex items-center hairline-frame transition-colors hover:border-accent hover:text-accent"
+              activeProps={{ className: 'nav-text px-4 min-h-11 inline-flex items-center hairline-frame transition-colors text-accent border-accent' }}
             >
               {p.allLabel}
             </Link>
@@ -54,8 +54,8 @@ function PortofoliuLayout() {
                 key={c.slug}
                 to="/$locale/portofoliu/$category"
                 params={{ locale, category: c.slug as PortfolioCategorySlug }}
-                className="nav-text px-4 py-2 hairline-frame transition-colors hover:border-accent hover:text-accent"
-                activeProps={{ className: 'nav-text px-4 py-2 hairline-frame transition-colors text-accent border-accent' }}
+                className="nav-text px-4 min-h-11 inline-flex items-center hairline-frame transition-colors hover:border-accent hover:text-accent"
+                activeProps={{ className: 'nav-text px-4 min-h-11 inline-flex items-center hairline-frame transition-colors text-accent border-accent' }}
               >
                 {c.label}
               </Link>
@@ -105,9 +105,9 @@ function PortofoliuLayout() {
                           {count} {projectsLabel}
                         </p>
                       )}
-                      <h3 className="serif text-2xl md:text-3xl leading-tight group-hover:text-accent transition-colors">
+                      <h2 className="serif text-2xl md:text-3xl leading-tight group-hover:text-accent transition-colors">
                         {c.label}
-                      </h3>
+                      </h2>
                       <p className="text-sm text-muted">
                         {c.description}
                       </p>

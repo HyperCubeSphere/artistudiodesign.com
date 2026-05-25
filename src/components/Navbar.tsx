@@ -104,7 +104,7 @@ export default function Navbar() {
                       params={{ locale }}
                       onClick={() => setOpen(false)}
                       activeOptions={{ exact: link.to === '/$locale' }}
-                      className="nav-text block py-3 border-b hairline-soft"
+                      className="nav-text block py-3.5 border-b hairline-soft"
                       activeProps={{ className: 'nav-text block py-3 border-b hairline-soft text-accent' }}
                     >
                       {link.label}
