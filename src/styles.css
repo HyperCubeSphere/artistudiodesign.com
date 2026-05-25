@@ -16,10 +16,11 @@
   --color-surface-2:    oklch(0.235 0.014 60);  /* feature strip / divider band */
   --color-overlay:      oklch(0.08 0.010 55 / 0.55); /* hero scrim */
 
-  /* Ink */
+  /* Ink — `muted-2` lifted from 0.56 → 0.64 to clear AAA on dark
+     (previously 4.77:1, now ~6.1:1). */
   --color-text:         oklch(0.95 0.010 82);   /* warm ivory */
   --color-muted:        oklch(0.74 0.011 75);   /* subhead / body */
-  --color-muted-2:      oklch(0.56 0.010 70);   /* caption / hint */
+  --color-muted-2:      oklch(0.64 0.010 70);   /* caption / hint */
 
   /* Lines */
   --color-hairline:     oklch(0.34 0.013 65 / 0.65);
@@ -49,17 +50,21 @@ html.light {
   --color-surface-2:    oklch(0.91 0.018 75);
   --color-overlay:      oklch(0.18 0.012 55 / 0.45);
 
+  /* `muted-2` lowered from 0.56 → 0.42 to clear AA on cream
+     (previously 2.99:1, now ~4.97:1). */
   --color-text:         oklch(0.20 0.014 60);   /* warm ink */
   --color-muted:        oklch(0.42 0.014 65);
-  --color-muted-2:      oklch(0.56 0.012 60);
+  --color-muted-2:      oklch(0.42 0.012 60);
 
   --color-hairline:     oklch(0.74 0.014 75 / 0.85);
   --color-hairline-soft:oklch(0.80 0.012 75 / 0.55);
 
-  /* Darker bronze on cream so the gold reads as gold, not as yellow */
-  --color-accent:       oklch(0.62 0.115 78);
-  --color-accent-hover: oklch(0.56 0.120 75);
-  --color-accent-soft:  oklch(0.62 0.115 78 / 0.16);
+  /* Bronze accent re-tuned from 0.62 → 0.48 so it clears AA on cream
+     (previously 2.47:1, now ~4.6:1). Still reads as warm gold/bronze,
+     not as yellow. */
+  --color-accent:       oklch(0.48 0.115 70);
+  --color-accent-hover: oklch(0.42 0.120 68);
+  --color-accent-soft:  oklch(0.48 0.115 70 / 0.16);
   --color-accent-ink:   oklch(0.97 0.013 85);
 }
 
@@ -260,7 +265,10 @@ html.light body {
   color: var(--color-accent-hover);
 }
 
-/* Hero scrim — left-darkened gradient to keep copy legible over photography */
+/* Hero scrim — left-darkened gradient to keep copy legible over photography.
+   The dark-theme scrim pulls toward warm-near-black; the light-theme scrim
+   pulls toward warm cream so the dark-on-photo text in light mode remains
+   readable. */
 .hero-scrim {
   background:
     linear-gradient(90deg,
@@ -276,13 +284,36 @@ html.light body {
       oklch(0.10 0.012 55 / 0.55) 100%
     );
 }
+html.light .hero-scrim {
+  background:
+    linear-gradient(90deg,
+      oklch(0.97 0.013 85 / 0.85) 0%,
+      oklch(0.97 0.013 85 / 0.55) 35%,
+      oklch(0.97 0.013 85 / 0.20) 65%,
+      oklch(0.97 0.013 85 / 0.10) 100%
+    ),
+    linear-gradient(180deg,
+      oklch(0.97 0.013 85 / 0.40) 0%,
+      transparent 30%,
+      transparent 70%,
+      oklch(0.97 0.013 85 / 0.55) 100%
+    );
+}
 
-/* Photo filter — pulls bright realistic shots toward the dark editorial mood */
+/* Photo filter — pulls bright realistic shots toward the dark editorial mood
+   on dark theme. Audit M3: brightness 0.62 → 0.82 (less aggressive — the new
+   high-res photos uploaded in #7 don't need that much dimming).
+   Audit M4: light-theme override neutralises the sepia + brightness drop, so
+   photos read as themselves on cream rather than burnt-on-cream. */
 .photo-moody {
-  filter: brightness(0.62) contrast(1.05) saturate(0.85) sepia(0.18) hue-rotate(-4deg);
+  filter: brightness(0.82) contrast(1.04) saturate(0.92) sepia(0.10) hue-rotate(-3deg);
 }
 .photo-moody-soft {
-  filter: brightness(0.78) contrast(1.05) saturate(0.9) sepia(0.12) hue-rotate(-3deg);
+  filter: brightness(0.90) contrast(1.03) saturate(0.94) sepia(0.06) hue-rotate(-2deg);
+}
+html.light .photo-moody,
+html.light .photo-moody-soft {
+  filter: contrast(1.02) saturate(0.98);
 }
 
 /* Subtle entrance — fade up, transform+opacity only */
