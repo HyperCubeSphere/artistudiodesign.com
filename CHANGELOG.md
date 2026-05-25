@@ -5,6 +5,12 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.2.1-beta.1](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.2.0...v1.2.1-beta.1) (2026-05-25)
+
+### 🧑‍💻 Code Refactoring
+
+* address audit critical+high+medium (light hero, AA contrast, touch targets, contact dedup) ([#9](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/9)) ([ec4db91](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/ec4db91a25c22c40dacd0d1988c2c4c6b43ed2dd)), closes [#7](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/7)
+
 ## [1.2.0](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.1.2...v1.2.0) (2026-05-21)
 
 ### 🍕 Features
