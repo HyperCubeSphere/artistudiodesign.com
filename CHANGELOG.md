@@ -5,6 +5,12 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.2.1-beta.2](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.2.1-beta.1...v1.2.1-beta.2) (2026-05-25)
+
+### 🧑‍💻 Code Refactoring
+
+* normalize heading hierarchy + adapt touch targets (audit H1+M1+M2) ([#15](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/15)) ([b5d650d](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/b5d650d5696a38617ae7606b12e4ca35db6662ac))
+
 ## [1.2.1-beta.1](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.2.0...v1.2.1-beta.1) (2026-05-25)
 
 ### 🧑‍💻 Code Refactoring
