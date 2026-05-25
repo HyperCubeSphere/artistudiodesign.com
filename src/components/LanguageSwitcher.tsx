@@ -34,7 +34,7 @@ export default function LanguageSwitcher() {
         aria-label={`${locale.toUpperCase()} — switch language`}
         aria-expanded={open}
         aria-haspopup="listbox"
-        className="h-10 px-3 inline-flex items-center gap-2 hairline-frame hover:border-accent hover:text-accent transition-colors"
+        className="h-11 px-3 inline-flex items-center gap-2 hairline-frame hover:border-accent hover:text-accent transition-colors"
       >
         <FlagIcon locale={locale as Locale} className="w-4 h-auto" />
         <span className="nav-text">{locale.toUpperCase()}</span>

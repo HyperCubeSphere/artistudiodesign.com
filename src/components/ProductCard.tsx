@@ -27,13 +27,15 @@ export default function ProductCard({ product }: ProductCardProps) {
       </Link>
       <div className="flex flex-col gap-2">
         {category ? <p className="eyebrow-sm">{category.label}</p> : null}
-        <Link
-          to="/$locale/produse/$slug"
-          params={{ locale, slug: product.slug }}
-          className="serif text-xl md:text-2xl leading-tight hover:text-accent transition-colors"
-        >
-          {name}
-        </Link>
+        <h3 className="serif text-xl md:text-2xl leading-tight">
+          <Link
+            to="/$locale/produse/$slug"
+            params={{ locale, slug: product.slug }}
+            className="hover:text-accent transition-colors"
+          >
+            {name}
+          </Link>
+        </h3>
         <p className="text-sm leading-relaxed line-clamp-3 text-muted">
           {desc}
         </p>
@@ -45,7 +47,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             to="/$locale/contact"
             params={{ locale }}
             search={{ produs: product.slug } as Record<string, string>}
-            className="nav-text text-accent hover:text-[var(--color-accent-hover)] transition-colors"
+            className="nav-text text-accent hover:text-accent-hover transition-colors"
           >
             {t.produse.ctaProduct} →
           </Link>

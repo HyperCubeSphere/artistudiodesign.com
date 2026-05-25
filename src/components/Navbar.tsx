@@ -56,7 +56,7 @@ export default function Navbar() {
                 <Link
                   to={link.to}
                   params={{ locale }}
-                  className="nav-text nav-link text-text hover:text-accent transition-colors"
+                  className="nav-text nav-link text-text hover:text-accent transition-colors inline-flex items-center min-h-11"
                   activeOptions={{ exact: link.to === '/$locale' }}
                   activeProps={{ 'data-active': 'true' } as Record<string, string>}
                 >

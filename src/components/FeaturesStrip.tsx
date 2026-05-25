@@ -11,7 +11,7 @@ export default function FeaturesStrip() {
           <div key={item.title} className="flex flex-col gap-3">
             <span aria-hidden="true" className="h-px w-12 bg-accent" />
             <p className="eyebrow-sm tabular-nums">— {pad2(i + 1)}</p>
-            <h3 className="serif text-xl md:text-2xl leading-tight">{item.title}</h3>
+            <h2 className="serif text-xl md:text-2xl leading-tight">{item.title}</h2>
             <p className="text-sm leading-relaxed text-muted">
               {item.description}
             </p>
