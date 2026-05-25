@@ -5,6 +5,12 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.2.1-beta.3](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.2.1-beta.2...v1.2.1-beta.3) (2026-05-25)
+
+### 🐛 Bug Fixes
+
+* **home:** remove `— 0X` numerals from FeaturesStrip (closes [#12](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/12)) ([#16](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/16)) ([7d2c67d](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/7d2c67de0b3933a34bad7f1791a77472440bef1c))
+
 ## [1.2.1-beta.2](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.2.1-beta.1...v1.2.1-beta.2) (2026-05-25)
 
 ### 🧑‍💻 Code Refactoring
