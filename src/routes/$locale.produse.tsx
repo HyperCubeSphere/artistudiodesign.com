@@ -41,8 +41,8 @@ function ProduseLayout() {
               to="/$locale/produse"
               params={{ locale }}
               activeOptions={{ exact: true }}
-              className="nav-text px-4 py-2 hairline-frame transition-colors hover:border-accent hover:text-accent"
-              activeProps={{ className: 'nav-text px-4 py-2 hairline-frame transition-colors text-accent border-accent' }}
+              className="nav-text px-4 min-h-11 inline-flex items-center hairline-frame transition-colors hover:border-accent hover:text-accent"
+              activeProps={{ className: 'nav-text px-4 min-h-11 inline-flex items-center hairline-frame transition-colors text-accent border-accent' }}
             >
               {p.categoriesAllLabel}
             </Link>
@@ -51,8 +51,8 @@ function ProduseLayout() {
                 key={c.slug}
                 to="/$locale/produse/categorie/$slug"
                 params={{ locale, slug: c.slug as ProductCategorySlug }}
-                className="nav-text px-4 py-2 hairline-frame transition-colors hover:border-accent hover:text-accent"
-                activeProps={{ className: 'nav-text px-4 py-2 hairline-frame transition-colors text-accent border-accent' }}
+                className="nav-text px-4 min-h-11 inline-flex items-center hairline-frame transition-colors hover:border-accent hover:text-accent"
+                activeProps={{ className: 'nav-text px-4 min-h-11 inline-flex items-center hairline-frame transition-colors text-accent border-accent' }}
               >
                 {c.label}
               </Link>
