@@ -3,6 +3,7 @@ import { useI18n } from '../i18n'
 import { seo } from '../lib/seo'
 import { GoldPeriod } from '../components/SectionHeader'
 import ServiceCard from '../components/ServiceCard'
+import { serviceImages } from '../content/images'
 import type ro from '../i18n/locales/ro'
 
 const translations = import.meta.glob('../i18n/locales/*.ts', { eager: true }) as Record<string, { default: typeof ro }>
@@ -42,8 +43,15 @@ function ServiciiPage() {
             <h2 className="eyebrow sticky top-28">{s.listEyebrow}</h2>
           </div>
           <div className="md:col-span-9">
-            {s.items.map((item) => (
-              <ServiceCard key={item.number} number={item.number} title={item.title} description={item.description} />
+            {s.items.map((item, i) => (
+              <ServiceCard
+                key={item.number}
+                slot={item.number}
+                image={serviceImages[i] ?? { alt: { ro: item.title, en: item.title } }}
+                title={item.title}
+                description={item.description}
+                locale={locale}
+              />
             ))}
           </div>
         </div>
