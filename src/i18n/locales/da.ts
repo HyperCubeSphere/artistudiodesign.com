@@ -9,7 +9,7 @@ const da: typeof ro = {
     despre: 'Om os',
     servicii: 'Ydelser',
     portofoliu: 'Portefølje',
-    magazin: 'Butik (ArtiCare)',
+    magazin: 'Butik',
     produse: 'Produkter',
     ghid: 'Brugsanvisning',
     contact: 'Kontakt',

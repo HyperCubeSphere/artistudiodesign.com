@@ -9,7 +9,7 @@ const hu: typeof ro = {
     despre: 'Rólunk',
     servicii: 'Szolgáltatások',
     portofoliu: 'Portfólió',
-    magazin: 'Bolt (ArtiCare)',
+    magazin: 'Bolt',
     produse: 'Termékek',
     ghid: 'Használati útmutató',
     contact: 'Kapcsolat',

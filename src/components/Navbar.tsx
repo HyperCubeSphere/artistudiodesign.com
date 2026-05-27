@@ -11,7 +11,6 @@ type NavTo =
   | '/$locale/servicii'
   | '/$locale/portofoliu'
   | '/$locale/magazin'
-  | '/$locale/produse'
   | '/$locale/contact'
 
 export default function Navbar() {
@@ -37,7 +36,6 @@ export default function Navbar() {
     { to: '/$locale/servicii', label: t.nav.servicii },
     { to: '/$locale/portofoliu', label: t.nav.portofoliu },
     { to: '/$locale/magazin', label: t.nav.magazin },
-    { to: '/$locale/produse', label: t.nav.produse },
     { to: '/$locale/contact', label: t.nav.contact },
   ]
 

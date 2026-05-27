@@ -7,7 +7,7 @@ const ro = {
     despre: 'Despre noi',
     servicii: 'Servicii',
     portofoliu: 'Portofoliu',
-    magazin: 'Magazin (ArtiCare)',
+    magazin: 'Magazin',
     produse: 'Produse',
     ghid: 'Ghid de utilizare',
     contact: 'Contact',
