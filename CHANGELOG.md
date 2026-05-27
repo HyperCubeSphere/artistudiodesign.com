@@ -5,6 +5,12 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.3.0-beta.1](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.2.1-beta.4...v1.3.0-beta.1) (2026-05-27)
+
+### 🍕 Features
+
+* **i18n:** translate all 13 locales (hu, de, fr, el, uk, es, tr, et, cs, nl, sv, it, da) ([#18](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/18)) ([f5a3b23](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/f5a3b236c543e05055a84d8a3eaf8cd026a326ca)), closes [#CE2939](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/CE2939) [#fff](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/fff) [#436F4D](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/436F4D)
+
 ## [1.2.1-beta.4](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.2.1-beta.3...v1.2.1-beta.4) (2026-05-27)
 
 ### 🐛 Bug Fixes
