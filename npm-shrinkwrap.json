@@ -1,12 +1,12 @@
 {
   "name": "@hypercubesphere/artistudiodesign.com",
-  "version": "1.2.1-beta.3",
+  "version": "1.2.1-beta.4",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
       "name": "@hypercubesphere/artistudiodesign.com",
-      "version": "1.2.1-beta.3",
+      "version": "1.2.1-beta.4",
       "license": "UNLICENSED",
       "dependencies": {
         "@tailwindcss/postcss": "^4.2.1",

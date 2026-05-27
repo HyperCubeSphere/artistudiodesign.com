@@ -5,6 +5,12 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.2.1-beta.4](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.2.1-beta.3...v1.2.1-beta.4) (2026-05-27)
+
+### 🐛 Bug Fixes
+
+* **content:** refresh stats — partners 2→5, projects 10→30+, cities 3→6+ ([#17](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/17)) ([ee29818](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/ee29818258a592c49956dfd6c54b4dd53a1351d2))
+
 ## [1.2.1-beta.3](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.2.1-beta.2...v1.2.1-beta.3) (2026-05-25)
 
 ### 🐛 Bug Fixes
