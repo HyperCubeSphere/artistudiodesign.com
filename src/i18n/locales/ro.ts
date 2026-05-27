@@ -84,9 +84,9 @@ const ro = {
     },
     stats: [
       { value: '2018', label: 'Înființare' },
-      { value: '2', label: 'Ateliere & parteneri' },
-      { value: '10 +', label: 'Proiecte livrate' },
-      { value: '3 +', label: 'Orașe acoperite' },
+      { value: '5', label: 'Ateliere & parteneri' },
+      { value: '30 +', label: 'Proiecte livrate' },
+      { value: '6 +', label: 'Orașe acoperite' },
     ],
   },
 
@@ -115,9 +115,9 @@ const ro = {
     statsHeading: 'Câteva repere ale activității noastre.',
     stats: [
       { value: '2018', label: 'Anul înființării' },
-      { value: '2', label: 'Ateliere & parteneri' },
-      { value: '10+', label: 'Proiecte livrate' },
-      { value: '3+', label: 'Orașe acoperite' },
+      { value: '5', label: 'Ateliere & parteneri' },
+      { value: '30+', label: 'Proiecte livrate' },
+      { value: '6+', label: 'Orașe acoperite' },
     ],
     ctaHeading: 'Hai să lucrăm împreună.',
     ctaButton: 'Contactează-ne',
