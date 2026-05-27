@@ -9,7 +9,7 @@ const el: typeof ro = {
     despre: 'Σχετικά με εμάς',
     servicii: 'Υπηρεσίες',
     portofoliu: 'Χαρτοφυλάκιο',
-    magazin: 'Κατάστημα (ArtiCare)',
+    magazin: 'Κατάστημα',
     produse: 'Προϊόντα',
     ghid: 'Οδηγός χρήσης',
     contact: 'Επικοινωνία',

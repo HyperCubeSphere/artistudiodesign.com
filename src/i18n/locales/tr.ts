@@ -9,7 +9,7 @@ const tr: typeof ro = {
     despre: 'Hakkımızda',
     servicii: 'Hizmetler',
     portofoliu: 'Portföy',
-    magazin: 'Mağaza (ArtiCare)',
+    magazin: 'Mağaza',
     produse: 'Ürünler',
     ghid: 'Kullanım kılavuzu',
     contact: 'İletişim',

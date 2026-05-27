@@ -9,7 +9,7 @@ const et: typeof ro = {
     despre: 'Meist',
     servicii: 'Teenused',
     portofoliu: 'Portfoolio',
-    magazin: 'Pood (ArtiCare)',
+    magazin: 'Pood',
     produse: 'Tooted',
     ghid: 'Kasutusjuhend',
     contact: 'Kontakt',

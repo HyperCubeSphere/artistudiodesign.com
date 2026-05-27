@@ -9,7 +9,7 @@ const it: typeof ro = {
     despre: 'Chi siamo',
     servicii: 'Servizi',
     portofoliu: 'Portfolio',
-    magazin: 'Negozio (ArtiCare)',
+    magazin: 'Negozio',
     produse: 'Prodotti',
     ghid: 'Guida all’uso',
     contact: 'Contatti',
