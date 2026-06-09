@@ -69,3 +69,23 @@ export const homePortfolioPicks: Array<{ category: PortfolioCategorySlug; image:
 export function localeAlt(img: ImageRef, locale: Locale): string {
   return locale === 'en' ? img.alt.en : img.alt.ro
 }
+
+/**
+ * Service offerings — bilingual alt text per slot. `src` stays undefined
+ * until real photography is supplied; the `<ServiceCard>` falls back to
+ * `<ServicePlaceholder>` while empty. Order matches the `servicii.items`
+ * array in every locale (01..06).
+ */
+export interface ServiceImageRef {
+  src?: string
+  alt: Record<'ro' | 'en', string>
+}
+
+export const serviceImages: ServiceImageRef[] = [
+  { alt: { ro: 'Atelier de design și proiectare 3D — Arti Studio Oradea', en: '3D design and drafting studio — Arti Studio Oradea' } },
+  { alt: { ro: 'Măsurători la fața locului — Arti Studio Oradea', en: 'On-site measurements — Arti Studio Oradea' } },
+  { alt: { ro: 'Producție de mobilier la comandă în atelier — Arti Studio Oradea', en: 'Custom furniture production in the workshop — Arti Studio Oradea' } },
+  { alt: { ro: 'Montaj și finisaje la cheie — Arti Studio Oradea', en: 'Turnkey installation and finishing — Arti Studio Oradea' } },
+  { alt: { ro: 'Feronerie și materiale premium — Arti Studio Oradea', en: 'Premium hardware and materials — Arti Studio Oradea' } },
+  { alt: { ro: 'Suport post-instalare și garanție — Arti Studio Oradea', en: 'Post-install support and warranty — Arti Studio Oradea' } },
+]
