@@ -9,7 +9,7 @@ const nl: typeof ro = {
     despre: 'Over ons',
     servicii: 'Diensten',
     portofoliu: 'Portfolio',
-    magazin: 'Winkel (ArtiCare)',
+    magazin: 'Winkel',
     produse: 'Producten',
     ghid: 'Gebruiksaanwijzing',
     contact: 'Contact',

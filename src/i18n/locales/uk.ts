@@ -9,7 +9,7 @@ const uk: typeof ro = {
     despre: 'Про нас',
     servicii: 'Послуги',
     portofoliu: 'Портфоліо',
-    magazin: 'Магазин (ArtiCare)',
+    magazin: 'Магазин',
     produse: 'Продукти',
     ghid: 'Інструкція з використання',
     contact: 'Контакти',

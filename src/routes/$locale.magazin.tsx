@@ -3,8 +3,10 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useI18n } from '../i18n'
 import { seo } from '../lib/seo'
 import { GoldPeriod } from '../components/SectionHeader'
+import ProductCard from '../components/ProductCard'
+import { products } from '../content/products'
 import { pad2 } from '../lib/format'
-import type { MagazinCategorySlug } from '../i18n/config'
+import type { MagazinCategorySlug, ProductCategorySlug } from '../i18n/config'
 import type ro from '../i18n/locales/ro'
 
 const translations = import.meta.glob('../i18n/locales/*.ts', { eager: true }) as Record<string, { default: typeof ro }>
@@ -23,6 +25,7 @@ export const Route = createFileRoute('/$locale/magazin')({
 function MagazinPage() {
   const { locale, t } = useI18n()
   const m = t.magazin
+  const p = t.produse
 
   return (
     <>
@@ -67,19 +70,50 @@ function MagazinPage() {
         </div>
       </section>
 
-      <section className="border-t hairline bg-surface">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-20 md:py-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <h2 className="serif text-3xl md:text-5xl leading-[1.05] max-w-2xl">
-            <GoldPeriod text={m.ctaHeading} />
-          </h2>
-          <Link
-            to="/$locale/contact"
-            params={{ locale }}
-            search={{ subiect: 'magazin-launch' }}
-            className="btn btn-primary self-start md:self-end"
-          >
-            {m.ctaButton}
-          </Link>
+      <section className="border-t hairline">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-20 md:py-24">
+          <div className="mb-12">
+            <p className="eyebrow mb-4">{p.eyebrow}</p>
+            <h2 className="serif text-4xl md:text-6xl leading-[1.05] max-w-3xl mb-6 text-balance">
+              <GoldPeriod text={p.heading} />
+            </h2>
+            <p className="text-base md:text-lg max-w-2xl text-muted">
+              {p.indexSubtitle}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-2 mb-12">
+            <Link
+              to="/$locale/produse"
+              params={{ locale }}
+              activeOptions={{ exact: true }}
+              className="nav-text px-4 min-h-11 inline-flex items-center hairline-frame transition-colors text-accent border-accent"
+            >
+              {p.categoriesAllLabel}
+            </Link>
+            {p.categories.map((c) => (
+              <Link
+                key={c.slug}
+                to="/$locale/produse/categorie/$slug"
+                params={{ locale, slug: c.slug as ProductCategorySlug }}
+                className="nav-text px-4 min-h-11 inline-flex items-center hairline-frame transition-colors hover:border-accent hover:text-accent"
+              >
+                {c.label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="flex items-end justify-between gap-6 mb-10 pb-4 border-b hairline-soft">
+            <h3 className="eyebrow">{p.categoriesAllLabel}</h3>
+            <p className="text-xs tabular-nums text-muted">
+              {products.length} {products.length === 1 ? p.itemSingular : p.itemPlural}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
+            {products.map((product) => (
+              <ProductCard key={product.slug} product={product} />
+            ))}
+          </div>
         </div>
       </section>
     </>
