@@ -5,6 +5,16 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.3.0-beta.2](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.3.0-beta.1...v1.3.0-beta.2) (2026-06-09)
+
+### 🍕 Features
+
+* **magazin:** merge Produse catalog into Magazin section (closes [#10](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/10)) ([#20](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/20)) ([38ce7ed](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/38ce7ed3bbd09e8155c803f6e74c657bfee3b151))
+
+### 🐛 Bug Fixes
+
+* **servicii:** replace numerals with image slots (closes [#11](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/11)) ([#19](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/19)) ([f93e2e9](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/f93e2e9a220e1790eee9d3791a13f7e82fa217df))
+
 ## [1.3.0-beta.1](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.2.1-beta.4...v1.3.0-beta.1) (2026-05-27)
 
 ### 🍕 Features
