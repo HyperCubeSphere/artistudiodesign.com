@@ -1,4 +1,6 @@
 import { createContext, use } from 'react'
+import { defaultLocale } from './config'
+import roTranslation from './locales/ro'
 import type ro from './locales/ro'
 
 export type Translation = typeof ro
@@ -21,10 +23,10 @@ const I18nContext = createContext<I18nContextValue | null>(null)
 
 export const I18nProvider = I18nContext.Provider
 
+const FALLBACK: I18nContextValue = { locale: defaultLocale, t: roTranslation }
+
 export function useI18n() {
-  const ctx = use(I18nContext)
-  if (!ctx) throw new Error('useI18n must be used within I18nProvider')
-  return ctx
+  return use(I18nContext) ?? FALLBACK
 }
 
 export function useTranslation() {

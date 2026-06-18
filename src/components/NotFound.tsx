@@ -1,8 +1,20 @@
-import { Link } from '@tanstack/react-router'
+import { Link, useRouterState } from '@tanstack/react-router'
 import { useI18n } from '../i18n'
+import { locales, type Locale } from '../i18n/config'
+import type ro from '../i18n/locales/ro'
+
+const translations = import.meta.glob('../i18n/locales/*.ts', { eager: true }) as Record<string, { default: typeof ro }>
 
 export function NotFound({ children }: { children?: React.ReactNode }) {
-  const { locale, t } = useI18n()
+  const ctx = useI18n()
+  const pathname = useRouterState({ select: (s) => s.location.pathname })
+  const seg = pathname.split('/')[1]
+  const urlLocale = locales.includes(seg as Locale) ? (seg as Locale) : null
+  const locale = (urlLocale ?? ctx.locale) as Locale
+  const t = urlLocale
+    ? (translations[`../i18n/locales/${urlLocale}.ts`]?.default ?? ctx.t)
+    : ctx.t
+
   return (
     <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-24 flex flex-col items-center text-center">
       <p className="eyebrow mb-4">{t.notFound.eyebrow}</p>
