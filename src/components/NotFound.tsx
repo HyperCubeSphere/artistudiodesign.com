@@ -1,20 +1,16 @@
-import { Link, useRouterState } from '@tanstack/react-router'
-import { useI18n } from '../i18n'
-import { locales, type Locale } from '../i18n/config'
-import type ro from '../i18n/locales/ro'
+import { Link } from '@tanstack/react-router'
+import { I18nProvider, useI18n } from '../i18n'
+import { getTranslation } from '../i18n/translations'
+import { useUrlLocaleOrDefault } from '../i18n/useUrlLocale'
+import type { Locale } from '../i18n/config'
 
-const translations = import.meta.glob('../i18n/locales/*.ts', { eager: true }) as Record<string, { default: typeof ro }>
-
+/**
+ * Locale-aware 404 surface. Must be rendered inside `<I18nProvider>` —
+ * wrap with `<NotFoundWithUrlLocale>` when called outside a `$locale`
+ * route (e.g. the router's `defaultNotFoundComponent` and `/404`).
+ */
 export function NotFound({ children }: { children?: React.ReactNode }) {
-  const ctx = useI18n()
-  const pathname = useRouterState({ select: (s) => s.location.pathname })
-  const seg = pathname.split('/')[1]
-  const urlLocale = locales.includes(seg as Locale) ? (seg as Locale) : null
-  const locale = (urlLocale ?? ctx.locale) as Locale
-  const t = urlLocale
-    ? (translations[`../i18n/locales/${urlLocale}.ts`]?.default ?? ctx.t)
-    : ctx.t
-
+  const { locale, t } = useI18n()
   return (
     <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-24 flex flex-col items-center text-center">
       <p className="eyebrow mb-4">{t.notFound.eyebrow}</p>
@@ -23,7 +19,7 @@ export function NotFound({ children }: { children?: React.ReactNode }) {
         {children ?? <p>{t.notFound.message}</p>}
       </div>
       <div className="flex gap-3 items-center flex-wrap justify-center">
-        <Link to="/$locale" params={{ locale }} className="btn btn-primary">
+        <Link to="/$locale" params={{ locale: locale as Locale }} className="btn btn-primary">
           {t.notFound.button}
         </Link>
         <button onClick={() => window.history.back()} className="btn btn-outline">
@@ -31,5 +27,16 @@ export function NotFound({ children }: { children?: React.ReactNode }) {
         </button>
       </div>
     </div>
+  )
+}
+
+/** Provider-wrapped variant for boundaries outside `$locale.tsx`. */
+export function NotFoundWithUrlLocale({ children }: { children?: React.ReactNode }) {
+  const locale = useUrlLocaleOrDefault()
+  const t = getTranslation(locale)
+  return (
+    <I18nProvider value={{ locale, t }}>
+      <NotFound>{children}</NotFound>
+    </I18nProvider>
   )
 }
