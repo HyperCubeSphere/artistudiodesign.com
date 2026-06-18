@@ -13,6 +13,39 @@ function tFor(locale: string) {
   return (translations[`../i18n/locales/${locale}.ts`] ?? translations[`../i18n/locales/ro.ts`]).default
 }
 
+/** Localized "opens in a new tab" cue for screen readers (visually hidden). */
+const NEW_TAB_LABEL: Record<Locale, string> = {
+  ro: 'se deschide într-o filă nouă',
+  en: 'opens in a new tab',
+  hu: 'új lapon nyílik meg',
+  de: 'wird in einem neuen Tab geöffnet',
+  fr: "s'ouvre dans un nouvel onglet",
+  el: 'ανοίγει σε νέα καρτέλα',
+  uk: 'відкривається в новій вкладці',
+  es: 'se abre en una pestaña nueva',
+  tr: 'yeni sekmede açılır',
+  et: 'avaneb uuel vahelehel',
+  cs: 'otevře se na nové kartě',
+  nl: 'opent in een nieuw tabblad',
+  sv: 'öppnas i en ny flik',
+  it: 'si apre in una nuova scheda',
+  da: 'åbner i en ny fane',
+}
+
+/**
+ * Gallery images = registry entries not already shown as a curated project
+ * cover. Cached per category at module load — the inputs are module-scoped
+ * constants, no need to rebuild a Set on every render.
+ */
+const galleryByCategory: Record<PortfolioCategorySlug, ImageRef[]> = portfolioCategorySlugs.reduce(
+  (acc, slug) => {
+    const used = new Set(projectsByCategory(slug).map((p) => p.image))
+    acc[slug] = portfolioImages[slug].filter((img) => !used.has(img))
+    return acc
+  },
+  {} as Record<PortfolioCategorySlug, ImageRef[]>,
+)
+
 export const Route = createFileRoute('/$locale/portofoliu/$category')({
   beforeLoad: ({ params }) => {
     if (!portfolioCategorySlugs.includes(params.category as PortfolioCategorySlug)) throw notFound()
@@ -37,8 +70,7 @@ function PortofoliuCategoryPage() {
   const category = params.category as PortfolioCategorySlug
   const cat = t.portofoliu.categories.find((c) => c.slug === category)
   const projects = projectsByCategory(category)
-  const projectImageSet = new Set(projects.map((p) => p.image))
-  const galleryImages = portfolioImages[category].filter((img) => !projectImageSet.has(img))
+  const galleryImages = galleryByCategory[category]
 
   return (
     <section className="py-16 md:py-20">
@@ -58,20 +90,7 @@ function PortofoliuCategoryPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {projects.map((proj, i) => (
             <article key={proj.id} className="portfolio-card group block">
-              <FullResWrap image={proj.image} locale={ll}>
-                <div className="aspect-[4/5] relative overflow-hidden">
-                  <img
-                    src={proj.image.src}
-                    alt={localeAlt(proj.image, ll)}
-                    width={proj.image.width}
-                    height={proj.image.height}
-                    loading={i < 3 ? 'eager' : 'lazy'}
-                    fetchPriority={i === 0 ? 'high' : 'auto'}
-                    decoding="async"
-                    className="portfolio-img absolute inset-0 w-full h-full object-cover photo-moody-soft"
-                  />
-                </div>
-              </FullResWrap>
+              <PortfolioThumb image={proj.image} locale={ll} eager={i < 3} priority={i === 0} />
               <div className="pt-4 flex flex-col gap-2">
                 <h3 className="serif text-xl md:text-2xl leading-tight">
                   {proj.title[ll === 'en' ? 'en' : 'ro']}
@@ -96,20 +115,15 @@ function PortofoliuCategoryPage() {
 
         {galleryImages.length > 0 ? (
           <div className="mt-16 md:mt-24 pt-12 md:pt-16 border-t hairline grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {galleryImages.map((img, i) => (
-              <FullResWrap key={img.src} image={img} locale={ll} className="portfolio-card group block">
-                <div className="aspect-[4/5] relative overflow-hidden">
-                  <img
-                    src={img.src}
-                    alt={localeAlt(img, ll)}
-                    width={img.width}
-                    height={img.height}
-                    loading={i < 3 ? 'eager' : 'lazy'}
-                    decoding="async"
-                    className="portfolio-img absolute inset-0 w-full h-full object-cover photo-moody-soft"
-                  />
-                </div>
-              </FullResWrap>
+            {galleryImages.map((img) => (
+              <PortfolioThumb
+                key={img.src}
+                image={img}
+                locale={ll}
+                eager={false}
+                priority={false}
+                className="portfolio-card group block"
+              />
             ))}
           </div>
         ) : null}
@@ -118,32 +132,66 @@ function PortofoliuCategoryPage() {
   )
 }
 
-interface FullResWrapProps {
+interface PortfolioThumbProps {
   image: ImageRef
+  locale: Locale
+  eager: boolean
+  priority: boolean
+  className?: string
+}
+
+/**
+ * The shared 4/5-aspect image tile used by both the curated-project grid
+ * and the extended gallery. When `image.full` is set the tile is wrapped
+ * in a `<FullResLink>` so visitors open the original in a new tab; when
+ * not, the same JSX renders without a link.
+ */
+function PortfolioThumb({ image, locale, eager, priority, className }: PortfolioThumbProps) {
+  const figure = (
+    <div className="aspect-[4/5] relative overflow-hidden">
+      <img
+        src={image.src}
+        alt={localeAlt(image, locale)}
+        width={image.width}
+        height={image.height}
+        loading={eager ? 'eager' : 'lazy'}
+        fetchPriority={priority ? 'high' : 'auto'}
+        decoding="async"
+        className="portfolio-img absolute inset-0 w-full h-full object-cover photo-moody-soft"
+      />
+    </div>
+  )
+  if (!image.full) {
+    return className ? <div className={className}>{figure}</div> : figure
+  }
+  return (
+    <FullResLink href={image.full} locale={locale} className={className}>
+      {figure}
+    </FullResLink>
+  )
+}
+
+interface FullResLinkProps {
+  href: string
   locale: Locale
   className?: string
   children: ReactNode
 }
 
+/** Constant suffix applied to every full-res link, hoisted to avoid per-render template work. */
+const FULL_RES_LINK_BASE = 'block cursor-zoom-in'
+
 /**
- * Wraps the thumbnail in `<a target="_blank">` pointing at the full-res
- * image when `image.full` is set. Browsers (desktop + mobile) open a new
- * tab natively — no UA sniffing, no modal. Falls back to a plain wrapper
- * when no `full` is provided so older registry entries keep working.
+ * Renders an `<a target="_blank">` to a high-resolution image. The link's
+ * accessible name flows from the child `<img alt>`; a visually-hidden span
+ * announces the new-tab behavior for screen-reader users.
  */
-function FullResWrap({ image, locale, className, children }: FullResWrapProps) {
-  if (!image.full) {
-    return <div className={className}>{children}</div>
-  }
+function FullResLink({ href, locale, className, children }: FullResLinkProps) {
+  const composed = className ? `${className} ${FULL_RES_LINK_BASE}` : FULL_RES_LINK_BASE
   return (
-    <a
-      href={image.full}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={localeAlt(image, locale)}
-      className={`${className ?? ''} block cursor-zoom-in focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent`.trim()}
-    >
+    <a href={href} target="_blank" rel="noopener noreferrer" className={composed}>
       {children}
+      <span className="sr-only"> ({NEW_TAB_LABEL[locale]})</span>
     </a>
   )
 }
