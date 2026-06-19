@@ -137,7 +137,7 @@ function ProjectCard({ project, locale, eager, priority, onOpen }: ProjectCardPr
           />
         </div>
       </button>
-      <div className="pt-6 md:pt-8 lg:pt-10 px-1 pb-3 flex flex-col gap-2">
+      <div className="pt-8 md:pt-10 lg:pt-14 px-2 md:px-4 pb-5 md:pb-6 flex flex-col gap-3 md:gap-4">
         <h3 className="serif text-xl md:text-2xl leading-tight">{title}</h3>
         <p className="eyebrow-sm tabular-nums text-muted">
           {project.images.length} {PHOTOS_LABEL[locale]}
