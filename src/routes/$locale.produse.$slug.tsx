@@ -49,7 +49,7 @@ function ProductDetail() {
   const ll = locale as Locale
 
   if (!product) {
-    return <p>{t.produse.productNotFound}</p>
+    return <p className="text-muted">{t.produse.productNotFound}</p>
   }
 
   const category = t.produse.categories.find((c) => c.slug === product.category)
@@ -61,28 +61,25 @@ function ProductDetail() {
 
   return (
     <>
-      <Link to="/$locale/produse" params={{ locale }} className="nav-text text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors inline-flex items-center gap-1 mb-8">
+      <Link to="/$locale/produse" params={{ locale }} className="nav-text text-muted hover:text-accent transition-colors inline-flex items-center gap-1 mb-8">
         ← {t.produse.backToProducts}
       </Link>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-        <div className="product-img-wrap" style={{ aspectRatio: '4 / 5' }}>
+        <div className="product-img-wrap aspect-[4/5]">
           <ProductPlaceholder slug={product.slug} title={name} className="block w-full h-full" />
         </div>
 
         <div className="flex flex-col gap-5">
           {category ? <p className="eyebrow">{category.label}</p> : null}
-          <h1 className="serif text-4xl md:text-5xl leading-[1.05] title-rule">
+          <h2 className="serif text-3xl md:text-4xl leading-[1.1]">
             <GoldPeriod text={name + '.'} />
-          </h1>
-          <p className="text-base leading-relaxed" style={{ color: 'var(--color-muted)' }}>
+          </h2>
+          <p className="text-base leading-relaxed text-muted">
             {product.shortDescription[ll === 'en' ? 'en' : 'ro']}
           </p>
-          <p className="serif text-5xl tabular-nums mt-2">
-            {product.priceLei},00 <span className="text-2xl align-baseline" style={{ color: 'var(--color-muted)' }}>{t.produse.priceLabel}</span>
-          </p>
-          <p className="text-xs" style={{ color: product.inStock ? 'var(--color-accent)' : 'var(--color-muted-2)' }}>
-            {product.inStock ? t.produse.inStockLabel : t.produse.outOfStockLabel}
+          <p className="serif text-3xl tabular-nums mt-2">
+            {product.priceLei} <span className="text-base align-baseline text-muted">{t.produse.priceLabel}</span>
           </p>
           <Link
             to="/$locale/contact"
@@ -96,15 +93,15 @@ function ProductDetail() {
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 mt-8 border-t hairline pt-8">
             <div>
               <dt className="eyebrow mb-2">{t.produse.detailDescriptionLabel}</dt>
-              <dd className="text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>{longDesc}</dd>
+              <dd className="text-sm leading-relaxed text-muted">{longDesc}</dd>
             </div>
             <div>
               <dt className="eyebrow mb-2">{t.produse.detailHowToUseLabel}</dt>
-              <dd className="text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>{howTo}</dd>
+              <dd className="text-sm leading-relaxed text-muted">{howTo}</dd>
             </div>
             <div>
               <dt className="eyebrow mb-2">{t.produse.detailContentsLabel}</dt>
-              <dd className="text-sm leading-relaxed" style={{ color: 'var(--color-muted)' }}>{contents}</dd>
+              <dd className="text-sm leading-relaxed text-muted">{contents}</dd>
             </div>
           </dl>
         </div>
@@ -121,11 +118,11 @@ function ProductDetail() {
                 params={{ locale, slug: p.slug }}
                 className="group flex flex-col gap-3"
               >
-                <div className="product-img-wrap" style={{ aspectRatio: '4 / 5' }}>
+                <div className="product-img-wrap aspect-[4/5]">
                   <ProductPlaceholder slug={p.slug} title={p.name[ll === 'en' ? 'en' : 'ro']} className="block w-full h-full" />
                 </div>
-                <h3 className="serif text-lg group-hover:text-[var(--color-accent)] transition-colors">{p.name[ll === 'en' ? 'en' : 'ro']}</h3>
-                <p className="serif text-2xl tabular-nums">{p.priceLei},00 <span className="text-sm" style={{ color: 'var(--color-muted)' }}>{t.produse.priceLabel}</span></p>
+                <h3 className="serif text-lg group-hover:text-accent transition-colors">{p.name[ll === 'en' ? 'en' : 'ro']}</h3>
+                <p className="tabular-nums text-sm text-muted">{p.priceLei} {t.produse.priceLabel}</p>
               </Link>
             ))}
           </div>

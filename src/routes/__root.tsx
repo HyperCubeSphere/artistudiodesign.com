@@ -1,5 +1,5 @@
-import { HeadContent, Scripts, createRootRoute, useRouterState } from '@tanstack/react-router'
-import { locales } from '../i18n/config'
+import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import { useUrlLocaleOrDefault } from '../i18n/useUrlLocale'
 import appCss from '../styles.css?url'
 
 const THEME_INIT_SCRIPT = `(function(){try{var stored=window.localStorage.getItem('theme');var mode=(stored==='light'||stored==='dark')?stored:'dark';var root=document.documentElement;root.classList.remove('light','dark');root.classList.add(mode);root.style.colorScheme=mode;var meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=mode==='dark'?'#14110d':'#f6f1e7';}catch(e){}})();`
@@ -18,7 +18,7 @@ export const Route = createRootRoute({
     ],
     links: [
       { rel: 'stylesheet', href: appCss },
-      { rel: 'icon', href: '/images/legacy/brand/logo.png', type: 'image/png' },
+      { rel: 'icon', href: '/images/brand/logo.png', type: 'image/png' },
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
       { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
       {
@@ -34,7 +34,7 @@ export const Route = createRootRoute({
           '@type': 'LocalBusiness',
           name: 'Arti Studio',
           url: 'https://artistudiodesign.com',
-          image: 'https://artistudiodesign.com/images/legacy/brand/logo.png',
+          image: 'https://artistudiodesign.com/images/brand/logo.png',
           telephone: '+40775140079',
           email: 'info@artistudiodesign.com',
           address: {
@@ -56,9 +56,7 @@ export const Route = createRootRoute({
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-  const pathname = useRouterState({ select: (s) => s.location.pathname })
-  const segments = pathname.split('/')
-  const lang = locales.includes(segments[1] as any) ? segments[1] : 'ro'
+  const lang = useUrlLocaleOrDefault()
 
   return (
     <html lang={lang} suppressHydrationWarning>

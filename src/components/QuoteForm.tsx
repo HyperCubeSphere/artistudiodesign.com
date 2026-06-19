@@ -5,6 +5,8 @@ import { TALLY_FORM_ID, CONTACT_EMAIL } from '../lib/site'
 interface QuoteFormProps {
   /** Pre-fill the message with a known product slug or note. */
   prefillProduct?: string
+  /** Pre-fill a subject tag — e.g. `magazin-launch` from the ArtiCare CTA. */
+  prefillSubject?: string
 }
 
 /**
@@ -13,7 +15,7 @@ interface QuoteFormProps {
  * available, intercepts and submits via fetch for an inline success state.
  * When TALLY_FORM_ID is the placeholder, falls back to a mailto compose.
  */
-export default function QuoteForm({ prefillProduct }: QuoteFormProps) {
+export default function QuoteForm({ prefillProduct, prefillSubject }: QuoteFormProps) {
   const { t } = useI18n()
   const f = t.contact.form
   const [submitting, setSubmitting] = useState(false)
@@ -46,14 +48,13 @@ export default function QuoteForm({ prefillProduct }: QuoteFormProps) {
   if (submitted) {
     return (
       <div
-        className="card p-8 flex flex-col gap-3"
+        className="card p-8 flex flex-col gap-3 border-accent"
         role="status"
         aria-live="polite"
-        style={{ borderColor: 'var(--color-accent)' }}
       >
         <p className="eyebrow">✓</p>
         <p className="serif text-2xl">Mulțumim. Revenim în maximum 24h.</p>
-        <p className="text-sm" style={{ color: 'var(--color-muted)' }}>
+        <p className="text-sm text-muted">
           Cererea ta a ajuns la noi. Vom răspunde cât mai curând posibil pe email-ul lăsat.
         </p>
       </div>
@@ -69,6 +70,7 @@ export default function QuoteForm({ prefillProduct }: QuoteFormProps) {
       noValidate
     >
       {prefillProduct ? <input type="hidden" name="produs" value={prefillProduct} /> : null}
+      {prefillSubject ? <input type="hidden" name="subiect" value={prefillSubject} /> : null}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <label className="block">
           <span className="sr-only">Nume</span>
@@ -115,16 +117,16 @@ export default function QuoteForm({ prefillProduct }: QuoteFormProps) {
         />
       </label>
       {!tallyConfigured ? (
-        <p className="text-xs" style={{ color: 'var(--color-muted-2)' }}>
+        <p className="text-xs text-muted-2">
           {f.fallback}{' '}
-          <a className="text-[var(--color-accent)] underline" href={`mailto:${CONTACT_EMAIL}`}>
+          <a className="text-accent underline" href={`mailto:${CONTACT_EMAIL}`}>
             {CONTACT_EMAIL}
           </a>
           .
         </p>
       ) : null}
       {error ? (
-        <p className="text-sm" style={{ color: 'var(--color-accent)' }}>
+        <p className="text-sm text-accent">
           {error}
         </p>
       ) : null}

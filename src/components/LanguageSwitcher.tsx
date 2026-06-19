@@ -34,8 +34,7 @@ export default function LanguageSwitcher() {
         aria-label={`${locale.toUpperCase()} — switch language`}
         aria-expanded={open}
         aria-haspopup="listbox"
-        className="h-10 px-3 inline-flex items-center gap-2 border hairline hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
-        style={{ borderWidth: 1 }}
+        className="h-11 px-3 inline-flex items-center gap-2 hairline-frame hover:border-accent hover:text-accent transition-colors"
       >
         <FlagIcon locale={locale as Locale} className="w-4 h-auto" />
         <span className="nav-text">{locale.toUpperCase()}</span>
@@ -47,8 +46,7 @@ export default function LanguageSwitcher() {
         <div
           role="listbox"
           aria-label="Language"
-          className="absolute right-0 top-full mt-1 border hairline z-[60] min-w-[180px] max-h-[320px] overflow-auto"
-          style={{ borderWidth: 1, backgroundColor: 'var(--color-bg)' }}
+          className="absolute right-0 top-full mt-1 hairline-frame bg-bg z-[60] min-w-[180px] max-h-[320px] overflow-auto"
         >
           {locales.map((l) => (
             <a
@@ -57,8 +55,7 @@ export default function LanguageSwitcher() {
               role="option"
               aria-selected={l === locale}
               onClick={() => setOpen(false)}
-              className="flex items-center gap-2.5 px-3 py-2.5 text-sm hover:bg-[var(--color-surface)] transition-colors"
-              style={{ color: l === locale ? 'var(--color-accent)' : 'var(--color-text)' }}
+              className={`flex items-center gap-2.5 px-3 py-2.5 text-sm hover:bg-surface transition-colors ${l === locale ? 'text-accent' : 'text-text'}`}
             >
               <FlagIcon locale={l} className="w-4 h-auto shrink-0" />
               <span>{localeNames[l]}</span>

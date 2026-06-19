@@ -31,20 +31,22 @@ export default function TallyEmbed({ formId, title, prefill, minHeight = 520 }: 
   if (id === 'REPLACE_ME') {
     return (
       <div
-        className="card p-8 flex flex-col gap-3"
-        style={{ minHeight, borderColor: 'var(--color-hairline)' }}
+        className="card p-8 flex flex-col gap-3 border-hairline"
+        style={{ minHeight }}
       >
         <p className="eyebrow">{title}</p>
-        <p className="text-sm" style={{ color: 'var(--color-muted)' }}>
+        <p className="text-sm text-muted">
           {t.contact.form.fallback}{' '}
-          <a className="text-[var(--color-accent)] underline" href={`mailto:${CONTACT_EMAIL}`}>
+          <a className="text-accent underline" href={`mailto:${CONTACT_EMAIL}`}>
             {CONTACT_EMAIL}
           </a>
           .
         </p>
-        <p className="text-xs" style={{ color: 'var(--color-muted-2)' }}>
-          (Tally form id not configured yet — set <code>TALLY_FORM_ID</code> in <code>src/lib/site.ts</code>.)
-        </p>
+        {import.meta.env.DEV ? (
+          <p className="text-xs text-muted-2">
+            (Tally form id not configured yet — set <code>TALLY_FORM_ID</code> in <code>src/lib/site.ts</code>.)
+          </p>
+        ) : null}
       </div>
     )
   }
@@ -52,7 +54,7 @@ export default function TallyEmbed({ formId, title, prefill, minHeight = 520 }: 
   return (
     <div className="relative" style={{ minHeight }}>
       {!loaded && (
-        <div className="absolute inset-0 flex items-center justify-center text-sm" style={{ color: 'var(--color-muted)' }}>
+        <div className="absolute inset-0 flex items-center justify-center text-sm text-muted">
           {t.contact.form.tallyLoading}
         </div>
       )}
@@ -62,8 +64,8 @@ export default function TallyEmbed({ formId, title, prefill, minHeight = 520 }: 
         title={title}
         loading="lazy"
         onLoad={() => setLoaded(true)}
-        className="w-full block"
-        style={{ minHeight, border: 'none', backgroundColor: 'transparent' }}
+        className="w-full block border-0 bg-transparent"
+        style={{ minHeight }}
       />
     </div>
   )

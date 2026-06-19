@@ -12,12 +12,14 @@ function tFor(locale: string) {
 
 interface ContactSearch {
   produs?: string
+  subiect?: string
 }
 
 export const Route = createFileRoute('/$locale/contact')({
   component: ContactPage,
   validateSearch: (search: Record<string, unknown>): ContactSearch => ({
     produs: typeof search.produs === 'string' ? search.produs : undefined,
+    subiect: typeof search.subiect === 'string' ? search.subiect : undefined,
   }),
   head: ({ params }) => {
     const t = tFor(params.locale)
@@ -27,7 +29,7 @@ export const Route = createFileRoute('/$locale/contact')({
 
 function ContactPage() {
   const { t } = useI18n()
-  const { produs } = Route.useSearch()
+  const { produs, subiect } = Route.useSearch()
   const c = t.contact
 
   return (
@@ -38,7 +40,7 @@ function ContactPage() {
           <h1 className="serif text-5xl md:text-7xl leading-[1.05] max-w-3xl mb-8 text-balance">
             <GoldPeriod text={c.heading} />
           </h1>
-          <p className="text-base md:text-lg max-w-2xl" style={{ color: 'var(--color-muted)' }}>
+          <p className="text-base md:text-lg max-w-2xl text-muted">
             {c.subtitle}
           </p>
         </div>
@@ -48,7 +50,7 @@ function ContactPage() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-16">
           <div>
             <p className="eyebrow mb-6">{c.formEyebrow}</p>
-            <ContactForm prefillProduct={produs} />
+            <ContactForm prefillProduct={produs} prefillSubject={subiect} />
           </div>
           <aside className="flex flex-col gap-10">
             <div>
@@ -56,7 +58,7 @@ function ContactPage() {
               <ul className="flex flex-col">
                 {c.info.map((info) => (
                   <li key={`${info.label}-${info.value}`} className="border-t hairline py-4">
-                    <p className="text-[11px] uppercase tracking-[0.2em]" style={{ color: 'var(--color-muted-2)' }}>
+                    <p className="text-[11px] uppercase tracking-[0.2em] text-muted-2">
                       {info.label}
                     </p>
                     <p className="text-sm mt-1">{info.value}</p>
@@ -73,7 +75,7 @@ function ContactPage() {
                       href={s.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block border-t hairline py-4 text-sm hover:text-[var(--color-accent)] transition-colors"
+                      className="block border-t hairline py-4 text-sm hover:text-accent transition-colors"
                     >
                       {s.label} →
                     </a>

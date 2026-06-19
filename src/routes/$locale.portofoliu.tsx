@@ -2,8 +2,8 @@ import { createFileRoute, Link, Outlet, useRouterState } from '@tanstack/react-r
 import { useI18n } from '../i18n'
 import { seo } from '../lib/seo'
 import { GoldPeriod } from '../components/SectionHeader'
-import { portfolioProjects } from '../content/portfolio'
 import { localeAlt } from '../content/images'
+import { projectsByCategory } from '../content/portfolio'
 import type { Locale, PortfolioCategorySlug } from '../i18n/config'
 import type ro from '../i18n/locales/ro'
 
@@ -35,7 +35,7 @@ function PortofoliuLayout() {
           <h1 className="serif text-5xl md:text-7xl leading-[1.05] max-w-3xl mb-8 text-balance">
             <GoldPeriod text={p.heading} />
           </h1>
-          <p className="text-base md:text-lg max-w-2xl" style={{ color: 'var(--color-muted)' }}>
+          <p className="text-base md:text-lg max-w-2xl text-muted">
             {p.subtitle}
           </p>
 
@@ -44,9 +44,8 @@ function PortofoliuLayout() {
               to="/$locale/portofoliu"
               params={{ locale }}
               activeOptions={{ exact: true }}
-              className="nav-text px-4 py-2 border hairline transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
-              style={{ borderWidth: 1 }}
-              activeProps={{ style: { borderColor: 'var(--color-accent)', color: 'var(--color-accent)' } }}
+              className="nav-text px-4 min-h-11 inline-flex items-center hairline-frame transition-colors hover:border-accent hover:text-accent"
+              activeProps={{ className: 'nav-text px-4 min-h-11 inline-flex items-center hairline-frame transition-colors text-accent border-accent' }}
             >
               {p.allLabel}
             </Link>
@@ -55,9 +54,8 @@ function PortofoliuLayout() {
                 key={c.slug}
                 to="/$locale/portofoliu/$category"
                 params={{ locale, category: c.slug as PortfolioCategorySlug }}
-                className="nav-text px-4 py-2 border hairline transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
-                style={{ borderWidth: 1 }}
-                activeProps={{ style: { borderColor: 'var(--color-accent)', color: 'var(--color-accent)' } }}
+                className="nav-text px-4 min-h-11 inline-flex items-center hairline-frame transition-colors hover:border-accent hover:text-accent"
+                activeProps={{ className: 'nav-text px-4 min-h-11 inline-flex items-center hairline-frame transition-colors text-accent border-accent' }}
               >
                 {c.label}
               </Link>
@@ -69,34 +67,55 @@ function PortofoliuLayout() {
       {isIndex ? (
         <section className="py-16 md:py-20">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-              {portfolioProjects.map((proj) => (
-                <Link
-                  key={proj.id}
-                  to="/$locale/portofoliu/$category"
-                  params={{ locale, category: proj.category }}
-                  className="portfolio-card group block"
-                >
-                  <div className="aspect-[4/5] relative overflow-hidden">
-                    <img
-                      src={proj.image.src}
-                      alt={localeAlt(proj.image, ll)}
-                      loading="lazy"
-                      decoding="async"
-                      className="portfolio-img absolute inset-0 w-full h-full object-cover photo-moody-soft"
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+              {p.categories.map((c, i) => {
+                const slug = c.slug as PortfolioCategorySlug
+                const projects = projectsByCategory(slug)
+                const cover = projects[0]?.cover
+                if (!cover) return null
+                const count = projects.length
+                const pluralRules = new Intl.PluralRules(locale)
+                const projectsLabel =
+                  pluralRules.select(count) === 'one' ? p.projectLabelOne : p.projectsLabel
+                return (
+                  <Link
+                    key={c.slug}
+                    to="/$locale/portofoliu/$category"
+                    params={{ locale, category: slug }}
+                    className="portfolio-card group block relative"
+                  >
+                    {/* Folder tab — base color via class so group-hover:bg wins
+                        (inline style would defeat the hover utility). */}
+                    <span
+                      aria-hidden="true"
+                      className="absolute top-0 left-6 z-10 h-3 w-24 -translate-y-1/2 transition-colors bg-accent group-hover:bg-accent-hover"
                     />
-                  </div>
-                  <div className="pt-4 flex flex-col gap-1">
-                    <p className="eyebrow text-[10px]">{p.categories.find((c) => c.slug === proj.category)?.label}</p>
-                    <h3 className="serif text-xl md:text-2xl leading-tight group-hover:text-[var(--color-accent)] transition-colors">
-                      {proj.title[ll === 'en' ? 'en' : 'ro']}
-                    </h3>
-                    <p className="text-sm" style={{ color: 'var(--color-muted)' }}>
-                      {proj.caption[ll === 'en' ? 'en' : 'ro']}
-                    </p>
-                  </div>
-                </Link>
-              ))}
+                    <div className="aspect-[4/5] relative overflow-hidden border hairline">
+                      <img
+                        src={cover.src}
+                        alt={localeAlt(cover, ll)}
+                        loading={i < 3 ? 'eager' : 'lazy'}
+                        fetchPriority={i === 0 ? 'high' : 'auto'}
+                        decoding="async"
+                        className="portfolio-img absolute inset-0 w-full h-full object-cover photo-moody-soft"
+                      />
+                    </div>
+                    <div className="pt-4 flex flex-col gap-2">
+                      {count > 0 && (
+                        <p className="eyebrow-sm tabular-nums">
+                          {count} {projectsLabel}
+                        </p>
+                      )}
+                      <h2 className="serif text-2xl md:text-3xl leading-tight group-hover:text-accent transition-colors">
+                        {c.label}
+                      </h2>
+                      <p className="text-sm text-muted">
+                        {c.description}
+                      </p>
+                    </div>
+                  </Link>
+                )
+              })}
             </div>
           </div>
         </section>

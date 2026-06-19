@@ -27,8 +27,7 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label={t.theme.toggleLabel}
-      className="w-10 h-10 inline-flex items-center justify-center border hairline hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
-      style={{ borderWidth: 1 }}
+      className="w-11 h-11 inline-flex items-center justify-center hairline-frame hover:border-accent hover:text-accent transition-colors"
     >
       {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
     </button>
