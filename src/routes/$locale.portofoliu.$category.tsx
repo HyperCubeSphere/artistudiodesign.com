@@ -1,10 +1,11 @@
-import { useEffect, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { useI18n } from '../i18n'
 import { seo } from '../lib/seo'
 import { GoldPeriod } from '../components/SectionHeader'
-import { localeAlt, portfolioImages, type ImageRef } from '../content/images'
+import { localeAlt, type ImageRef } from '../content/images'
+import { projectsByCategory, type PortfolioProject } from '../content/portfolio'
 import { portfolioCategorySlugs, type Locale, type PortfolioCategorySlug } from '../i18n/config'
 import type ro from '../i18n/locales/ro'
 
@@ -13,42 +14,30 @@ function tFor(locale: string) {
   return (translations[`../i18n/locales/${locale}.ts`] ?? translations[`../i18n/locales/ro.ts`]).default
 }
 
-/** Localized "opens in a new tab" cue for screen readers (visually hidden). */
-const NEW_TAB_LABEL: Record<Locale, string> = {
-  ro: 'se deschide într-o filă nouă',
-  en: 'opens in a new tab',
-  hu: 'új lapon nyílik meg',
-  de: 'wird in einem neuen Tab geöffnet',
-  fr: "s'ouvre dans un nouvel onglet",
-  el: 'ανοίγει σε νέα καρτέλα',
-  uk: 'відкривається в новій вкладці',
-  es: 'se abre en una pestaña nueva',
-  tr: 'yeni sekmede açılır',
-  et: 'avaneb uuel vahelehel',
-  cs: 'otevře se na nové kartě',
-  nl: 'opent in een nieuw tabblad',
-  sv: 'öppnas i en ny flik',
-  it: 'si apre in una nuova scheda',
-  da: 'åbner i en ny fane',
-}
-
-/** Localized close-button label for the desktop lightbox. */
+/** Localized chrome strings for the gallery lightbox. */
 const CLOSE_LABEL: Record<Locale, string> = {
-  ro: 'Închide',
-  en: 'Close',
-  hu: 'Bezárás',
-  de: 'Schließen',
-  fr: 'Fermer',
-  el: 'Κλείσιμο',
-  uk: 'Закрити',
-  es: 'Cerrar',
-  tr: 'Kapat',
-  et: 'Sulge',
-  cs: 'Zavřít',
-  nl: 'Sluiten',
-  sv: 'Stäng',
-  it: 'Chiudi',
-  da: 'Luk',
+  ro: 'Închide', en: 'Close', hu: 'Bezárás', de: 'Schließen', fr: 'Fermer',
+  el: 'Κλείσιμο', uk: 'Закрити', es: 'Cerrar', tr: 'Kapat', et: 'Sulge',
+  cs: 'Zavřít', nl: 'Sluiten', sv: 'Stäng', it: 'Chiudi', da: 'Luk',
+}
+const PREV_LABEL: Record<Locale, string> = {
+  ro: 'Imaginea anterioară', en: 'Previous image', hu: 'Előző kép',
+  de: 'Vorheriges Bild', fr: 'Image précédente', el: 'Προηγούμενη εικόνα',
+  uk: 'Попереднє зображення', es: 'Imagen anterior', tr: 'Önceki görsel',
+  et: 'Eelmine pilt', cs: 'Předchozí obrázek', nl: 'Vorige afbeelding',
+  sv: 'Föregående bild', it: 'Immagine precedente', da: 'Forrige billede',
+}
+const NEXT_LABEL: Record<Locale, string> = {
+  ro: 'Imaginea următoare', en: 'Next image', hu: 'Következő kép',
+  de: 'Nächstes Bild', fr: 'Image suivante', el: 'Επόμενη εικόνα',
+  uk: 'Наступне зображення', es: 'Imagen siguiente', tr: 'Sonraki görsel',
+  et: 'Järgmine pilt', cs: 'Další obrázek', nl: 'Volgende afbeelding',
+  sv: 'Nästa bild', it: 'Immagine successiva', da: 'Næste billede',
+}
+const PHOTOS_LABEL: Record<Locale, string> = {
+  ro: 'foto', en: 'photos', hu: 'fotó', de: 'Fotos', fr: 'photos',
+  el: 'φωτογραφίες', uk: 'фото', es: 'fotos', tr: 'fotoğraf', et: 'fotot',
+  cs: 'fotografií', nl: "foto's", sv: 'foton', it: 'foto', da: 'fotos',
 }
 
 export const Route = createFileRoute('/$locale/portofoliu/$category')({
@@ -74,7 +63,8 @@ function PortofoliuCategoryPage() {
   const ll = locale as Locale
   const category = params.category as PortfolioCategorySlug
   const cat = t.portofoliu.categories.find((c) => c.slug === category)
-  const images = portfolioImages[category]
+  const projects = projectsByCategory(category)
+  const [activeProject, setActiveProject] = useState<PortfolioProject | null>(null)
 
   return (
     <section className="py-16 md:py-20">
@@ -92,153 +82,207 @@ function PortofoliuCategoryPage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {images.map((img, i) => (
-            <PortfolioThumb
-              key={img.src}
-              image={img}
+          {projects.map((project, i) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
               locale={ll}
               eager={i < 3}
               priority={i === 0}
-              className="portfolio-card group block"
+              onOpen={() => setActiveProject(project)}
             />
           ))}
         </div>
       </div>
+
+      {activeProject ? (
+        <ProjectGallery
+          project={activeProject}
+          locale={ll}
+          onClose={() => setActiveProject(null)}
+        />
+      ) : null}
     </section>
   )
 }
 
-interface PortfolioThumbProps {
-  image: ImageRef
+interface ProjectCardProps {
+  project: PortfolioProject
   locale: Locale
   eager: boolean
   priority: boolean
-  className?: string
+  onOpen: () => void
 }
 
-/**
- * The shared 4/5-aspect image tile. When `image.full` is set the tile is
- * wrapped in a `<FullResLink>` so visitors open the original (lightbox on
- * desktop, new tab on touch); without `full` it renders as a plain image.
- */
-function PortfolioThumb({ image, locale, eager, priority, className }: PortfolioThumbProps) {
-  const figure = (
-    <div className="aspect-[4/5] relative overflow-hidden">
-      <img
-        src={image.src}
-        alt={localeAlt(image, locale)}
-        width={image.width}
-        height={image.height}
-        loading={eager ? 'eager' : 'lazy'}
-        fetchPriority={priority ? 'high' : 'auto'}
-        decoding="async"
-        className="portfolio-img absolute inset-0 w-full h-full object-cover photo-moody-soft"
-      />
-    </div>
-  )
-  if (!image.full) {
-    return className ? <div className={className}>{figure}</div> : figure
-  }
+function ProjectCard({ project, locale, eager, priority, onOpen }: ProjectCardProps) {
+  const title = project.title[locale === 'en' ? 'en' : 'ro']
   return (
-    <FullResLink href={image.full} locale={locale} className={className}>
-      {figure}
-    </FullResLink>
+    <article className="portfolio-card group block">
+      <button
+        type="button"
+        onClick={onOpen}
+        aria-label={`${title} — ${project.images.length} ${PHOTOS_LABEL[locale]}`}
+        className="block w-full text-left cursor-zoom-in"
+      >
+        <div className="aspect-[4/5] relative overflow-hidden">
+          <img
+            src={project.cover.src}
+            alt={localeAlt(project.cover, locale)}
+            width={project.cover.width}
+            height={project.cover.height}
+            loading={eager ? 'eager' : 'lazy'}
+            fetchPriority={priority ? 'high' : 'auto'}
+            decoding="async"
+            className="portfolio-img absolute inset-0 w-full h-full object-cover photo-moody-soft"
+          />
+        </div>
+      </button>
+      <div className="pt-6 md:pt-8 lg:pt-10 px-1 pb-3 flex flex-col gap-2">
+        <h3 className="serif text-xl md:text-2xl leading-tight">{title}</h3>
+        <p className="eyebrow-sm tabular-nums text-muted">
+          {project.images.length} {PHOTOS_LABEL[locale]}
+        </p>
+      </div>
+    </article>
   )
 }
 
-interface FullResLinkProps {
-  href: string
+interface ProjectGalleryProps {
+  project: PortfolioProject
   locale: Locale
-  className?: string
-  children: ReactNode
+  onClose: () => void
 }
 
-/** Constant suffix applied to every full-res link, hoisted to avoid per-render template work. */
-const FULL_RES_LINK_BASE = 'block cursor-zoom-in'
-
 /**
- * Renders an `<a target="_blank">` to a high-resolution image. On hover-
- * capable devices (desktop, pointer mouse) the click opens an inline
- * lightbox showing the full-res image at viewport size; touch-only
- * devices (no hover) keep the tap-to-open-in-new-tab behavior so mobile
- * visitors can pinch-zoom the original.
- *
- * The link's accessible name flows from the child `<img alt>`; a
- * visually-hidden span announces the new-tab behavior for screen-reader
- * users on platforms where it applies.
+ * Multi-image lightbox. Portaled to `document.body` so it escapes every
+ * ancestor stacking context (`.portfolio-card` carries `isolation: isolate`).
+ * Locks body scroll, ESC closes, ArrowLeft/Right step. Adjacent images
+ * preload via injected `<link rel="preload">` so prev/next feels instant.
  */
-function FullResLink({ href, locale, className, children }: FullResLinkProps) {
-  const composed = className ? `${className} ${FULL_RES_LINK_BASE}` : FULL_RES_LINK_BASE
-  const [open, setOpen] = useState(false)
+function ProjectGallery({ project, locale, onClose }: ProjectGalleryProps) {
+  const [index, setIndex] = useState(0)
   const [mounted, setMounted] = useState(false)
+  const total = project.images.length
+
+  const step = useCallback(
+    (delta: number) => {
+      setIndex((i) => Math.min(Math.max(i + delta, 0), total - 1))
+    },
+    [total],
+  )
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
   useEffect(() => {
-    if (!open) return
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false)
+      if (e.key === 'Escape') onClose()
+      else if (e.key === 'ArrowLeft') step(-1)
+      else if (e.key === 'ArrowRight') step(1)
     }
     document.addEventListener('keydown', onKey)
-    // Always restore to empty — capturing `prev` risked persisting an
-    // accidental `overflow: hidden` and leaving the rest of the site
-    // un-scrollable if a previous run left bad state behind.
     document.body.style.overflow = 'hidden'
     return () => {
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = ''
     }
-  }, [open])
+  }, [onClose, step])
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches) {
-      e.preventDefault()
-      setOpen(true)
+  // Preload neighbours so prev/next feels instant.
+  useEffect(() => {
+    const adjacent = [index - 1, index + 1].filter((i) => i >= 0 && i < total)
+    const links = adjacent.map((i) => {
+      const link = document.createElement('link')
+      link.rel = 'preload'
+      link.as = 'image'
+      link.href = project.images[i].full ?? project.images[i].src
+      document.head.appendChild(link)
+      return link
+    })
+    return () => {
+      for (const link of links) link.parentElement?.removeChild(link)
     }
-  }
+  }, [index, project, total])
 
-  const lightbox = open ? (
+  if (!mounted) return null
+
+  const current = project.images[index]
+  const fullSrc = current.full ?? current.src
+
+  const overlay = (
     <div
       role="dialog"
       aria-modal="true"
-      onClick={() => setOpen(false)}
-      className="fixed inset-0 z-[100] flex items-center justify-center cursor-zoom-out p-4 md:p-10 bg-[oklch(0.10_0.012_60/0.92)] backdrop-blur-sm"
+      aria-label={project.title[locale === 'en' ? 'en' : 'ro']}
+      onClick={onClose}
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10 bg-[oklch(0.10_0.012_60/0.92)] backdrop-blur-sm"
     >
       <img
-        src={href}
-        alt=""
+        key={fullSrc}
+        src={fullSrc}
+        alt={localeAlt(current, locale)}
         className="max-w-full max-h-full object-contain shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       />
+
+      <p
+        aria-live="polite"
+        className="absolute top-4 md:top-6 left-1/2 -translate-x-1/2 nav-text tabular-nums text-[oklch(0.96_0.010_82)] px-3 py-1 bg-[oklch(0.10_0.012_60/0.6)] hairline-frame"
+      >
+        {index + 1} / {total}
+      </p>
+
       <button
         type="button"
-        onClick={() => setOpen(false)}
+        onClick={(e) => { e.stopPropagation(); onClose() }}
         aria-label={CLOSE_LABEL[locale]}
         className="absolute top-4 right-4 md:top-6 md:right-6 w-11 h-11 inline-flex items-center justify-center text-3xl leading-none text-[oklch(0.96_0.010_82)] hairline-frame bg-[oklch(0.10_0.012_60/0.6)] hover:text-accent transition-colors"
       >
         <span aria-hidden="true">×</span>
       </button>
-    </div>
-  ) : null
 
+      {total > 1 ? (
+        <>
+          <NavButton
+            side="left"
+            disabled={index === 0}
+            label={PREV_LABEL[locale]}
+            onClick={(e) => { e.stopPropagation(); step(-1) }}
+          />
+          <NavButton
+            side="right"
+            disabled={index === total - 1}
+            label={NEXT_LABEL[locale]}
+            onClick={(e) => { e.stopPropagation(); step(1) }}
+          />
+        </>
+      ) : null}
+    </div>
+  )
+
+  return createPortal(overlay, document.body)
+}
+
+interface NavButtonProps {
+  side: 'left' | 'right'
+  disabled: boolean
+  label: string
+  onClick: (e: React.MouseEvent) => void
+}
+
+function NavButton({ side, disabled, label, onClick }: NavButtonProps) {
+  const pos = side === 'left' ? 'left-4 md:left-6' : 'right-4 md:right-6'
+  const arrow: ReactNode = side === 'left' ? '‹' : '›'
   return (
-    <>
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={handleClick}
-        className={composed}
-      >
-        {children}
-        <span className="sr-only"> ({NEW_TAB_LABEL[locale]})</span>
-      </a>
-      {/* Portal escapes every ancestor stacking context (the surrounding
-          `.portfolio-card` carries `isolation: isolate`, which previously
-          bound `z-50` inside the card). */}
-      {mounted && lightbox ? createPortal(lightbox, document.body) : null}
-    </>
+    <button
+      type="button"
+      disabled={disabled}
+      onClick={onClick}
+      aria-label={label}
+      className={`absolute top-1/2 -translate-y-1/2 ${pos} w-12 h-12 md:w-14 md:h-14 inline-flex items-center justify-center text-4xl md:text-5xl leading-none text-[oklch(0.96_0.010_82)] hairline-frame bg-[oklch(0.10_0.012_60/0.6)] hover:text-accent transition-colors disabled:opacity-30 disabled:cursor-not-allowed`}
+    >
+      <span aria-hidden="true">{arrow}</span>
+    </button>
   )
 }
