@@ -2,8 +2,8 @@ import { createFileRoute, Link, Outlet, useRouterState } from '@tanstack/react-r
 import { useI18n } from '../i18n'
 import { seo } from '../lib/seo'
 import { GoldPeriod } from '../components/SectionHeader'
+import { localeAlt } from '../content/images'
 import { projectsByCategory } from '../content/portfolio'
-import { localeAlt, portfolioImages } from '../content/images'
 import type { Locale, PortfolioCategorySlug } from '../i18n/config'
 import type ro from '../i18n/locales/ro'
 
@@ -70,9 +70,10 @@ function PortofoliuLayout() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
               {p.categories.map((c, i) => {
                 const slug = c.slug as PortfolioCategorySlug
-                const cover = portfolioImages[slug][0]
+                const projects = projectsByCategory(slug)
+                const cover = projects[0]?.cover
                 if (!cover) return null
-                const count = projectsByCategory(slug).length
+                const count = projects.length
                 const pluralRules = new Intl.PluralRules(locale)
                 const projectsLabel =
                   pluralRules.select(count) === 'one' ? p.projectLabelOne : p.projectsLabel
