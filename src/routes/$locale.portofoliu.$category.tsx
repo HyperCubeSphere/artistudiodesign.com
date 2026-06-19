@@ -1,4 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react'
+import { createPortal } from 'react-dom'
 import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { useI18n } from '../i18n'
 import { seo } from '../lib/seo'
@@ -214,6 +215,11 @@ const FULL_RES_LINK_BASE = 'block cursor-zoom-in'
 function FullResLink({ href, locale, className, children }: FullResLinkProps) {
   const composed = className ? `${className} ${FULL_RES_LINK_BASE}` : FULL_RES_LINK_BASE
   const [open, setOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     if (!open) return
@@ -221,11 +227,13 @@ function FullResLink({ href, locale, className, children }: FullResLinkProps) {
       if (e.key === 'Escape') setOpen(false)
     }
     document.addEventListener('keydown', onKey)
-    const prev = document.body.style.overflow
+    // Always restore to empty — capturing `prev` risked persisting an
+    // accidental `overflow: hidden` and leaving the rest of the site
+    // un-scrollable if a previous run left bad state behind.
     document.body.style.overflow = 'hidden'
     return () => {
       document.removeEventListener('keydown', onKey)
-      document.body.style.overflow = prev
+      document.body.style.overflow = ''
     }
   }, [open])
 
@@ -235,6 +243,30 @@ function FullResLink({ href, locale, className, children }: FullResLinkProps) {
       setOpen(true)
     }
   }
+
+  const lightbox = open ? (
+    <div
+      role="dialog"
+      aria-modal="true"
+      onClick={() => setOpen(false)}
+      className="fixed inset-0 z-[100] flex items-center justify-center cursor-zoom-out p-4 md:p-10 bg-[oklch(0.10_0.012_60/0.92)] backdrop-blur-sm"
+    >
+      <img
+        src={href}
+        alt=""
+        className="max-w-full max-h-full object-contain shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      />
+      <button
+        type="button"
+        onClick={() => setOpen(false)}
+        aria-label={CLOSE_LABEL[locale]}
+        className="absolute top-4 right-4 md:top-6 md:right-6 w-11 h-11 inline-flex items-center justify-center text-3xl leading-none text-[oklch(0.96_0.010_82)] hairline-frame bg-[oklch(0.10_0.012_60/0.6)] hover:text-accent transition-colors"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+  ) : null
 
   return (
     <>
@@ -248,29 +280,10 @@ function FullResLink({ href, locale, className, children }: FullResLinkProps) {
         {children}
         <span className="sr-only"> ({NEW_TAB_LABEL[locale]})</span>
       </a>
-      {open ? (
-        <div
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setOpen(false)}
-          className="fixed inset-0 z-50 flex items-center justify-center cursor-zoom-out p-4 md:p-10 bg-[oklch(0.10_0.012_60/0.92)] backdrop-blur-sm"
-        >
-          <img
-            src={href}
-            alt=""
-            className="max-w-full max-h-full object-contain shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          />
-          <button
-            type="button"
-            onClick={() => setOpen(false)}
-            aria-label={CLOSE_LABEL[locale]}
-            className="absolute top-4 right-4 md:top-6 md:right-6 w-11 h-11 inline-flex items-center justify-center text-3xl leading-none text-[oklch(0.96_0.010_82)] hairline-frame bg-[oklch(0.10_0.012_60/0.6)] hover:text-accent transition-colors"
-          >
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-      ) : null}
+      {/* Portal escapes every ancestor stacking context (the surrounding
+          `.portfolio-card` carries `isolation: isolate`, which previously
+          bound `z-50` inside the card). */}
+      {mounted && lightbox ? createPortal(lightbox, document.body) : null}
     </>
   )
 }
