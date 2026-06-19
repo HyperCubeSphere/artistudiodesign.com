@@ -4,7 +4,6 @@ import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { useI18n } from '../i18n'
 import { seo } from '../lib/seo'
 import { GoldPeriod } from '../components/SectionHeader'
-import { projectsByCategory } from '../content/portfolio'
 import { localeAlt, portfolioImages, type ImageRef } from '../content/images'
 import { portfolioCategorySlugs, type Locale, type PortfolioCategorySlug } from '../i18n/config'
 import type ro from '../i18n/locales/ro'
@@ -52,20 +51,6 @@ const CLOSE_LABEL: Record<Locale, string> = {
   da: 'Luk',
 }
 
-/**
- * Gallery images = registry entries not already shown as a curated project
- * cover. Cached per category at module load — the inputs are module-scoped
- * constants, no need to rebuild a Set on every render.
- */
-const galleryByCategory: Record<PortfolioCategorySlug, ImageRef[]> = portfolioCategorySlugs.reduce(
-  (acc, slug) => {
-    const used = new Set(projectsByCategory(slug).map((p) => p.image))
-    acc[slug] = portfolioImages[slug].filter((img) => !used.has(img))
-    return acc
-  },
-  {} as Record<PortfolioCategorySlug, ImageRef[]>,
-)
-
 export const Route = createFileRoute('/$locale/portofoliu/$category')({
   beforeLoad: ({ params }) => {
     if (!portfolioCategorySlugs.includes(params.category as PortfolioCategorySlug)) throw notFound()
@@ -89,8 +74,7 @@ function PortofoliuCategoryPage() {
   const ll = locale as Locale
   const category = params.category as PortfolioCategorySlug
   const cat = t.portofoliu.categories.find((c) => c.slug === category)
-  const projects = projectsByCategory(category)
-  const galleryImages = galleryByCategory[category]
+  const images = portfolioImages[category]
 
   return (
     <section className="py-16 md:py-20">
@@ -108,45 +92,17 @@ function PortofoliuCategoryPage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {projects.map((proj, i) => (
-            <article key={proj.id} className="portfolio-card group block">
-              <PortfolioThumb image={proj.image} locale={ll} eager={i < 3} priority={i === 0} />
-              <div className="pt-6 md:pt-10 lg:pt-12 px-1 pb-3 flex flex-col gap-3">
-                <h3 className="serif text-xl md:text-2xl leading-tight">
-                  {proj.title[ll === 'en' ? 'en' : 'ro']}
-                </h3>
-                <p className="text-sm leading-relaxed text-muted">
-                  {proj.caption[ll === 'en' ? 'en' : 'ro']}
-                </p>
-                <ul className="flex flex-wrap gap-1.5 mt-1">
-                  {proj.tags[ll === 'en' ? 'en' : 'ro'].map((tag) => (
-                    <li
-                      key={tag}
-                      className="text-[10px] uppercase tracking-[var(--tracking-nav)] px-2 py-1 border hairline-soft text-muted"
-                    >
-                      {tag}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </article>
+          {images.map((img, i) => (
+            <PortfolioThumb
+              key={img.src}
+              image={img}
+              locale={ll}
+              eager={i < 3}
+              priority={i === 0}
+              className="portfolio-card group block"
+            />
           ))}
         </div>
-
-        {galleryImages.length > 0 ? (
-          <div className="mt-16 md:mt-24 pt-12 md:pt-16 border-t hairline grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {galleryImages.map((img) => (
-              <PortfolioThumb
-                key={img.src}
-                image={img}
-                locale={ll}
-                eager={false}
-                priority={false}
-                className="portfolio-card group block"
-              />
-            ))}
-          </div>
-        ) : null}
       </div>
     </section>
   )
@@ -161,10 +117,9 @@ interface PortfolioThumbProps {
 }
 
 /**
- * The shared 4/5-aspect image tile used by both the curated-project grid
- * and the extended gallery. When `image.full` is set the tile is wrapped
- * in a `<FullResLink>` so visitors open the original in a new tab; when
- * not, the same JSX renders without a link.
+ * The shared 4/5-aspect image tile. When `image.full` is set the tile is
+ * wrapped in a `<FullResLink>` so visitors open the original (lightbox on
+ * desktop, new tab on touch); without `full` it renders as a plain image.
  */
 function PortfolioThumb({ image, locale, eager, priority, className }: PortfolioThumbProps) {
   const figure = (
