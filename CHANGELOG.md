@@ -5,6 +5,16 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.4.0](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.3.0...v1.4.0) (2026-06-19)
+
+### 🍕 Features
+
+* **portfolio:** inline carousel arrows on multi-image project cards ([#25](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/25)) ([eef2975](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/eef29758f75ff19fc5ce62dc78a839d08b15710a))
+
+### 🐛 Bug Fixes
+
+* **portfolio:** execute all findings from PR [#25](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/25) max-review ([#26](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/26)) ([41c98cc](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/41c98ccdcd845242ec8a146d96022f7b2ff35b5d)), closes [#9](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/9) [#15](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/15) [#1](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/1) [#2](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/2) [#4](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/4) [#5](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/5) [#7](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/7) [#8](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/8) [#1](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/1) [#2](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/2) [#4](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/4) [#5](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/5) [#7](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/7) [#8](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/8) [#3](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/3) [#6](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/6) [#10](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/10) [#11](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/11) [#12](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/12) [#13](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/13) [#14](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/14)
+
 ## [1.4.0-beta.2](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.4.0-beta.1...v1.4.0-beta.2) (2026-06-19)
 
 ### 🐛 Bug Fixes
