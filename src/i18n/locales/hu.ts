@@ -168,6 +168,12 @@ const hu: typeof ro = {
       { slug: 'dressing', label: 'Gardrób', description: 'Walk-in megoldások minden tárgyhoz optimalizálva.' },
       { slug: 'baie', label: 'Fürdőszoba', description: 'Nedvességálló textúrák, integrálva a bútorzattal.' },
     ],
+    gallery: {
+      close: 'Bezárás',
+      prev: 'Előző kép',
+      next: 'Következő kép',
+      photos: 'fotó',
+    },
   },
 
   magazin: {

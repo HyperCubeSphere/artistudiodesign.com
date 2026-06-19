@@ -166,6 +166,12 @@ const ro = {
       { slug: 'dressing', label: 'Dressing', description: 'Soluții walk-in optimizate pentru fiecare obiect.' },
       { slug: 'baie', label: 'Baie', description: 'Texturi rezistente la umiditate, integrate cu mobilierul.' },
     ],
+    gallery: {
+      close: 'Închide',
+      prev: 'Imaginea anterioară',
+      next: 'Imaginea următoare',
+      photos: 'foto',
+    },
   },
 
   magazin: {

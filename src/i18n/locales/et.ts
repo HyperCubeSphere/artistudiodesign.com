@@ -168,6 +168,12 @@ const et: typeof ro = {
       { slug: 'dressing', label: 'Garderoob', description: 'Walk-in lahendused, optimeeritud iga eseme jaoks.' },
       { slug: 'baie', label: 'Vannituba', description: 'Niiskuskindlad faktuurid, mis sulanduvad mööbliga.' },
     ],
+    gallery: {
+      close: 'Sulge',
+      prev: 'Eelmine pilt',
+      next: 'Järgmine pilt',
+      photos: 'fotot',
+    },
   },
 
   magazin: {

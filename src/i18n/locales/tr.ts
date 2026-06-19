@@ -168,6 +168,12 @@ const tr: typeof ro = {
       { slug: 'dressing', label: 'Giysi odası', description: 'Her eşyaya optimize edilmiş walk-in çözümler.' },
       { slug: 'baie', label: 'Banyo', description: 'Mobilyayla bütünleşen, neme dayanıklı dokular.' },
     ],
+    gallery: {
+      close: 'Kapat',
+      prev: 'Önceki görsel',
+      next: 'Sonraki görsel',
+      photos: 'fotoğraf',
+    },
   },
 
   magazin: {

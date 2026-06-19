@@ -168,6 +168,12 @@ const de: typeof ro = {
       { slug: 'dressing', label: 'Ankleide', description: 'Walk-in-Lösungen, optimiert für jedes Stück.' },
       { slug: 'baie', label: 'Bad', description: 'Feuchtigkeitsbeständige Texturen, integriert in das Möbel.' },
     ],
+    gallery: {
+      close: 'Schließen',
+      prev: 'Vorheriges Bild',
+      next: 'Nächstes Bild',
+      photos: 'Fotos',
+    },
   },
 
   magazin: {

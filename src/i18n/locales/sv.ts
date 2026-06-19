@@ -168,6 +168,12 @@ const sv: typeof ro = {
       { slug: 'dressing', label: 'Walk-in', description: 'Walk-in-lösningar optimerade för varje plagg.' },
       { slug: 'baie', label: 'Badrum', description: 'Fukttåliga texturer integrerade med möblerna.' },
     ],
+    gallery: {
+      close: 'Stäng',
+      prev: 'Föregående bild',
+      next: 'Nästa bild',
+      photos: 'foton',
+    },
   },
 
   magazin: {

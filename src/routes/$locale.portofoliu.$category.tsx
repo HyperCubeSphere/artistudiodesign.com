@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { useI18n } from '../i18n'
@@ -14,31 +14,7 @@ function tFor(locale: string) {
   return (translations[`../i18n/locales/${locale}.ts`] ?? translations[`../i18n/locales/ro.ts`]).default
 }
 
-/** Localized chrome strings for the gallery lightbox. */
-const CLOSE_LABEL: Record<Locale, string> = {
-  ro: 'Închide', en: 'Close', hu: 'Bezárás', de: 'Schließen', fr: 'Fermer',
-  el: 'Κλείσιμο', uk: 'Закрити', es: 'Cerrar', tr: 'Kapat', et: 'Sulge',
-  cs: 'Zavřít', nl: 'Sluiten', sv: 'Stäng', it: 'Chiudi', da: 'Luk',
-}
-const PREV_LABEL: Record<Locale, string> = {
-  ro: 'Imaginea anterioară', en: 'Previous image', hu: 'Előző kép',
-  de: 'Vorheriges Bild', fr: 'Image précédente', el: 'Προηγούμενη εικόνα',
-  uk: 'Попереднє зображення', es: 'Imagen anterior', tr: 'Önceki görsel',
-  et: 'Eelmine pilt', cs: 'Předchozí obrázek', nl: 'Vorige afbeelding',
-  sv: 'Föregående bild', it: 'Immagine precedente', da: 'Forrige billede',
-}
-const NEXT_LABEL: Record<Locale, string> = {
-  ro: 'Imaginea următoare', en: 'Next image', hu: 'Következő kép',
-  de: 'Nächstes Bild', fr: 'Image suivante', el: 'Επόμενη εικόνα',
-  uk: 'Наступне зображення', es: 'Imagen siguiente', tr: 'Sonraki görsel',
-  et: 'Järgmine pilt', cs: 'Další obrázek', nl: 'Volgende afbeelding',
-  sv: 'Nästa bild', it: 'Immagine successiva', da: 'Næste billede',
-}
-const PHOTOS_LABEL: Record<Locale, string> = {
-  ro: 'foto', en: 'photos', hu: 'fotó', de: 'Fotos', fr: 'photos',
-  el: 'φωτογραφίες', uk: 'фото', es: 'fotos', tr: 'fotoğraf', et: 'fotot',
-  cs: 'fotografií', nl: "foto's", sv: 'foton', it: 'foto', da: 'fotos',
-}
+type GalleryStrings = (typeof ro)['portofoliu']['gallery']
 
 export const Route = createFileRoute('/$locale/portofoliu/$category')({
   beforeLoad: ({ params }) => {
@@ -64,12 +40,13 @@ interface ActiveSelection {
 
 function PortofoliuCategoryPage() {
   const { locale, t } = useI18n()
-  const params = Route.useParams()
   const ll = locale as Locale
+  const params = Route.useParams()
   const category = params.category as PortfolioCategorySlug
   const cat = t.portofoliu.categories.find((c) => c.slug === category)
   const projects = projectsByCategory(category)
   const [active, setActive] = useState<ActiveSelection | null>(null)
+  const g = t.portofoliu.gallery
 
   return (
     <section className="py-16 md:py-20">
@@ -94,6 +71,7 @@ function PortofoliuCategoryPage() {
               locale={ll}
               eager={i < 3}
               priority={i === 0}
+              strings={g}
               onOpen={(startIndex) => setActive({ project, startIndex })}
             />
           ))}
@@ -105,6 +83,7 @@ function PortofoliuCategoryPage() {
           project={active.project}
           startIndex={active.startIndex}
           locale={ll}
+          strings={g}
           onClose={() => setActive(null)}
         />
       ) : null}
@@ -117,33 +96,31 @@ interface ProjectCardProps {
   locale: Locale
   eager: boolean
   priority: boolean
+  strings: GalleryStrings
   onOpen: (startIndex: number) => void
 }
 
-function ProjectCard({ project, locale, eager, priority, onOpen }: ProjectCardProps) {
+function ProjectCard({ project, locale, eager, priority, strings, onOpen }: ProjectCardProps) {
   const title = project.title[locale === 'en' ? 'en' : 'ro']
   const total = project.images.length
   const hasMany = total > 1
   const [index, setIndex] = useState(0)
-  // First arrow interaction primes the whole gallery for eager loading so
-  // subsequent swaps feel instant instead of waiting on the browser's lazy
-  // fetch for off-screen carousel images.
-  const [primed, setPrimed] = useState(false)
+  // Note: carousel index persists across lightbox open/close within a
+  // category visit. Inter-category navigation remounts the card (keyed
+  // by `project.id`) so it resets to the cover.
   const current = project.images[index]
+  const primed = index !== 0
 
   const step = (delta: number) => {
     setIndex((i) => Math.min(Math.max(i + delta, 0), total - 1))
-    if (!primed) setPrimed(true)
   }
 
-  const handleKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault()
-      onOpen(index)
-    } else if (hasMany && e.key === 'ArrowLeft') {
+  const handleArrowKey = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (!hasMany) return
+    if (e.key === 'ArrowLeft') {
       e.preventDefault()
       step(-1)
-    } else if (hasMany && e.key === 'ArrowRight') {
+    } else if (e.key === 'ArrowRight') {
       e.preventDefault()
       step(1)
     }
@@ -151,17 +128,14 @@ function ProjectCard({ project, locale, eager, priority, onOpen }: ProjectCardPr
 
   return (
     <article className="portfolio-card group block">
-      <div
-        role="button"
-        tabIndex={0}
-        onClick={() => onOpen(index)}
-        onKeyDown={handleKey}
-        aria-label={`${title} — ${total} ${PHOTOS_LABEL[locale]}${hasMany ? ` (${index + 1}/${total})` : ''}`}
-        className="block w-full cursor-zoom-in focus-visible:outline-none"
-      >
-        <div className="aspect-[4/5] relative overflow-hidden">
+      <div className="aspect-[4/5] relative overflow-hidden">
+        <button
+          type="button"
+          onClick={() => onOpen(index)}
+          onKeyDown={handleArrowKey}
+          className="block w-full h-full cursor-zoom-in text-left"
+        >
           <img
-            key={current.src}
             src={current.src}
             alt={localeAlt(current, locale)}
             width={current.width}
@@ -171,73 +145,52 @@ function ProjectCard({ project, locale, eager, priority, onOpen }: ProjectCardPr
             decoding="async"
             className="portfolio-img absolute inset-0 w-full h-full object-cover photo-moody-soft"
           />
+        </button>
 
-          {hasMany ? (
-            <>
-              <CardNavButton
-                side="left"
-                disabled={index === 0}
-                label={PREV_LABEL[locale]}
-                onClick={(e) => { e.stopPropagation(); step(-1) }}
-              />
-              <CardNavButton
-                side="right"
-                disabled={index === total - 1}
-                label={NEXT_LABEL[locale]}
-                onClick={(e) => { e.stopPropagation(); step(1) }}
-              />
-              <p
-                aria-hidden="true"
-                className="absolute z-10 bottom-2 left-2 nav-text tabular-nums text-[10px] text-[oklch(0.96_0.010_82)] px-2 py-0.5 bg-[oklch(0.10_0.012_60/0.6)] hairline-frame"
-              >
-                {index + 1} / {total}
-              </p>
-            </>
-          ) : null}
-        </div>
+        {hasMany ? (
+          <>
+            <NavArrow
+              side="left"
+              size="sm"
+              revealOnHover
+              ariaDisabled={index === 0}
+              label={strings.prev}
+              onClick={() => step(-1)}
+            />
+            <NavArrow
+              side="right"
+              size="sm"
+              revealOnHover
+              ariaDisabled={index === total - 1}
+              label={strings.next}
+              onClick={() => step(1)}
+            />
+            <p
+              aria-hidden="true"
+              className="pointer-events-none absolute z-10 bottom-2 left-2 nav-text tabular-nums text-[10px] text-[oklch(0.96_0.010_82)] px-2 py-0.5 bg-[oklch(0.10_0.012_60/0.6)] hairline-frame"
+            >
+              {index + 1} / {total}
+            </p>
+            <span aria-live="polite" className="sr-only">
+              {index + 1} / {total}
+            </span>
+          </>
+        ) : null}
       </div>
       <div className="pt-8 md:pt-10 lg:pt-14 px-2 md:px-4 pb-5 md:pb-6 flex flex-col gap-3 md:gap-4">
         <h3 className="serif text-xl md:text-2xl leading-tight">{title}</h3>
         <p className="eyebrow-sm tabular-nums text-muted">
-          {total} {PHOTOS_LABEL[locale]}
+          {total} {strings.photos}
         </p>
       </div>
     </article>
   )
 }
 
-interface CardNavButtonProps {
-  side: 'left' | 'right'
-  disabled: boolean
-  label: string
-  onClick: (e: React.MouseEvent) => void
-}
-
-/**
- * Carousel arrow on a project card. Hover-revealed on devices with a
- * fine pointer (`(hover: hover)` → `lg:opacity-0` + `group-hover:opacity-100`);
- * always visible on touch via the `[@media(hover:none)]:opacity-100` selector
- * so visitors without a pointer still discover the carousel.
- */
-function CardNavButton({ side, disabled, label, onClick }: CardNavButtonProps) {
-  const pos = side === 'left' ? 'left-2' : 'right-2'
-  const arrow = side === 'left' ? '‹' : '›'
-  return (
-    <button
-      type="button"
-      disabled={disabled}
-      onClick={onClick}
-      aria-label={label}
-      className={`absolute z-10 top-1/2 -translate-y-1/2 ${pos} w-9 h-9 inline-flex items-center justify-center text-2xl leading-none text-[oklch(0.96_0.010_82)] hairline-frame bg-[oklch(0.10_0.012_60/0.6)] hover:text-accent transition-opacity opacity-0 group-hover:opacity-100 [@media(hover:none)]:opacity-100 focus-visible:opacity-100 disabled:opacity-30 disabled:cursor-not-allowed`}
-    >
-      <span aria-hidden="true">{arrow}</span>
-    </button>
-  )
-}
-
 interface ProjectGalleryProps {
   project: PortfolioProject
   locale: Locale
+  strings: GalleryStrings
   onClose: () => void
   startIndex?: number
 }
@@ -247,10 +200,13 @@ interface ProjectGalleryProps {
  * ancestor stacking context (`.portfolio-card` carries `isolation: isolate`).
  * Locks body scroll, ESC closes, ArrowLeft/Right step. Adjacent images
  * preload via injected `<link rel="preload">` so prev/next feels instant.
+ * On mount focus moves to the close button so the previously-focused
+ * project card behind the overlay doesn't receive bubbled key events.
  */
-function ProjectGallery({ project, locale, onClose, startIndex = 0 }: ProjectGalleryProps) {
+function ProjectGallery({ project, locale, strings, onClose, startIndex = 0 }: ProjectGalleryProps) {
   const [index, setIndex] = useState(startIndex)
   const [mounted, setMounted] = useState(false)
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null)
   const total = project.images.length
 
   const step = useCallback(
@@ -263,6 +219,10 @@ function ProjectGallery({ project, locale, onClose, startIndex = 0 }: ProjectGal
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  useEffect(() => {
+    if (mounted) closeButtonRef.current?.focus()
+  }, [mounted])
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -323,9 +283,10 @@ function ProjectGallery({ project, locale, onClose, startIndex = 0 }: ProjectGal
       </p>
 
       <button
+        ref={closeButtonRef}
         type="button"
         onClick={(e) => { e.stopPropagation(); onClose() }}
-        aria-label={CLOSE_LABEL[locale]}
+        aria-label={strings.close}
         className="absolute top-4 right-4 md:top-6 md:right-6 w-11 h-11 inline-flex items-center justify-center text-3xl leading-none text-[oklch(0.96_0.010_82)] hairline-frame bg-[oklch(0.10_0.012_60/0.6)] hover:text-accent transition-colors"
       >
         <span aria-hidden="true">×</span>
@@ -333,16 +294,18 @@ function ProjectGallery({ project, locale, onClose, startIndex = 0 }: ProjectGal
 
       {total > 1 ? (
         <>
-          <NavButton
+          <NavArrow
             side="left"
-            disabled={index === 0}
-            label={PREV_LABEL[locale]}
+            size="lg"
+            ariaDisabled={index === 0}
+            label={strings.prev}
             onClick={(e) => { e.stopPropagation(); step(-1) }}
           />
-          <NavButton
+          <NavArrow
             side="right"
-            disabled={index === total - 1}
-            label={NEXT_LABEL[locale]}
+            size="lg"
+            ariaDisabled={index === total - 1}
+            label={strings.next}
             onClick={(e) => { e.stopPropagation(); step(1) }}
           />
         </>
@@ -353,23 +316,49 @@ function ProjectGallery({ project, locale, onClose, startIndex = 0 }: ProjectGal
   return createPortal(overlay, document.body)
 }
 
-interface NavButtonProps {
+interface NavArrowProps {
   side: 'left' | 'right'
-  disabled: boolean
+  size: 'sm' | 'lg'
+  ariaDisabled: boolean
   label: string
-  onClick: (e: React.MouseEvent) => void
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+  /** When true, hide until parent `.group` is hovered or touch-only device. */
+  revealOnHover?: boolean
 }
 
-function NavButton({ side, disabled, label, onClick }: NavButtonProps) {
-  const pos = side === 'left' ? 'left-4 md:left-6' : 'right-4 md:right-6'
+/**
+ * Shared chevron button used by both the card carousel (`size='sm'`,
+ * `revealOnHover`) and the lightbox (`size='lg'`).
+ *
+ * Uses `aria-disabled` rather than the native `disabled` attribute so the
+ * button stays focusable at the carousel boundary — the browser blurs
+ * truly-disabled controls, which would drop keyboard focus to <body>.
+ * `onClick` early-returns when ariaDisabled is true.
+ */
+function NavArrow({ side, size, ariaDisabled, label, onClick, revealOnHover }: NavArrowProps) {
+  const small = size === 'sm'
+  const pos = side === 'left'
+    ? (small ? 'left-2' : 'left-4 md:left-6')
+    : (small ? 'right-2' : 'right-4 md:right-6')
+  const dim = small
+    ? 'w-9 h-9 text-2xl'
+    : 'w-12 h-12 md:w-14 md:h-14 text-4xl md:text-5xl'
+  const reveal = revealOnHover
+    ? 'opacity-0 group-hover:opacity-100 [@media(hover:none)]:opacity-100 focus-visible:opacity-100'
+    : ''
   const arrow: ReactNode = side === 'left' ? '‹' : '›'
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (ariaDisabled) return
+    onClick(e)
+  }
   return (
     <button
       type="button"
-      disabled={disabled}
-      onClick={onClick}
+      aria-disabled={ariaDisabled || undefined}
       aria-label={label}
-      className={`absolute top-1/2 -translate-y-1/2 ${pos} w-12 h-12 md:w-14 md:h-14 inline-flex items-center justify-center text-4xl md:text-5xl leading-none text-[oklch(0.96_0.010_82)] hairline-frame bg-[oklch(0.10_0.012_60/0.6)] hover:text-accent transition-colors disabled:opacity-30 disabled:cursor-not-allowed`}
+      onClick={handleClick}
+      onKeyDown={(e) => e.stopPropagation()}
+      className={`absolute z-10 top-1/2 -translate-y-1/2 ${pos} ${dim} ${reveal} inline-flex items-center justify-center leading-none text-[oklch(0.96_0.010_82)] hairline-frame bg-[oklch(0.10_0.012_60/0.6)] hover:text-accent cursor-pointer transition aria-disabled:opacity-30 aria-disabled:cursor-not-allowed`.trim()}
     >
       <span aria-hidden="true">{arrow}</span>
     </button>

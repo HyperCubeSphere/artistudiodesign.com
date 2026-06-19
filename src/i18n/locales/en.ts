@@ -168,6 +168,12 @@ const en: typeof ro = {
       { slug: 'dressing', label: 'Dressing', description: 'Walk-in solutions optimised for every object.' },
       { slug: 'baie', label: 'Bathroom', description: 'Moisture-resistant textures, integrated with the cabinetry.' },
     ],
+    gallery: {
+      close: 'Close',
+      prev: 'Previous image',
+      next: 'Next image',
+      photos: 'photos',
+    },
   },
 
   magazin: {

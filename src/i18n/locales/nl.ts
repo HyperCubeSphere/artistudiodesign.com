@@ -168,6 +168,12 @@ const nl: typeof ro = {
       { slug: 'dressing', label: 'Dressing', description: 'Walk-in oplossingen geoptimaliseerd voor elk item.' },
       { slug: 'baie', label: 'Badkamer', description: 'Vochtbestendige texturen geïntegreerd met meubels.' },
     ],
+    gallery: {
+      close: 'Sluiten',
+      prev: 'Vorige afbeelding',
+      next: 'Volgende afbeelding',
+      photos: "foto's",
+    },
   },
 
   magazin: {
