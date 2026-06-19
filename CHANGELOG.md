@@ -5,6 +5,12 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.4.0-beta.1](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.3.0...v1.4.0-beta.1) (2026-06-19)
+
+### 🍕 Features
+
+* **portfolio:** inline carousel arrows on multi-image project cards ([#25](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/25)) ([eef2975](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/eef29758f75ff19fc5ce62dc78a839d08b15710a))
+
 ## [1.3.0](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.2.0...v1.3.0) (2026-06-19)
 
 ### 🍕 Features
