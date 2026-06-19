@@ -11,7 +11,6 @@ type NavTo =
   | '/$locale/servicii'
   | '/$locale/portofoliu'
   | '/$locale/magazin'
-  | '/$locale/produse'
   | '/$locale/contact'
 
 export default function Navbar() {
@@ -37,7 +36,6 @@ export default function Navbar() {
     { to: '/$locale/servicii', label: t.nav.servicii },
     { to: '/$locale/portofoliu', label: t.nav.portofoliu },
     { to: '/$locale/magazin', label: t.nav.magazin },
-    { to: '/$locale/produse', label: t.nav.produse },
     { to: '/$locale/contact', label: t.nav.contact },
   ]
 
@@ -56,7 +54,7 @@ export default function Navbar() {
                 <Link
                   to={link.to}
                   params={{ locale }}
-                  className="nav-text nav-link text-text hover:text-accent transition-colors"
+                  className="nav-text nav-link text-text hover:text-accent transition-colors inline-flex items-center min-h-11"
                   activeOptions={{ exact: link.to === '/$locale' }}
                   activeProps={{ 'data-active': 'true' } as Record<string, string>}
                 >
@@ -104,7 +102,7 @@ export default function Navbar() {
                       params={{ locale }}
                       onClick={() => setOpen(false)}
                       activeOptions={{ exact: link.to === '/$locale' }}
-                      className="nav-text block py-3 border-b hairline-soft"
+                      className="nav-text block py-3.5 border-b hairline-soft"
                       activeProps={{ className: 'nav-text block py-3 border-b hairline-soft text-accent' }}
                     >
                       {link.label}

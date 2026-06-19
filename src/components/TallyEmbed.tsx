@@ -42,9 +42,11 @@ export default function TallyEmbed({ formId, title, prefill, minHeight = 520 }: 
           </a>
           .
         </p>
-        <p className="text-xs text-muted-2">
-          (Tally form id not configured yet — set <code>TALLY_FORM_ID</code> in <code>src/lib/site.ts</code>.)
-        </p>
+        {import.meta.env.DEV ? (
+          <p className="text-xs text-muted-2">
+            (Tally form id not configured yet — set <code>TALLY_FORM_ID</code> in <code>src/lib/site.ts</code>.)
+          </p>
+        ) : null}
       </div>
     )
   }
