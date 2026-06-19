@@ -5,6 +5,12 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.3.0-beta.3](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.3.0-beta.2...v1.3.0-beta.3) (2026-06-19)
+
+### 🍕 Features
+
+* **portfolio:** 59 new photos with full-res click-through + i18n NotFound provider crash ([#22](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/22)) ([fedea34](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/fedea349ca851ec95cd98973d83d636d7ef716e4))
+
 ## [1.3.0-beta.2](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.3.0-beta.1...v1.3.0-beta.2) (2026-06-09)
 
 ### 🍕 Features
