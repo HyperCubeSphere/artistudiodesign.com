@@ -168,6 +168,12 @@ const da: typeof ro = {
       { slug: 'dressing', label: 'Walk-in', description: 'Walk-in-løsninger optimeret til hver ting.' },
       { slug: 'baie', label: 'Badeværelse', description: 'Fugtbestandige teksturer integreret med møblerne.' },
     ],
+    gallery: {
+      close: 'Luk',
+      prev: 'Forrige billede',
+      next: 'Næste billede',
+      photos: 'fotos',
+    },
   },
 
   magazin: {

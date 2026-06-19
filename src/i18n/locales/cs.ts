@@ -168,6 +168,12 @@ const cs: typeof ro = {
       { slug: 'dressing', label: 'Šatna', description: 'Walk-in řešení optimalizovaná pro každou věc.' },
       { slug: 'baie', label: 'Koupelna', description: 'Textury odolné vlhkosti integrované s nábytkem.' },
     ],
+    gallery: {
+      close: 'Zavřít',
+      prev: 'Předchozí obrázek',
+      next: 'Další obrázek',
+      photos: 'fotografií',
+    },
   },
 
   magazin: {

@@ -168,6 +168,12 @@ const fr: typeof ro = {
       { slug: 'dressing', label: 'Dressing', description: 'Solutions walk-in optimisées pour chaque pièce.' },
       { slug: 'baie', label: 'Salle de bain', description: 'Textures résistantes à l’humidité, intégrées au mobilier.' },
     ],
+    gallery: {
+      close: 'Fermer',
+      prev: 'Image précédente',
+      next: 'Image suivante',
+      photos: 'photos',
+    },
   },
 
   magazin: {
