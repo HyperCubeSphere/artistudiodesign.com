@@ -57,6 +57,11 @@ export const Route = createFileRoute('/$locale/portofoliu/$category')({
   },
 })
 
+interface ActiveSelection {
+  project: PortfolioProject
+  startIndex: number
+}
+
 function PortofoliuCategoryPage() {
   const { locale, t } = useI18n()
   const params = Route.useParams()
@@ -64,7 +69,7 @@ function PortofoliuCategoryPage() {
   const category = params.category as PortfolioCategorySlug
   const cat = t.portofoliu.categories.find((c) => c.slug === category)
   const projects = projectsByCategory(category)
-  const [activeProject, setActiveProject] = useState<PortfolioProject | null>(null)
+  const [active, setActive] = useState<ActiveSelection | null>(null)
 
   return (
     <section className="py-16 md:py-20">
@@ -89,17 +94,18 @@ function PortofoliuCategoryPage() {
               locale={ll}
               eager={i < 3}
               priority={i === 0}
-              onOpen={() => setActiveProject(project)}
+              onOpen={(startIndex) => setActive({ project, startIndex })}
             />
           ))}
         </div>
       </div>
 
-      {activeProject ? (
+      {active ? (
         <ProjectGallery
-          project={activeProject}
+          project={active.project}
+          startIndex={active.startIndex}
           locale={ll}
-          onClose={() => setActiveProject(null)}
+          onClose={() => setActive(null)}
         />
       ) : null}
     </section>
@@ -111,39 +117,121 @@ interface ProjectCardProps {
   locale: Locale
   eager: boolean
   priority: boolean
-  onOpen: () => void
+  onOpen: (startIndex: number) => void
 }
 
 function ProjectCard({ project, locale, eager, priority, onOpen }: ProjectCardProps) {
   const title = project.title[locale === 'en' ? 'en' : 'ro']
+  const total = project.images.length
+  const hasMany = total > 1
+  const [index, setIndex] = useState(0)
+  // First arrow interaction primes the whole gallery for eager loading so
+  // subsequent swaps feel instant instead of waiting on the browser's lazy
+  // fetch for off-screen carousel images.
+  const [primed, setPrimed] = useState(false)
+  const current = project.images[index]
+
+  const step = (delta: number) => {
+    setIndex((i) => Math.min(Math.max(i + delta, 0), total - 1))
+    if (!primed) setPrimed(true)
+  }
+
+  const handleKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      onOpen(index)
+    } else if (hasMany && e.key === 'ArrowLeft') {
+      e.preventDefault()
+      step(-1)
+    } else if (hasMany && e.key === 'ArrowRight') {
+      e.preventDefault()
+      step(1)
+    }
+  }
+
   return (
     <article className="portfolio-card group block">
-      <button
-        type="button"
-        onClick={onOpen}
-        aria-label={`${title} — ${project.images.length} ${PHOTOS_LABEL[locale]}`}
-        className="block w-full text-left cursor-zoom-in"
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={() => onOpen(index)}
+        onKeyDown={handleKey}
+        aria-label={`${title} — ${total} ${PHOTOS_LABEL[locale]}${hasMany ? ` (${index + 1}/${total})` : ''}`}
+        className="block w-full cursor-zoom-in focus-visible:outline-none"
       >
         <div className="aspect-[4/5] relative overflow-hidden">
           <img
-            src={project.cover.src}
-            alt={localeAlt(project.cover, locale)}
-            width={project.cover.width}
-            height={project.cover.height}
-            loading={eager ? 'eager' : 'lazy'}
-            fetchPriority={priority ? 'high' : 'auto'}
+            key={current.src}
+            src={current.src}
+            alt={localeAlt(current, locale)}
+            width={current.width}
+            height={current.height}
+            loading={eager || primed ? 'eager' : 'lazy'}
+            fetchPriority={priority && index === 0 ? 'high' : 'auto'}
             decoding="async"
             className="portfolio-img absolute inset-0 w-full h-full object-cover photo-moody-soft"
           />
+
+          {hasMany ? (
+            <>
+              <CardNavButton
+                side="left"
+                disabled={index === 0}
+                label={PREV_LABEL[locale]}
+                onClick={(e) => { e.stopPropagation(); step(-1) }}
+              />
+              <CardNavButton
+                side="right"
+                disabled={index === total - 1}
+                label={NEXT_LABEL[locale]}
+                onClick={(e) => { e.stopPropagation(); step(1) }}
+              />
+              <p
+                aria-hidden="true"
+                className="absolute z-10 bottom-2 left-2 nav-text tabular-nums text-[10px] text-[oklch(0.96_0.010_82)] px-2 py-0.5 bg-[oklch(0.10_0.012_60/0.6)] hairline-frame"
+              >
+                {index + 1} / {total}
+              </p>
+            </>
+          ) : null}
         </div>
-      </button>
+      </div>
       <div className="pt-8 md:pt-10 lg:pt-14 px-2 md:px-4 pb-5 md:pb-6 flex flex-col gap-3 md:gap-4">
         <h3 className="serif text-xl md:text-2xl leading-tight">{title}</h3>
         <p className="eyebrow-sm tabular-nums text-muted">
-          {project.images.length} {PHOTOS_LABEL[locale]}
+          {total} {PHOTOS_LABEL[locale]}
         </p>
       </div>
     </article>
+  )
+}
+
+interface CardNavButtonProps {
+  side: 'left' | 'right'
+  disabled: boolean
+  label: string
+  onClick: (e: React.MouseEvent) => void
+}
+
+/**
+ * Carousel arrow on a project card. Hover-revealed on devices with a
+ * fine pointer (`(hover: hover)` → `lg:opacity-0` + `group-hover:opacity-100`);
+ * always visible on touch via the `[@media(hover:none)]:opacity-100` selector
+ * so visitors without a pointer still discover the carousel.
+ */
+function CardNavButton({ side, disabled, label, onClick }: CardNavButtonProps) {
+  const pos = side === 'left' ? 'left-2' : 'right-2'
+  const arrow = side === 'left' ? '‹' : '›'
+  return (
+    <button
+      type="button"
+      disabled={disabled}
+      onClick={onClick}
+      aria-label={label}
+      className={`absolute z-10 top-1/2 -translate-y-1/2 ${pos} w-9 h-9 inline-flex items-center justify-center text-2xl leading-none text-[oklch(0.96_0.010_82)] hairline-frame bg-[oklch(0.10_0.012_60/0.6)] hover:text-accent transition-opacity opacity-0 group-hover:opacity-100 [@media(hover:none)]:opacity-100 focus-visible:opacity-100 disabled:opacity-30 disabled:cursor-not-allowed`}
+    >
+      <span aria-hidden="true">{arrow}</span>
+    </button>
   )
 }
 
@@ -151,6 +239,7 @@ interface ProjectGalleryProps {
   project: PortfolioProject
   locale: Locale
   onClose: () => void
+  startIndex?: number
 }
 
 /**
@@ -159,8 +248,8 @@ interface ProjectGalleryProps {
  * Locks body scroll, ESC closes, ArrowLeft/Right step. Adjacent images
  * preload via injected `<link rel="preload">` so prev/next feels instant.
  */
-function ProjectGallery({ project, locale, onClose }: ProjectGalleryProps) {
-  const [index, setIndex] = useState(0)
+function ProjectGallery({ project, locale, onClose, startIndex = 0 }: ProjectGalleryProps) {
+  const [index, setIndex] = useState(startIndex)
   const [mounted, setMounted] = useState(false)
   const total = project.images.length
 
