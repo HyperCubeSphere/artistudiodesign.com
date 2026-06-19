@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { useI18n } from '../i18n'
 import { seo } from '../lib/seo'
@@ -30,6 +30,25 @@ const NEW_TAB_LABEL: Record<Locale, string> = {
   sv: 'öppnas i en ny flik',
   it: 'si apre in una nuova scheda',
   da: 'åbner i en ny fane',
+}
+
+/** Localized close-button label for the desktop lightbox. */
+const CLOSE_LABEL: Record<Locale, string> = {
+  ro: 'Închide',
+  en: 'Close',
+  hu: 'Bezárás',
+  de: 'Schließen',
+  fr: 'Fermer',
+  el: 'Κλείσιμο',
+  uk: 'Закрити',
+  es: 'Cerrar',
+  tr: 'Kapat',
+  et: 'Sulge',
+  cs: 'Zavřít',
+  nl: 'Sluiten',
+  sv: 'Stäng',
+  it: 'Chiudi',
+  da: 'Luk',
 }
 
 /**
@@ -91,7 +110,7 @@ function PortofoliuCategoryPage() {
           {projects.map((proj, i) => (
             <article key={proj.id} className="portfolio-card group block">
               <PortfolioThumb image={proj.image} locale={ll} eager={i < 3} priority={i === 0} />
-              <div className="pt-6 md:pt-7 px-1 pb-2 flex flex-col gap-3">
+              <div className="pt-6 md:pt-10 lg:pt-12 px-1 pb-3 flex flex-col gap-3">
                 <h3 className="serif text-xl md:text-2xl leading-tight">
                   {proj.title[ll === 'en' ? 'en' : 'ro']}
                 </h3>
@@ -183,10 +202,10 @@ const FULL_RES_LINK_BASE = 'block cursor-zoom-in'
 
 /**
  * Renders an `<a target="_blank">` to a high-resolution image. On hover-
- * capable devices (desktop, pointer mouse) the click is suppressed so
- * visitors get only the magnifier cursor + the existing hover-zoom on
- * `.portfolio-img`; touch-only devices (no hover) keep the tap-to-open-
- * in-new-tab behavior the original prompt asked for.
+ * capable devices (desktop, pointer mouse) the click opens an inline
+ * lightbox showing the full-res image at viewport size; touch-only
+ * devices (no hover) keep the tap-to-open-in-new-tab behavior so mobile
+ * visitors can pinch-zoom the original.
  *
  * The link's accessible name flows from the child `<img alt>`; a
  * visually-hidden span announces the new-tab behavior for screen-reader
@@ -194,21 +213,64 @@ const FULL_RES_LINK_BASE = 'block cursor-zoom-in'
  */
 function FullResLink({ href, locale, className, children }: FullResLinkProps) {
   const composed = className ? `${className} ${FULL_RES_LINK_BASE}` : FULL_RES_LINK_BASE
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('keydown', onKey)
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prev
+    }
+  }, [open])
+
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches) {
       e.preventDefault()
+      setOpen(true)
     }
   }
+
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      onClick={handleClick}
-      className={composed}
-    >
-      {children}
-      <span className="sr-only"> ({NEW_TAB_LABEL[locale]})</span>
-    </a>
+    <>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={handleClick}
+        className={composed}
+      >
+        {children}
+        <span className="sr-only"> ({NEW_TAB_LABEL[locale]})</span>
+      </a>
+      {open ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setOpen(false)}
+          className="fixed inset-0 z-50 flex items-center justify-center cursor-zoom-out p-4 md:p-10 bg-[oklch(0.10_0.012_60/0.92)] backdrop-blur-sm"
+        >
+          <img
+            src={href}
+            alt=""
+            className="max-w-full max-h-full object-contain shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            aria-label={CLOSE_LABEL[locale]}
+            className="absolute top-4 right-4 md:top-6 md:right-6 w-11 h-11 inline-flex items-center justify-center text-3xl leading-none text-[oklch(0.96_0.010_82)] hairline-frame bg-[oklch(0.10_0.012_60/0.6)] hover:text-accent transition-colors"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+      ) : null}
+    </>
   )
 }
