@@ -168,6 +168,12 @@ const it: typeof ro = {
       { slug: 'dressing', label: 'Cabina armadio', description: 'Soluzioni walk-in ottimizzate per ogni capo.' },
       { slug: 'baie', label: 'Bagno', description: 'Texture resistenti all’umidità, integrate con il mobile.' },
     ],
+    gallery: {
+      close: 'Chiudi',
+      prev: 'Immagine precedente',
+      next: 'Immagine successiva',
+      photos: 'foto',
+    },
   },
 
   magazin: {

@@ -168,6 +168,12 @@ const es: typeof ro = {
       { slug: 'dressing', label: 'Vestidor', description: 'Soluciones walk-in optimizadas para cada prenda.' },
       { slug: 'baie', label: 'Baño', description: 'Texturas resistentes a la humedad, integradas con el mobiliario.' },
     ],
+    gallery: {
+      close: 'Cerrar',
+      prev: 'Imagen anterior',
+      next: 'Imagen siguiente',
+      photos: 'fotos',
+    },
   },
 
   magazin: {

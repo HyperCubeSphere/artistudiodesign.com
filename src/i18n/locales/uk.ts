@@ -168,6 +168,12 @@ const uk: typeof ro = {
       { slug: 'dressing', label: 'Гардероб', description: 'Рішення walk-in, оптимізовані під кожну річ.' },
       { slug: 'baie', label: 'Ванна', description: 'Вологостійкі текстури, інтегровані з меблями.' },
     ],
+    gallery: {
+      close: 'Закрити',
+      prev: 'Попереднє зображення',
+      next: 'Наступне зображення',
+      photos: 'фото',
+    },
   },
 
   magazin: {

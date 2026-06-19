@@ -168,6 +168,12 @@ const el: typeof ro = {
       { slug: 'dressing', label: 'Ντρέσινγκ', description: 'Λύσεις walk-in βελτιστοποιημένες για κάθε ρούχο.' },
       { slug: 'baie', label: 'Μπάνιο', description: 'Υλικά ανθεκτικά στην υγρασία, ενσωματωμένα με το έπιπλο.' },
     ],
+    gallery: {
+      close: 'Κλείσιμο',
+      prev: 'Προηγούμενη εικόνα',
+      next: 'Επόμενη εικόνα',
+      photos: 'φωτογραφίες',
+    },
   },
 
   magazin: {
