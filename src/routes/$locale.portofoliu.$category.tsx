@@ -91,14 +91,14 @@ function PortofoliuCategoryPage() {
           {projects.map((proj, i) => (
             <article key={proj.id} className="portfolio-card group block">
               <PortfolioThumb image={proj.image} locale={ll} eager={i < 3} priority={i === 0} />
-              <div className="pt-4 flex flex-col gap-2">
+              <div className="pt-6 md:pt-7 px-1 pb-2 flex flex-col gap-3">
                 <h3 className="serif text-xl md:text-2xl leading-tight">
                   {proj.title[ll === 'en' ? 'en' : 'ro']}
                 </h3>
-                <p className="text-sm text-muted">
+                <p className="text-sm leading-relaxed text-muted">
                   {proj.caption[ll === 'en' ? 'en' : 'ro']}
                 </p>
-                <ul className="flex flex-wrap gap-1.5 mt-2">
+                <ul className="flex flex-wrap gap-1.5 mt-1">
                   {proj.tags[ll === 'en' ? 'en' : 'ro'].map((tag) => (
                     <li
                       key={tag}
@@ -182,14 +182,31 @@ interface FullResLinkProps {
 const FULL_RES_LINK_BASE = 'block cursor-zoom-in'
 
 /**
- * Renders an `<a target="_blank">` to a high-resolution image. The link's
- * accessible name flows from the child `<img alt>`; a visually-hidden span
- * announces the new-tab behavior for screen-reader users.
+ * Renders an `<a target="_blank">` to a high-resolution image. On hover-
+ * capable devices (desktop, pointer mouse) the click is suppressed so
+ * visitors get only the magnifier cursor + the existing hover-zoom on
+ * `.portfolio-img`; touch-only devices (no hover) keep the tap-to-open-
+ * in-new-tab behavior the original prompt asked for.
+ *
+ * The link's accessible name flows from the child `<img alt>`; a
+ * visually-hidden span announces the new-tab behavior for screen-reader
+ * users on platforms where it applies.
  */
 function FullResLink({ href, locale, className, children }: FullResLinkProps) {
   const composed = className ? `${className} ${FULL_RES_LINK_BASE}` : FULL_RES_LINK_BASE
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches) {
+      e.preventDefault()
+    }
+  }
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={composed}>
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={handleClick}
+      className={composed}
+    >
       {children}
       <span className="sr-only"> ({NEW_TAB_LABEL[locale]})</span>
     </a>
