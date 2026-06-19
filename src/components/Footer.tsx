@@ -1,20 +1,15 @@
-import { Link, useRouterState } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 import { useI18n } from '../i18n'
 import Logo from './Logo'
 
 export default function Footer() {
   const { locale, t } = useI18n()
   const f = t.footer
-  const pathname = useRouterState({ select: (s) => s.location.pathname })
-  // On /contact, the page's own aside already lists address/phone/email/hours.
-  // Suppress the duplicate footer columns there — keep only logo + tagline +
-  // socials so the page doesn't show the same 6 lines twice ~600px apart.
-  const onContact = pathname.endsWith('/contact')
 
   return (
     <footer className="border-t hairline mt-24">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-14 grid grid-cols-1 md:grid-cols-12 gap-10">
-        <div className={`flex flex-col gap-4 ${onContact ? 'md:col-span-8' : 'md:col-span-4'}`}>
+        <div className="md:col-span-4 flex flex-col gap-4">
           <Link to="/$locale" params={{ locale }} className="text-text inline-block" aria-label="Arti Studio">
             <Logo size="sm" />
           </Link>
@@ -23,42 +18,38 @@ export default function Footer() {
           </p>
         </div>
 
-        {!onContact ? (
-          <>
-            <div className="md:col-span-3 flex flex-col gap-3">
-              <p className="eyebrow flex items-center gap-2">
-                <PinIcon /> {f.addressLabel}
-              </p>
-              <p className="text-sm">{f.address}</p>
-              <p className="text-xs text-muted-2">
-                {f.hours}
-              </p>
-            </div>
+        <div className="md:col-span-3 flex flex-col gap-3">
+          <p className="eyebrow flex items-center gap-2">
+            <PinIcon /> {f.addressLabel}
+          </p>
+          <p className="text-sm">{f.address}</p>
+          <p className="text-xs text-muted-2">
+            {f.hours}
+          </p>
+        </div>
 
-            <div className="md:col-span-3 flex flex-col gap-3">
-              <p className="eyebrow flex items-center gap-2">
-                <PhoneIcon /> {f.phoneLabel}
-              </p>
-              <a href={`tel:${f.phone.replace(/\s/g, '')}`} className="text-sm hover:text-accent transition-colors">
-                {f.phone}
-              </a>
-              <a href={`tel:${f.phoneAlt.replace(/\s/g, '')}`} className="text-sm hover:text-accent transition-colors">
-                {f.phoneAlt}
-              </a>
-              <p className="eyebrow flex items-center gap-2 mt-2">
-                <MailIcon /> {f.emailLabel}
-              </p>
-              <a href={`mailto:${f.email}`} className="text-sm hover:text-accent transition-colors break-all">
-                {f.email}
-              </a>
-              <a href={`mailto:${f.emailAlt}`} className="text-sm hover:text-accent transition-colors break-all">
-                {f.emailAlt}
-              </a>
-            </div>
-          </>
-        ) : null}
+        <div className="md:col-span-3 flex flex-col gap-3">
+          <p className="eyebrow flex items-center gap-2">
+            <PhoneIcon /> {f.phoneLabel}
+          </p>
+          <a href={`tel:${f.phone.replace(/\s/g, '')}`} className="text-sm hover:text-accent transition-colors">
+            {f.phone}
+          </a>
+          <a href={`tel:${f.phoneAlt.replace(/\s/g, '')}`} className="text-sm hover:text-accent transition-colors">
+            {f.phoneAlt}
+          </a>
+          <p className="eyebrow flex items-center gap-2 mt-2">
+            <MailIcon /> {f.emailLabel}
+          </p>
+          <a href={`mailto:${f.email}`} className="text-sm hover:text-accent transition-colors break-all">
+            {f.email}
+          </a>
+          <a href={`mailto:${f.emailAlt}`} className="text-sm hover:text-accent transition-colors break-all">
+            {f.emailAlt}
+          </a>
+        </div>
 
-        <div className={`flex flex-col gap-3 ${onContact ? 'md:col-span-4' : 'md:col-span-2'}`}>
+        <div className="md:col-span-2 flex flex-col gap-3">
           <p className="eyebrow">{f.socialLabel}</p>
           <div className="flex gap-3">
             <SocialIcon href="https://www.facebook.com/profile.php?id=100089499761060" label="Facebook">
@@ -82,7 +73,8 @@ export default function Footer() {
           <Link
             to="/$locale/confidentialitate"
             params={{ locale }}
-            className="text-xs text-muted-2 hover:text-accent transition-colors"
+            className="text-xs hover:text-accent transition-colors"
+            className="text-muted-2"
           >
             {t.nav.confidentialitate}
           </Link>
@@ -99,7 +91,7 @@ function SocialIcon({ href, label, children }: { href: string; label: string; ch
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="w-11 h-11 inline-flex items-center justify-center hairline-frame hover:border-accent hover:text-accent transition-colors"
+      className="w-10 h-10 inline-flex items-center justify-center hairline-frame hover:border-accent hover:text-accent transition-colors"
     >
       {children}
     </a>

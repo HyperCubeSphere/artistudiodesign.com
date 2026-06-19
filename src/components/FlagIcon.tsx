@@ -23,13 +23,6 @@ const flags: Record<Locale, React.ReactNode> = {
       <path d="M10,0 V15 M0,7.5 H20" stroke="#C8102E" strokeWidth="3" />
     </>
   ),
-  hu: (
-    <>
-      <rect width="20" height="5" fill="#CE2939" />
-      <rect y="5" width="20" height="5" fill="#fff" />
-      <rect y="10" width="20" height="5" fill="#436F4D" />
-    </>
-  ),
   ro: (
     <>
       <rect x="0" width="6.67" height="15" fill="#002B7F" />

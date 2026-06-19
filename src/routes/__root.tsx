@@ -1,5 +1,5 @@
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-import { useUrlLocaleOrDefault } from '../i18n/useUrlLocale'
+import { HeadContent, Scripts, createRootRoute, useRouterState } from '@tanstack/react-router'
+import { locales } from '../i18n/config'
 import appCss from '../styles.css?url'
 
 const THEME_INIT_SCRIPT = `(function(){try{var stored=window.localStorage.getItem('theme');var mode=(stored==='light'||stored==='dark')?stored:'dark';var root=document.documentElement;root.classList.remove('light','dark');root.classList.add(mode);root.style.colorScheme=mode;var meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=mode==='dark'?'#14110d':'#f6f1e7';}catch(e){}})();`
@@ -56,7 +56,9 @@ export const Route = createRootRoute({
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-  const lang = useUrlLocaleOrDefault()
+  const pathname = useRouterState({ select: (s) => s.location.pathname })
+  const segments = pathname.split('/')
+  const lang = locales.includes(segments[1] as any) ? segments[1] : 'ro'
 
   return (
     <html lang={lang} suppressHydrationWarning>

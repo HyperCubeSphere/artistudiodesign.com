@@ -5,52 +5,6 @@
 
 > All notable changes to this project will be documented in this file
 
-## [1.3.0-beta.3](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.3.0-beta.2...v1.3.0-beta.3) (2026-06-19)
-
-### 🍕 Features
-
-* **portfolio:** 59 new photos with full-res click-through + i18n NotFound provider crash ([#22](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/22)) ([fedea34](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/fedea349ca851ec95cd98973d83d636d7ef716e4))
-
-## [1.3.0-beta.2](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.3.0-beta.1...v1.3.0-beta.2) (2026-06-09)
-
-### 🍕 Features
-
-* **magazin:** merge Produse catalog into Magazin section (closes [#10](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/10)) ([#20](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/20)) ([38ce7ed](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/38ce7ed3bbd09e8155c803f6e74c657bfee3b151))
-
-### 🐛 Bug Fixes
-
-* **servicii:** replace numerals with image slots (closes [#11](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/11)) ([#19](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/19)) ([f93e2e9](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/f93e2e9a220e1790eee9d3791a13f7e82fa217df))
-
-## [1.3.0-beta.1](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.2.1-beta.4...v1.3.0-beta.1) (2026-05-27)
-
-### 🍕 Features
-
-* **i18n:** translate all 13 locales (hu, de, fr, el, uk, es, tr, et, cs, nl, sv, it, da) ([#18](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/18)) ([f5a3b23](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/f5a3b236c543e05055a84d8a3eaf8cd026a326ca)), closes [#CE2939](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/CE2939) [#fff](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/fff) [#436F4D](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/436F4D)
-
-## [1.2.1-beta.4](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.2.1-beta.3...v1.2.1-beta.4) (2026-05-27)
-
-### 🐛 Bug Fixes
-
-* **content:** refresh stats — partners 2→5, projects 10→30+, cities 3→6+ ([#17](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/17)) ([ee29818](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/ee29818258a592c49956dfd6c54b4dd53a1351d2))
-
-## [1.2.1-beta.3](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.2.1-beta.2...v1.2.1-beta.3) (2026-05-25)
-
-### 🐛 Bug Fixes
-
-* **home:** remove `— 0X` numerals from FeaturesStrip (closes [#12](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/12)) ([#16](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/16)) ([7d2c67d](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/7d2c67de0b3933a34bad7f1791a77472440bef1c))
-
-## [1.2.1-beta.2](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.2.1-beta.1...v1.2.1-beta.2) (2026-05-25)
-
-### 🧑‍💻 Code Refactoring
-
-* normalize heading hierarchy + adapt touch targets (audit H1+M1+M2) ([#15](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/15)) ([b5d650d](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/b5d650d5696a38617ae7606b12e4ca35db6662ac))
-
-## [1.2.1-beta.1](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.2.0...v1.2.1-beta.1) (2026-05-25)
-
-### 🧑‍💻 Code Refactoring
-
-* address audit critical+high+medium (light hero, AA contrast, touch targets, contact dedup) ([#9](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/9)) ([ec4db91](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/ec4db91a25c22c40dacd0d1988c2c4c6b43ed2dd)), closes [#7](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/7)
-
 ## [1.2.0](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.1.2...v1.2.0) (2026-05-21)
 
 ### 🍕 Features

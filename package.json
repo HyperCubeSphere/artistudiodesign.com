@@ -1,6 +1,6 @@
 {
   "name": "@hypercubesphere/artistudiodesign.com",
-  "version": "1.3.0-beta.3",
+  "version": "1.2.0",
   "description": "",
   "main": "src/router.tsx",
   "private": true,

@@ -24,7 +24,7 @@ function ProduseIndex() {
   return (
     <>
       <div className="flex items-end justify-between gap-6 mb-10 pb-4 border-b hairline-soft">
-        <h2 className="eyebrow">{p.categoriesAllLabel}</h2>
+        <p className="eyebrow">{p.categoriesAllLabel}</p>
         <p className="text-xs tabular-nums text-muted">
           {products.length} {products.length === 1 ? p.itemSingular : p.itemPlural}
         </p>
