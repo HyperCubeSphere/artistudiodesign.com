@@ -40,19 +40,16 @@ export default function Footer() {
                 <PhoneIcon /> {f.phoneLabel}
               </p>
               <a href={`tel:${f.phone.replace(/\s/g, '')}`} className="text-sm hover:text-accent transition-colors">
-                {f.phone}
+                {f.phoneName} · {f.phone}
               </a>
               <a href={`tel:${f.phoneAlt.replace(/\s/g, '')}`} className="text-sm hover:text-accent transition-colors">
-                {f.phoneAlt}
+                {f.phoneAltName} · {f.phoneAlt}
               </a>
               <p className="eyebrow flex items-center gap-2 mt-2">
                 <MailIcon /> {f.emailLabel}
               </p>
               <a href={`mailto:${f.email}`} className="text-sm hover:text-accent transition-colors break-all">
                 {f.email}
-              </a>
-              <a href={`mailto:${f.emailAlt}`} className="text-sm hover:text-accent transition-colors break-all">
-                {f.emailAlt}
               </a>
             </div>
           </>

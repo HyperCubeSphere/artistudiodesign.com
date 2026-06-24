@@ -60,13 +60,13 @@ All product / portfolio / category slugs are exported as `as const` tuples from 
 
 ## Forms
 
-Contact and quote-request forms are rendered with `<TallyEmbed />` (iframe-based, free tier). Set `TALLY_FORM_ID` in `src/lib/site.ts`. While unset, the component renders a graceful fallback with a `mailto:info@artistudiodesign.com` link instead of a broken iframe.
+Contact and quote-request forms are rendered with `<TallyEmbed />` (iframe-based, free tier). Set `TALLY_FORM_ID` in `src/lib/site.ts`. While unset, the component renders a graceful fallback with a `mailto:arti.studio.design18@gmail.com` link instead of a broken iframe.
 
 ## Brand contact data (canonical)
 
 - Address: Oradea, Bihor, România
-- Phones: +40 775 140 079 · +40 744 299 302
-- Emails: info@artistudiodesign.com · contact@artistudiodesign.com
+- Phones: Alex +40 744 299 302 · Nicu Pop +40 775 140 079
+- Email: arti.studio.design18@gmail.com
 - Hours: Lun–Vin, 09:00–18:00
 - Social: Facebook · Instagram · YouTube
 
