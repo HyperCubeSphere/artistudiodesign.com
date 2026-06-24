@@ -19,5 +19,5 @@ export function tallyEmbedSrc(formId = TALLY_FORM_ID, opts?: { hiddenFields?: Re
   return `https://tally.so/embed/${formId}?${params.toString()}`
 }
 
-export const CONTACT_EMAIL = 'info@artistudiodesign.com'
-export const CONTACT_PHONE = '+40775140079'
+export const CONTACT_EMAIL = 'arti.studio.design18@gmail.com'
+export const CONTACT_PHONE = '+40744299302'

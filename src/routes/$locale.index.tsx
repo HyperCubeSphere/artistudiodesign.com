@@ -29,8 +29,8 @@ export const Route = createFileRoute('/$locale/')({
         '@type': 'LocalBusiness',
         name: 'Arti Studio',
         url: 'https://artistudiodesign.com',
-        telephone: '+40775140079',
-        email: 'info@artistudiodesign.com',
+        telephone: '+40744299302',
+        email: 'arti.studio.design18@gmail.com',
         address: {
           '@type': 'PostalAddress',
           addressLocality: 'Oradea',
