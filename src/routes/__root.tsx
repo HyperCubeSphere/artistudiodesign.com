@@ -35,8 +35,8 @@ export const Route = createRootRoute({
           name: 'Arti Studio',
           url: 'https://artistudiodesign.com',
           image: 'https://artistudiodesign.com/images/brand/logo.png',
-          telephone: '+40775140079',
-          email: 'info@artistudiodesign.com',
+          telephone: '+40744299302',
+          email: 'arti.studio.design18@gmail.com',
           address: {
             '@type': 'PostalAddress',
             addressLocality: 'Oradea',
