@@ -5,6 +5,12 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.5.0](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.4.1...v1.5.0) (2026-06-24)
+
+### 🍕 Features
+
+* move domains over ([a279e27](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/a279e278f89a36600f52d6ccb4417c77d1a7287e))
+
 ## [1.4.1](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.4.0...v1.4.1) (2026-06-24)
 
 ### 🧑‍💻 Code Refactoring
