@@ -5,6 +5,18 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.5.0](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.4.1...v1.5.0) (2026-06-24)
+
+### 🍕 Features
+
+* move domains over ([a279e27](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/a279e278f89a36600f52d6ccb4417c77d1a7287e))
+
+## [1.4.1](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.4.0...v1.4.1) (2026-06-24)
+
+### 🧑‍💻 Code Refactoring
+
+* **contact:** single Gmail address, named phone numbers (Alex, Nicu Pop) ([#28](https://github.com/HyperCubeSphere/artistudiodesign.com/issues/28)) ([e0bb802](https://github.com/HyperCubeSphere/artistudiodesign.com/commit/e0bb8021ed466e61dd167fe9cf321c8d20d8f6b3))
+
 ## [1.4.1-beta.1](https://github.com/HyperCubeSphere/artistudiodesign.com/compare/v1.4.0...v1.4.1-beta.1) (2026-06-24)
 
 ### 🧑‍💻 Code Refactoring
